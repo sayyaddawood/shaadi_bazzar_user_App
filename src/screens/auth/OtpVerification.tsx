@@ -1,43 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Keyboard, StyleSheet, View} from 'react-native';
 import {Colors, Dimen} from '../../theme';
 import {
   AppContainer,
   Button,
-  EditText,
   ImageView,
-  Spacer,
+  OtpInput,
   TextView,
 } from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { useNavigationHook } from '../../hooks';
+import {useNavigationHook} from '../../hooks';
+
 const Login = () => {
   const navigation = useNavigationHook();
-  const onSendOTP = () => {
+  const [value, setValue] = useState<string>('');
+  const onVerifyOTP = () => {
     Keyboard.dismiss();
-    navigation.navigate('OtpVerification');
+    navigation.navigate('Register');
+  };
+
+  const onReSend = () => {
+    alert('Resent OTP');
   };
 
   return (
     <AppContainer>
       <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
         <View style={styles.content}>
-          <TextView type="h1">Continue With Phone</TextView>
-          <Spacer height={20} />
+          <TextView type="h1">Verify Mobile Number</TextView>
           <TextView type="h6" style={styles.sendOtp}>
-            We will send you <TextView type="h6">One Time Password</TextView>
-            {'\n'}on this phone number
+            We sent a verification code to
+            <TextView type="h6"> 03089787678</TextView>
+            {'\n'}Enter the code below
           </TextView>
           <ImageView uri={'https://picsum.photos/200'} style={styles.image} />
-          <Spacer height={Dimen.height / 25} />
-          <TextView type="h6">Enter Your Phone</TextView>
-          <EditText
-            placeholder="+92-308-9273234"
-            keyboardType="number-pad"
-            onChangeText={() => {}}
+          <OtpInput {...{value, setValue}} />
+          <Button
+            style={styles.btn}
+            text={'VERIFY & PROCEED'}
+            onPress={onVerifyOTP}
           />
-          <Spacer height={5} />
-          <Button text={'SEND OTP'} onPress={onSendOTP} />
+          <TextView type="h6" style={styles.receivedCode}>
+            Didn't Receive Code?{' '}
+            <TextView type="h6" onPress={onReSend}>
+              Resend Code
+            </TextView>
+          </TextView>
         </View>
       </KeyboardAwareScrollView>
     </AppContainer>
@@ -59,11 +67,22 @@ const styles = StyleSheet.create({
     width: Dimen.height / 4.8,
     borderRadius: Dimen.height / 4.8,
     marginTop: Dimen.height / 35,
+    marginBottom: Dimen.height / 15,
   },
   content: {
     paddingTop: Dimen.height / 10,
   },
   sendOtp: {
     fontWeight: 'normal',
+    marginTop: 15,
+  },
+  receivedCode: {
+    marginTop: 8,
+    fontWeight: 'normal',
+  },
+
+  btn: {
+    marginTop: 20,
+    marginHorizontal: 80,
   },
 });

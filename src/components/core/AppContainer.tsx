@@ -6,7 +6,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Colors} from '../theme';
+import {Colors} from '../../theme';
 
 type AppContainer = {
   children: React.ReactNode;

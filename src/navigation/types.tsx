@@ -1,9 +1,10 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import SCREENS from './screenNames';
 
 export type RootStackParamList = {
   Splash: undefined;
   Login: undefined;
+  OtpVerification: undefined;
+  Register: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

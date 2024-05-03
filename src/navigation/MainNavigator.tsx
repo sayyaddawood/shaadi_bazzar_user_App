@@ -2,10 +2,9 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Login, Splash} from '../screens';
+import {Login, OtpVerification, Splash, Register} from '../screens';
 import {navigationRef} from './navigationService';
 import {AppContainer} from '../components';
-import {View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +31,12 @@ function MainNavigator() {
           initialRouteName={initialRouteName}>
           <Stack.Screen name="Splash" component={Splash} options={options} />
           <Stack.Screen name="Login" component={Login} options={options} />
+          <Stack.Screen name="Register" component={Register} options={options} />
+          <Stack.Screen
+            name="OtpVerification"
+            component={OtpVerification}
+            options={options}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AppContainer>
