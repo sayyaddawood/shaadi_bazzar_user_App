@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
-import {
-  ImageSourcePropType,
-  ImageStyle,
-  StyleProp,
-  StyleSheet,
-  View,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {StyleSheet} from 'react-native';
+import FastImage, {ResizeMode} from 'react-native-fast-image';
 
 type ImageView = {
   style?: any;
   onLoadEnd?: () => void;
   uri: string | number;
+  resizeMode?: ResizeMode;
 };
 
-const ImageView = ({uri, style, onLoadEnd}: ImageView) => {
+const ImageView = ({
+  uri,
+  resizeMode = 'contain',
+  style,
+  onLoadEnd,
+}: ImageView) => {
   const [isLoading, setLoading] = useState(true);
   const isNetworkImage =
     typeof uri === 'string' ? (uri as string).startsWith('http') : false;
@@ -27,6 +27,7 @@ const ImageView = ({uri, style, onLoadEnd}: ImageView) => {
           ? {uri: uri as string, priority: FastImage.priority.high}
           : (uri as number)
       }
+      resizeMode={resizeMode}
       onLoadStart={() => setLoading(true)}
       onLoadEnd={() => {
         setLoading(false);

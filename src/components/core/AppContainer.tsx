@@ -16,9 +16,9 @@ type AppContainer = {
 
 const AppContainer = ({children, safeAreaStyle, style}: AppContainer) => {
   return (
-    <SafeAreaView style={[styles.mainContainer, safeAreaStyle]}>
+    <View style={[styles.mainContainer, safeAreaStyle]}>
       <View style={[styles.mainContainer, style]}>{children}</View>
-    </SafeAreaView>
+    </View>
   );
 };
 

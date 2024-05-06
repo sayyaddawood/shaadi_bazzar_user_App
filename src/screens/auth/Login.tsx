@@ -10,7 +10,7 @@ import {
   TextView,
 } from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { useNavigationHook } from '../../hooks';
+import {useNavigationHook} from '../../hooks';
 const Login = () => {
   const navigation = useNavigationHook();
   const onSendOTP = () => {

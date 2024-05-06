@@ -1,5 +1,6 @@
 // ... onboarding
 export { default as Splash } from './onboard/Splash'
+export { default as Onboarding } from './onboard/Onboarding'
 
 // ... auth
 export { default as Login } from './auth/Login'

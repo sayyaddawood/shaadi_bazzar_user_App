@@ -3,23 +3,36 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../theme';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
-import {AppContainer} from '../../components';
+import {AppContainer, TextView} from '../../components';
 
 const Splash = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   useEffect(() => {
     (() => {
       setTimeout(() => {
-        navigation.navigate('Login');
+        navigation.replace('Onboarding');
       }, 2000);
     })();
   }, []);
 
   return (
-    <AppContainer>
-      <Text style={{color: Colors.Black}}>Splash ...</Text>
+    <AppContainer style={styles.bg}>
+      <TextView type="h1" style={styles.text}>
+        Shadi Bazaar
+      </TextView>
     </AppContainer>
   );
 };
 
 export default Splash;
+
+const styles = StyleSheet.create({
+  bg: {
+    backgroundColor: Colors.PrimaryColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: Colors.White,
+  },
+});

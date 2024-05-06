@@ -14,7 +14,9 @@ const Button = ({text, style, onPress}: Button) => {
     <Pressable
       style={({pressed}) => [{opacity: pressed ? 0.9 : 1}, styles.btn, style]}
       onPress={onPress}>
-      <TextView type='h6' color={Colors.White} style={styles.text}>{text}</TextView>
+      <TextView type="h6" color={Colors.White} style={styles.text}>
+        {text}
+      </TextView>
     </Pressable>
   );
 };
@@ -31,6 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   text: {
-    textTransform: 'uppercase'
-  }
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+  },
 });

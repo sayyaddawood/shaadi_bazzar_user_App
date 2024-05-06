@@ -1,9 +1,10 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {MainNavigator} from './src/navigation';
 import {AppContainer} from './src/components';
+import { Colors } from './src/theme';
 
 declare global {
   const userData: any; // type will change later
@@ -11,7 +12,7 @@ declare global {
 
 const App = () => {
   return (
-    <AppContainer>
+    <AppContainer safeAreaStyle={styles.bg}>
         <StatusBar backgroundColor={'transparent'} barStyle={'dark-content'} />
         <MainNavigator />
     </AppContainer>
@@ -19,3 +20,10 @@ const App = () => {
 };
 
 export default App;
+
+
+const styles = StyleSheet.create({
+  bg: {
+    backgroundColor: Colors.PrimaryColor,
+  },
+});
