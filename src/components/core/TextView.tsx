@@ -9,7 +9,7 @@ type TextView = {
   color?: string;
   onPress?: () => void;
   position?: 'center' | 'right' | 'left';
-  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8';
   [key: string]: any;
 };
 
@@ -17,7 +17,7 @@ const TextView = ({
   children,
   color,
   type = 'h6',
-  position,
+  position = 'left',
   style,
   onPress,
   ...props
@@ -78,6 +78,16 @@ const styles = StyleSheet.create({
   },
   h6: {
     fontSize: FontScale.medium,
+    color: Colors.Black,
+    fontFamily: Fonts.regular,
+  },
+  h7: {
+    fontSize: FontScale.small,
+    color: Colors.Black,
+    fontFamily: Fonts.regular,
+  },
+  h8: {
+    fontSize: FontScale.mini,
     color: Colors.Black,
     fontFamily: Fonts.regular,
   },

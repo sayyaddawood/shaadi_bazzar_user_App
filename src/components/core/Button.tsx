@@ -7,14 +7,21 @@ type Button = {
   style?: StyleProp<ViewStyle>;
   text: string;
   onPress: () => void;
+  type?: string;
+  textColor?: string;
 };
 
-const Button = ({text, style, onPress}: Button) => {
+const Button = ({type = 'fill', textColor, text, style, onPress}: Button) => {
   return (
     <Pressable
-      style={({pressed}) => [{opacity: pressed ? 0.9 : 1}, styles.btn, style]}
+      style={({pressed}) => [
+        {opacity: pressed ? 0.9 : 1},
+        styles.btn,
+        type == 'outline' && styles.outline,
+        style,
+      ]}
       onPress={onPress}>
-      <TextView type="h6" color={Colors.White} style={styles.text}>
+      <TextView type="h6" color={textColor ?? Colors.White} style={styles.text}>
         {text}
       </TextView>
     </Pressable>
@@ -35,5 +42,11 @@ const styles = StyleSheet.create({
   text: {
     textTransform: 'uppercase',
     letterSpacing: 1,
+  },
+
+  outline: {
+    borderWidth: 1,
+    backgroundColor: Colors.White,
+    borderColor: Colors.PrimaryColor,
   },
 });

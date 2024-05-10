@@ -6,6 +6,8 @@ export type RootStackParamList = {
   OtpVerification: undefined;
   Register: undefined;
   Onboarding: undefined;
+  Home: undefined;
+  VenueDetail: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

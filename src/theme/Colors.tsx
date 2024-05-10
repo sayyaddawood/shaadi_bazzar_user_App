@@ -6,6 +6,7 @@ const Colors = {
   Red: 'red',
   Icon: '#000000',
   LightestGray: 'rgba(39, 45, 55, .5)',
+  Halfwit: '#eee',
 };
 
 export default Colors;
