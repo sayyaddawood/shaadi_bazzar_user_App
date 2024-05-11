@@ -1,6 +1,6 @@
 import React from 'react';
 import {Icons, TextView} from '../core';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import Line from '../Line';
@@ -95,7 +95,7 @@ export default PrimaryInfo;
 const styles = StyleSheet.create({
   des: {
     color: Colors.Gray,
-    marginTop: 2,
+    marginTop: Platform.OS == "ios" ? 2 : -2,
   },
   location: {
     color: Colors.Gray,

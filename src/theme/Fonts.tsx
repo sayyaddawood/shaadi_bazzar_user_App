@@ -8,7 +8,7 @@ const isIOS = Platform.OS == 'ios';
 const Fonts = {
   black: 'Lato-Black',
   blackItalic: 'Lato-BlackItalic',
-  light: isIOS ?  'Lato-Light' : "Lato-Bold",
+  light: isIOS ?  'Lato-Light' : "Lato-Regular",
   lightItalic: 'Lato-LightItalic',
   italic: 'Lato-Italic',
   regular: isIOS ? 'Lato-Regular' : 'Lato-Bold',
