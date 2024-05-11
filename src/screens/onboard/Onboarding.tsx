@@ -34,6 +34,7 @@ const Onboarding = () => {
         data={Data}
         horizontal
         bounces={false}
+        showsHorizontalScrollIndicator={false}
         snapToInterval={Dimen.width}
         snapToAlignment="start"
         decelerationRate={'fast'}

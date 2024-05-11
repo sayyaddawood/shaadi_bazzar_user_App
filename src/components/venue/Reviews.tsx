@@ -180,7 +180,7 @@ const ReviewsItem = () => {
         position="left"
         type="h8"
         color={Colors.Gray}
-        style={{fontFamily: Fonts.light, marginTop: 2}}>
+        style={{fontFamily: Fonts.light , marginTop: 2}}>
         Reviewed 5 months ago
       </TextView>
 
