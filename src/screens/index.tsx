@@ -16,3 +16,4 @@ export {default as Vendors} from './home/Vendors';
 
 // ... Venue
 export {default as VenueDetail} from './venue/VenueDetail';
+export {default as SendMessage} from './venue/SendMessage';

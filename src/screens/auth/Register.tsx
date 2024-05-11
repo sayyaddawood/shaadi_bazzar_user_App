@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import {Keyboard, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Colors, Dimen} from '../../theme';
 import {
   AppContainer,
@@ -16,8 +16,9 @@ import {useNavigationHook} from '../../hooks';
 const Login = () => {
   const navigation = useNavigationHook();
   const [value, setValue] = useState<string>('');
-  const onVerifyOTP = () => {
+  const onRegister = () => {
     Keyboard.dismiss();
+    navigation.navigate('Home');
   };
 
   const onReSend = () => {
@@ -25,62 +26,55 @@ const Login = () => {
   };
 
   return (
-    <AppContainer>
-      <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
-        <View style={styles.content}>
-          <TextView type="h1" position="left" style={styles.text}>
-            Your Information
-          </TextView>
+    <SafeAreaView style={{flex: 1, backgroundColor: Colors.White}}>
+      <AppContainer>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
+          <View style={styles.content}>
+            <TextView type="h1" position="left" style={styles.text}>
+              Your Information
+            </TextView>
 
-          <Spacer height={30} />
+            <Spacer height={30} />
 
-          <EditText
-            label="Name"
-            placeholder="+92-308-9273234"
-            keyboardType="number-pad"
-            onChangeText={() => {}}
-          />
+            <EditText
+              label="Name"
+              placeholder="+923089273234"
+              keyboardType="number-pad"
+              onChangeText={() => {}}
+            />
 
-          <Spacer height={10} />
+            <Spacer height={10} />
 
-          <EditText
-            label="Business Type"
-            placeholder="Select"
-            keyboardType="number-pad"
-            onChangeText={() => {}}
-          />
+            <EditText
+              label="Email Address"
+              placeholder="example@example.com"
+              keyboardType="number-pad"
+              onChangeText={() => {}}
+            />
 
-          <Spacer height={10} />
+            <Spacer height={10} />
 
-          <EditText
-            label="Name Of Business"
-            placeholder="Select"
-            keyboardType="number-pad"
-            onChangeText={() => {}}
-          />
+            <EditText
+              label="City"
+              placeholder="City"
+              keyboardType="number-pad"
+              onChangeText={() => {}}
+            />
 
-          <Spacer height={10} />
+            <Spacer height={10} />
 
-          <EditText
-            label="City"
-            placeholder="City"
-            keyboardType="number-pad"
-            onChangeText={() => {}}
-          />
+            <EditText
+              label="Address"
+              placeholder="Address"
+              keyboardType="number-pad"
+              onChangeText={() => {}}
+            />
 
-          <Spacer height={10} />
-
-          <EditText
-            label="Business Address"
-            placeholder="Address"
-            keyboardType="number-pad"
-            onChangeText={() => {}}
-          />
-
-          <Button style={styles.btn} text={'Continue'} onPress={onVerifyOTP} />
-        </View>
-      </KeyboardAwareScrollView>
-    </AppContainer>
+            <Button style={styles.btn} text={'Continue'} onPress={onRegister} />
+          </View>
+        </KeyboardAwareScrollView>
+      </AppContainer>
+    </SafeAreaView>
   );
 };
 

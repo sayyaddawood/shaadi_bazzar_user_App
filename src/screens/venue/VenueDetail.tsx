@@ -15,8 +15,13 @@ import {
 } from '../../components';
 import {Colors, Dimen} from '../../theme';
 import {IconsType} from '../../components/core/Icons';
+import {useNavigationHook} from '../../hooks';
 
 const VenueDetail = () => {
+  const navigation = useNavigationHook();
+
+  const onBackPress = () => navigation.goBack();
+
   const items = [
     'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
     'https://i.pinimg.com/564x/4f/96/d1/4f96d1769c0d96bae46f3b4371ccf0ef.jpg',
@@ -28,7 +33,7 @@ const VenueDetail = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppContainer>
-          <Header onBackPress={() => {}} title={'Venues in Hyderabad'} />
+          <Header onBackPress={onBackPress} title={'Venues in Hyderabad'} />
           <ImageSlider images={items} />
 
           <View style={styles.body}>
@@ -50,7 +55,7 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: Colors.White},
   body: {
     marginHorizontal: 20,
-    marginTop: 15,
+    marginTop: 5,
   },
   des: {
     color: Colors.Gray,

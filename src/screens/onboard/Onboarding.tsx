@@ -54,7 +54,7 @@ const Onboarding = () => {
               />
 
               <View style={[styles.descriptionView, {bottom: 130}]}>
-                <TextView type="h5" style={styles.title}>
+                <TextView type="h5" position='center' style={styles.title}>
                   {item.title}
                 </TextView>
               </View>

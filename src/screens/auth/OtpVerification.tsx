@@ -20,15 +20,15 @@ const Login = () => {
   };
 
   const onReSend = () => {
-    alert('Resent OTP');
+    navigation.navigate('Home');
   };
 
   return (
     <AppContainer>
       <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
         <View style={styles.content}>
-          <TextView type="h1">Verify Mobile Number</TextView>
-          <TextView type="h6" style={styles.sendOtp}>
+          <TextView type="h1" position='center'>Verify Mobile Number</TextView>
+          <TextView type="h6" position='center' style={styles.sendOtp}>
             We sent a verification code to
             <TextView type="h6"> 03089787678</TextView>
             {'\n'}Enter the code below
@@ -40,7 +40,7 @@ const Login = () => {
             text={'VERIFY & PROCEED'}
             onPress={onVerifyOTP}
           />
-          <TextView type="h6" style={styles.receivedCode}>
+          <TextView type="h6" position='center' style={styles.receivedCode}>
             Didn't Receive Code?{' '}
             <TextView type="h6" onPress={onReSend}>
               Resend Code

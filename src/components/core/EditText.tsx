@@ -34,9 +34,11 @@ type EditTextType = {
   getCode?(value: string): void;
   required?: boolean;
   editable?: boolean;
+  multiline?: boolean;
   labelStyle?: StyleProp<TextStyle>;
   errorTextStyle?: StyleProp<ViewStyle>;
   value?: string;
+
   autoCapitalize?: any;
   max?: any;
   rightIcon?: JSX.Element;
@@ -48,6 +50,7 @@ type EditTextType = {
 const EditText = ({
   style,
   placeholder,
+  multiline,
   keyboardType = 'default',
   label,
   inputStyle,
@@ -73,7 +76,7 @@ const EditText = ({
     <View style={[styles.con, style]}>
       {label && (
         <View style={[styles.labelStylee]}>
-          <TextView style={labelStyle}>{label}</TextView>
+          <TextView style={[labelStyle,]}>{label}</TextView>
 
           {required && <TextView style={{color: Colors.Red}}>*</TextView>}
         </View>
@@ -82,6 +85,7 @@ const EditText = ({
       <View style={[styles.container, inputStyle]}>
         <TextInput
           editable={editable}
+          multiline={multiline}
           ref={reference}
           value={value}
           autoFocus={autoFocus}
@@ -89,7 +93,7 @@ const EditText = ({
           placeholderTextColor={placeholderColor}
           autoCapitalize={autoCapitalize}
           maxLength={max}
-          style={[styles.input, {fontFamily: Fonts.regular}, inputStyle]}
+          style={[styles.input, {fontFamily: Fonts.regular,}, inputStyle]}
           secureTextEntry={isPassword}
           keyboardType={keyboardType}
           returnKeyType={returnKey}
@@ -163,7 +167,6 @@ const styles = StyleSheet.create({
 
   labelStylee: {
     flexDirection: 'row',
-    marginLeft: 35,
     marginBottom: -5,
   },
 

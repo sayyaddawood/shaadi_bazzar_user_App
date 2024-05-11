@@ -4,13 +4,52 @@ import {StyleSheet, View} from 'react-native';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import Line from '../Line';
+import {IconButton} from 'react-native-paper';
+import {useNavigationHook} from '../../hooks';
 
 const PrimaryInfo = () => {
+  const navigation = useNavigationHook();
+
+  const onPressCall = () => alert('Navigated to call');
+  const onPressMessage = () => navigation.navigate('SendMessage');
+
   return (
     <>
-      <TextView position="left" type="h5">
-        Sari Banquet Convention & Lawns
-      </TextView>
+      <View style={styles.row}>
+        <TextView position="left" type="h5">
+          Sari Banquet Convention & Lawns
+        </TextView>
+
+        <View style={styles.rowMessage}>
+          <IconButton
+            icon={() => (
+              <Icons
+                type={IconsType.AntDesign}
+                name={'message1'}
+                size={25}
+                color={Colors.PrimaryColor}
+              />
+            )}
+            size={12}
+            style={{marginRight: 0}}
+            onPress={onPressMessage}
+          />
+          <IconButton
+            icon={() => (
+              <Icons
+                type={IconsType.Ionicons}
+                name={'call'}
+                size={15}
+                color={Colors.White}
+              />
+            )}
+            size={12}
+            style={{backgroundColor: 'green', padding: 3}}
+            onPress={onPressCall}
+          />
+        </View>
+      </View>
+
       <TextView position="left" type="h8" style={styles.des}>
         (Formerly known as Sari banquet convention & lawns)
       </TextView>
@@ -76,5 +115,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Halfwit,
     marginLeft: -20,
     marginVertical: 15,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  rowMessage: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: -10,
   },
 });

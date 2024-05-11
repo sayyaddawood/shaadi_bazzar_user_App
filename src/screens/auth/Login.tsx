@@ -22,15 +22,15 @@ const Login = () => {
     <AppContainer>
       <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
         <View style={styles.content}>
-          <TextView type="h1">Continue With Phone</TextView>
+          <TextView type="h1" position='center'>Continue With Phone</TextView>
           <Spacer height={20} />
-          <TextView type="h6" style={styles.sendOtp}>
+          <TextView type="h6" position='center' style={styles.sendOtp}>
             We will send you <TextView type="h6">One Time Password</TextView>
             {'\n'}on this phone number
           </TextView>
           <ImageView uri={'https://picsum.photos/200'} style={styles.image} />
           <Spacer height={Dimen.height / 25} />
-          <TextView type="h6">Enter Your Phone</TextView>
+          <TextView type="h6" position='center'>Enter Your Phone</TextView>
           <EditText
             placeholder="+92-308-9273234"
             keyboardType="number-pad"

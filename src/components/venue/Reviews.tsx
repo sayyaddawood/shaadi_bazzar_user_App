@@ -82,7 +82,7 @@ const PriceInfo = () => {
       <Spacer height={10} />
 
       <Line style={[styles.line, {marginTop: 5}]} />
-      {Array(20)
+      {Array(3)
         .fill('*')
         .map(it => {
           return <ReviewsItem />;

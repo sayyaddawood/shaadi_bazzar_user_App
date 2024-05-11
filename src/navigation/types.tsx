@@ -8,6 +8,7 @@ export type RootStackParamList = {
   Onboarding: undefined;
   Home: undefined;
   VenueDetail: undefined;
+  SendMessage: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
