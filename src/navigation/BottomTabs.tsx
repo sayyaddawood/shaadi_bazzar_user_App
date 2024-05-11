@@ -35,7 +35,7 @@ const BottomTabs = () => {
                   : Dimen.width * 0.21,
               },
               android: {
-                height: Dimen.width * 0.17,
+                height: Dimen.width * 0.15,
               },
             }),
           },
@@ -127,7 +127,7 @@ var styles = StyleSheet.create({
   tabIconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: Platform.OS == 'ios' ? 10 : 5,
     marginBottom: 10,
   },
 
