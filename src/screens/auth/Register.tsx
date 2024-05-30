@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import {Keyboard, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Alert, Keyboard, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Colors, Dimen} from '../../theme';
 import {
   AppContainer,
   Button,
   EditText,
-  ImageView,
-  OtpInput,
   Spacer,
   TextView,
 } from '../../components';
@@ -18,11 +16,11 @@ const Login = () => {
   const [value, setValue] = useState<string>('');
   const onRegister = () => {
     Keyboard.dismiss();
-    navigation.navigate('Home');
+    navigation.navigate('HomeTabs');
   };
 
   const onReSend = () => {
-    alert('Resent OTP');
+    Alert.alert('Resent OTP');
   };
 
   return (

@@ -17,3 +17,12 @@ export {default as Vendors} from './home/Vendors';
 // ... Venue
 export {default as VenueDetail} from './venue/VenueDetail';
 export {default as SendMessage} from './venue/SendMessage';
+export {default as VenueCategoriesList} from './venue/VenueCategoriesList';
+export {default as AlbumListing} from './venue/album/AlbumListing';
+export {default as WriteReview} from './venue/WriteReview';
+export {default as CheckAvailability} from './venue/CheckAvailability';
+export {default as ViewAllAlbums} from './venue/album/ViewAllAlbums';
+export {default as AlbumGallery} from './venue/album/AlbumGallery';
+
+// ... settings
+export {default as UserSettings} from './settings/UserSettings';

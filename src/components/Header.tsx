@@ -1,9 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {IconButton} from 'react-native-paper';
-import {Icons, TextView} from './core';
-import {IconsType} from './core/Icons';
-import {Colors} from '../theme';
+import {TextView} from './core';
+import BackButton from './BackButton';
 
 type HeaderProps = {
   onBackPress?: () => void;
@@ -13,21 +11,7 @@ type HeaderProps = {
 const Header = ({onBackPress, title}: HeaderProps) => {
   return (
     <View style={styles.container}>
-      {onBackPress && (
-        <IconButton
-          icon={() => (
-            <Icons
-              type={IconsType.Entypo}
-              name={'chevron-small-left'}
-              size={25}
-              color={Colors.Black}
-            />
-          )}
-          size={15}
-          style={{backgroundColor: Colors.Halfwit}}
-          onPress={onBackPress}
-        />
-      )}
+      {onBackPress && <BackButton {...{onBackPress}} />}
 
       <TextView type="h5" style={styles.text}>
         {title}

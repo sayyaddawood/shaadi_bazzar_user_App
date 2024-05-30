@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   TextInput,
   StyleProp,
@@ -14,11 +14,13 @@ import {Colors, Dimen} from '../../theme';
 import TextView from './TextView';
 import Fonts from '../../theme/Fonts';
 import Icons, {IconsType} from './Icons';
+import DatePicker from './DatePicker';
 
 type EditTextType = {
   country?: boolean;
   style?: StyleProp<ViewStyle>;
   inputStyle?: any;
+  input?: any;
   password?: boolean;
   placeholder?: string;
   keyboardType?: KeyboardType;
@@ -38,13 +40,14 @@ type EditTextType = {
   labelStyle?: StyleProp<TextStyle>;
   errorTextStyle?: StyleProp<ViewStyle>;
   value?: string;
-
   autoCapitalize?: any;
   max?: any;
-  rightIcon?: JSX.Element;
+  rightIcon?: () => React.ReactNode;
   isDropDown?: boolean;
   secureTextEntry?: boolean;
   rightText?: string;
+  type?: string;
+  pointerEvent?: string;
 };
 
 const EditText = ({
@@ -54,6 +57,7 @@ const EditText = ({
   keyboardType = 'default',
   label,
   inputStyle,
+  input,
   returnKey,
   onChangeText,
   errorMessage,
@@ -65,35 +69,60 @@ const EditText = ({
   value,
   autoCapitalize = 'none',
   max,
+  rightIcon,
   editable = true,
   secureTextEntry = false,
   errorTextStyle,
+  type,
+  pointerEvent,
 }: EditTextType) => {
   let placeholderColor = Colors.Gray;
   let [isPassword, setIsPassword] = React.useState(secureTextEntry);
+  const [isFocused, setIsFocused] = useState(false);
+  const [visible, setVisibility] = useState(false);
 
   return (
     <View style={[styles.con, style]}>
       {label && (
         <View style={[styles.labelStylee]}>
-          <TextView style={[labelStyle,]}>{label}</TextView>
+          <TextView style={[labelStyle]}>{label}</TextView>
 
           {required && <TextView style={{color: Colors.Red}}>*</TextView>}
         </View>
       )}
 
-      <View style={[styles.container, inputStyle]}>
+      <Pressable
+        style={[
+          styles.container,
+          isFocused && {borderColor: Colors.PrimaryColor},
+          inputStyle,
+        ]}
+        disabled={pointerEvent == 'none' ? false : true}
+        onPress={() => {
+          if (type == 'calender') {
+            setVisibility(true)
+          }
+        }}>
+        {rightIcon && rightIcon()}
         <TextInput
           editable={editable}
           multiline={multiline}
           ref={reference}
           value={value}
           autoFocus={autoFocus}
+          pointerEvents={pointerEvent}
+          focusable={true}
+          onFocus={() => {
+            setIsFocused(true);
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+          }}
           placeholder={placeholder}
           placeholderTextColor={placeholderColor}
           autoCapitalize={autoCapitalize}
           maxLength={max}
-          style={[styles.input, {fontFamily: Fonts.regular,}, inputStyle]}
+          style={[styles.input, {fontFamily: Fonts.regular}, input]}
           secureTextEntry={isPassword}
           keyboardType={keyboardType}
           returnKeyType={returnKey}
@@ -120,12 +149,25 @@ const EditText = ({
             />
           </Pressable>
         )}
-      </View>
+      </Pressable>
 
       {errorMessage && (
         <TextView style={[styles.errorText, errorTextStyle]}>
           {errorMessage}
         </TextView>
+      )}
+
+      {type == 'calender' && (
+        <DatePicker
+          {...{
+            visible,
+            setVisibility,
+            onConfirmDate(date) {
+              console.log(date);
+              onChangeText(date)
+            },
+          }}
+        />
       )}
     </View>
   );
@@ -142,7 +184,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginVertical: 10,
     marginHorizontal: 35,
-    height: 40,
+    height: 45,
     borderRadius: 4,
   },
 

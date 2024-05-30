@@ -1,6 +1,6 @@
 import React from 'react';
 import {Keyboard, StyleSheet, View} from 'react-native';
-import {Colors, Dimen} from '../../theme';
+import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
   Button,
@@ -22,15 +22,19 @@ const Login = () => {
     <AppContainer>
       <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
         <View style={styles.content}>
-          <TextView type="h1" position='center'>Continue With Phone</TextView>
+          <TextView type="h1" position="center">
+            Continue With Phone
+          </TextView>
           <Spacer height={20} />
-          <TextView type="h6" position='center' style={styles.sendOtp}>
+          <TextView type="h6" position="center" style={styles.sendOtp}>
             We will send you <TextView type="h6">One Time Password</TextView>
             {'\n'}on this phone number
           </TextView>
-          <ImageView uri={'https://picsum.photos/200'} style={styles.image} />
-          <Spacer height={Dimen.height / 25} />
-          <TextView type="h6" position='center'>Enter Your Phone</TextView>
+          <ImageView uri={AssetsIcons.login} style={styles.image} />
+          <Spacer height={Dimen.height / 35} />
+          <TextView type="h6" position="center">
+            Enter Your Phone Number
+          </TextView>
           <EditText
             placeholder="+92-308-9273234"
             keyboardType="number-pad"
@@ -55,8 +59,8 @@ const styles = StyleSheet.create({
   },
   image: {
     alignSelf: 'center',
-    height: Dimen.height / 4.8,
-    width: Dimen.height / 4.8,
+    height: Dimen.height / 3,
+    width: Dimen.height / 3,
     borderRadius: Dimen.height / 4.8,
     marginTop: Dimen.height / 35,
   },

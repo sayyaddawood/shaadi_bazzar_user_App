@@ -6,34 +6,11 @@ import Line from '../Line';
 import {IconsType} from '../core/Icons';
 import Fonts from '../../theme/Fonts';
 
-const PriceInfo = () => {
-  const items = [
-    {
-      name: 'Photo Package',
-      price: '20,000',
-    },
-    {
-      name: 'Photo + Video',
-      price: '30,000',
-    },
-    {
-      name: 'Candid Photography',
-      price: '15,000',
-    },
-    {
-      name: 'Cinematography',
-      price: '18,000',
-    },
-    {
-      name: 'Studio Photography',
-      price: '10,000',
-    },
-  ];
+type ReviewsType = {
+  onWriteAReviewPress: () => void;
+};
 
-  const onWriteAReviewPress = () => {
-    alert('Write a review');
-  };
-
+const Reviews = ({onWriteAReviewPress}: ReviewsType) => {
   return (
     <>
       <View style={styles.writeReview}>
@@ -84,14 +61,14 @@ const PriceInfo = () => {
       <Line style={[styles.line, {marginTop: 5}]} />
       {Array(3)
         .fill('*')
-        .map(it => {
-          return <ReviewsItem />;
+        .map((it, index) => {
+          return <ReviewsItem {...{index}} />;
         })}
     </>
   );
 };
 
-export default PriceInfo;
+export default Reviews;
 
 const styles = StyleSheet.create({
   location: {
@@ -158,9 +135,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReviewsItem = () => {
+type ReviewItem = {
+  index: number
+}
+
+const ReviewsItem = ({index} : ReviewItem) => {
   return (
-    <View style={styles.container}>
+    <View key={index} style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <TextView position="left" type="h7" style={{marginRight: 5}}>
           Dawood Ali Khan
@@ -180,7 +161,7 @@ const ReviewsItem = () => {
         position="left"
         type="h8"
         color={Colors.Gray}
-        style={{fontFamily: Fonts.light , marginTop: 2}}>
+        style={{fontFamily: Fonts.light, marginTop: 2}}>
         Reviewed 5 months ago
       </TextView>
 

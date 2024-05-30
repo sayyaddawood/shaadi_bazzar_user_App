@@ -1,17 +1,42 @@
 import React from 'react';
-import {View} from 'react-native';
-import {AppContainer, TextView} from '../../components';
+import {FlatList, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {
+  AppContainer,
+  Categories,
+  HomeHeader,
+  VenuesListing,
+} from '../../components';
 import {useNavigationHook} from '../../hooks';
+import {Colors} from '../../theme';
 
 const Home = () => {
   const navigation = useNavigationHook();
   return (
-    <AppContainer style={{justifyContent: 'center'}}>
-      <TextView type="h1" position='center' onPress={() => navigation.navigate('VenueDetail')}>
-        Home
-      </TextView>
-    </AppContainer>
+    <SafeAreaView style={styles.container}>
+      <AppContainer>
+        <HomeHeader />
+        <FlatList
+          data={[1]}
+          contentContainerStyle={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          renderItem={({}) => {
+            return (
+              <>
+                <Categories />
+                <VenuesListing type={'venue'} />
+                <VenuesListing type={'photographer'} />
+              </>
+            );
+          }}
+        />
+      </AppContainer>
+    </SafeAreaView>
   );
 };
 
 export default Home;
+
+const styles = StyleSheet.create({
+  container: {backgroundColor: Colors.White, flex: 1},
+  scrollView: {paddingBottom: 70},
+});

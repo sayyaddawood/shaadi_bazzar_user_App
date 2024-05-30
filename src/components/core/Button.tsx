@@ -9,9 +9,19 @@ type Button = {
   onPress: () => void;
   type?: string;
   textColor?: string;
+  rightIcon?: () => React.ReactNode;
+  leftIcon?: () => React.ReactNode;
 };
 
-const Button = ({type = 'fill', textColor, text, style, onPress}: Button) => {
+const Button = ({
+  rightIcon,
+  leftIcon,
+  type = 'fill',
+  textColor,
+  text,
+  style,
+  onPress,
+}: Button) => {
   return (
     <Pressable
       style={({pressed}) => [
@@ -21,9 +31,11 @@ const Button = ({type = 'fill', textColor, text, style, onPress}: Button) => {
         style,
       ]}
       onPress={onPress}>
+      {leftIcon && leftIcon()}
       <TextView type="h6" color={textColor ?? Colors.White} style={styles.text}>
         {text}
       </TextView>
+      {rightIcon && rightIcon()}
     </Pressable>
   );
 };
@@ -36,7 +48,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 40,
+    height: 45,
     borderRadius: 4,
   },
   text: {

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, Text, StyleSheet, Platform, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, Platform, View} from 'react-native';
 import {
   CodeField,
   Cursor,
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    marginTop: 30,
   },
   codeFieldRoot: {marginTop: 0},
   cell: {

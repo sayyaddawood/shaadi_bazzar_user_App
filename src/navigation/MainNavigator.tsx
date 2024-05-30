@@ -10,6 +10,13 @@ import {
   Onboarding,
   VenueDetail,
   SendMessage,
+  VenueCategoriesList,
+  AlbumListing,
+  WriteReview,
+  CheckAvailability,
+  ViewAllAlbums,
+  AlbumGallery,
+  UserSettings,
 } from '../screens';
 import {navigationRef} from './navigationService';
 import {AppContainer} from '../components';
@@ -43,9 +50,18 @@ function MainNavigator() {
             component={VenueDetail}
             options={options}
           />
-          <Stack.Screen name="Home" component={BottomTabs} options={options} />
+          <Stack.Screen
+            name="HomeTabs"
+            component={BottomTabs}
+            options={options}
+          />
           <Stack.Screen name="Splash" component={Splash} options={options} />
           <Stack.Screen name="Login" component={Login} options={options} />
+          <Stack.Screen
+            name="VenueCategoriesList"
+            component={VenueCategoriesList}
+            options={options}
+          />
           <Stack.Screen
             name="Register"
             component={Register}
@@ -64,6 +80,37 @@ function MainNavigator() {
           <Stack.Screen
             name="SendMessage"
             component={SendMessage}
+            options={options}
+          />
+          <Stack.Screen
+            name="AlbumListing"
+            component={AlbumListing}
+            options={options}
+          />
+          <Stack.Screen
+            name="WriteReview"
+            component={WriteReview}
+            options={options}
+          />
+          <Stack.Screen
+            name="CheckAvailability"
+            component={CheckAvailability}
+            options={options}
+          />
+          <Stack.Screen
+            name="ViewAllAlbums"
+            component={ViewAllAlbums}
+            options={options}
+          />
+          <Stack.Screen
+            name="AlbumGallery"
+            component={AlbumGallery}
+            options={options}
+          />
+
+          <Stack.Screen
+            name="UserSettings"
+            component={UserSettings}
             options={options}
           />
         </Stack.Navigator>

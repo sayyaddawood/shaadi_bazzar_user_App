@@ -16,6 +16,7 @@ import {
 import {Colors, Dimen} from '../../theme';
 import {IconsType} from '../../components/core/Icons';
 import {useNavigationHook} from '../../hooks';
+import {FlatList} from 'react-native';
 
 const VenueDetail = () => {
   const navigation = useNavigationHook();
@@ -31,20 +32,37 @@ const VenueDetail = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <AppContainer>
-          <Header onBackPress={onBackPress} title={'Venues in Hyderabad'} />
-          <ImageSlider images={items} />
+      <FlatList
+        data={[1]}
+        showsVerticalScrollIndicator={false}
+        renderItem={({}) => {
+          return (
+            <>
+              <AppContainer>
+                <Header
+                  onBackPress={onBackPress}
+                  title={'Venues in Hyderabad'}
+                />
+                <ImageSlider images={items} />
 
-          <View style={styles.body}>
-            <PrimaryInfo />
-            <PriceInfo />
-            <Album {...{items}} />
+                <View style={styles.body}>
+                  <PrimaryInfo />
+                  <PriceInfo />
+                  <Album {...{items}} />
 
-            <Reviews />
-          </View>
-        </AppContainer>
-      </ScrollView>
+                  <Reviews
+                    onWriteAReviewPress={() =>
+                      navigation.navigate('WriteReview', {
+                        title: 'Sari Banquet Convention & Lawns',
+                      })
+                    }
+                  />
+                </View>
+              </AppContainer>
+            </>
+          );
+        }}
+      />
     </SafeAreaView>
   );
 };

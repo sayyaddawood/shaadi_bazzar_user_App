@@ -7,8 +7,20 @@ export type RootStackParamList = {
   Register: undefined;
   Onboarding: undefined;
   Home: undefined;
+  HomeTabs: undefined;
   VenueDetail: undefined;
+  VenueCategoriesList: undefined;
   SendMessage: undefined;
+  AlbumListing: undefined;
+  WriteReview: {
+    title: string;
+  };
+  CheckAvailability: undefined
+  ViewAllAlbums: undefined
+  AlbumGallery: {
+    activeIndexImage: number
+  },
+  UserSettings: undefined
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

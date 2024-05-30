@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Keyboard, StyleSheet, View} from 'react-native';
-import {Colors, Dimen} from '../../theme';
+import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
   Button,
@@ -16,31 +16,33 @@ const Login = () => {
   const [value, setValue] = useState<string>('');
   const onVerifyOTP = () => {
     Keyboard.dismiss();
-    navigation.navigate('Register');
+    navigation.navigate('HomeTabs');
   };
 
   const onReSend = () => {
-    navigation.navigate('Home');
+    // navigation.navigate('Home');
   };
 
   return (
     <AppContainer>
       <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
         <View style={styles.content}>
-          <TextView type="h1" position='center'>Verify Mobile Number</TextView>
-          <TextView type="h6" position='center' style={styles.sendOtp}>
+          <TextView type="h1" position="center">
+            Verify Mobile Number
+          </TextView>
+          <TextView type="h6" position="center" style={styles.sendOtp}>
             We sent a verification code to
             <TextView type="h6"> 03089787678</TextView>
             {'\n'}Enter the code below
           </TextView>
-          <ImageView uri={'https://picsum.photos/200'} style={styles.image} />
+          <ImageView uri={AssetsIcons.login} style={styles.image} />
           <OtpInput {...{value, setValue}} />
           <Button
             style={styles.btn}
             text={'VERIFY & PROCEED'}
             onPress={onVerifyOTP}
           />
-          <TextView type="h6" position='center' style={styles.receivedCode}>
+          <TextView type="h6" position="center" style={styles.receivedCode}>
             Didn't Receive Code?{' '}
             <TextView type="h6" onPress={onReSend}>
               Resend Code
@@ -63,11 +65,10 @@ const styles = StyleSheet.create({
   },
   image: {
     alignSelf: 'center',
-    height: Dimen.height / 4.8,
-    width: Dimen.height / 4.8,
+    height: Dimen.height / 3,
+    width: Dimen.height / 3,
     borderRadius: Dimen.height / 4.8,
     marginTop: Dimen.height / 35,
-    marginBottom: Dimen.height / 15,
   },
   content: {
     paddingTop: Dimen.height / 10,
@@ -83,6 +84,5 @@ const styles = StyleSheet.create({
 
   btn: {
     marginTop: 20,
-    marginHorizontal: 80,
   },
 });

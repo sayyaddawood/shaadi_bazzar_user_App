@@ -11,7 +11,7 @@ const PrimaryInfo = () => {
   const navigation = useNavigationHook();
 
   const onPressCall = () => alert('Navigated to call');
-  const onPressMessage = () => navigation.navigate('SendMessage');
+  const onPressMessage = () => navigation.navigate('CheckAvailability');
 
   return (
     <>
@@ -24,17 +24,17 @@ const PrimaryInfo = () => {
           <IconButton
             icon={() => (
               <Icons
-                type={IconsType.AntDesign}
-                name={'message1'}
-                size={25}
-                color={Colors.PrimaryColor}
+                type={IconsType.Ionicons}
+                name={'calendar-outline'}
+                size={20}
+                color={Colors.White}
               />
             )}
-            size={12}
-            style={{marginRight: 0}}
+            size={18}
+            style={{marginRight: 0, backgroundColor: Colors.PrimaryColor}}
             onPress={onPressMessage}
           />
-          <IconButton
+          {/* <IconButton
             icon={() => (
               <Icons
                 type={IconsType.Ionicons}
@@ -46,7 +46,7 @@ const PrimaryInfo = () => {
             size={12}
             style={{backgroundColor: 'green', padding: 3}}
             onPress={onPressCall}
-          />
+          /> */}
         </View>
       </View>
 
@@ -95,7 +95,7 @@ export default PrimaryInfo;
 const styles = StyleSheet.create({
   des: {
     color: Colors.Gray,
-    marginTop: Platform.OS == "ios" ? 2 : -2,
+    marginTop: Platform.OS == 'ios' ? 2 : -2,
   },
   location: {
     color: Colors.Gray,

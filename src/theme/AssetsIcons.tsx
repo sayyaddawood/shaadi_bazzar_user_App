@@ -7,6 +7,12 @@ let AssetsIcons = {
   vendors: require('../assets/images/vendors.png'),
   ideas: require('../assets/images/ideas.png'),
   packages: require('../assets/images/packages.png'),
+  login: require('../assets/images/login.png'),
+  support: require('../assets/images/support.png'),
+  share: require('../assets/images/share.png'),
+  rating: require('../assets/images/rating.png'),
+  information: require('../assets/images/information.png'),
+  logout: require('../assets/images/logout.png'),
 
 };
 
