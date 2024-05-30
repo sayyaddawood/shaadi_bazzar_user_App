@@ -1,5 +1,5 @@
 import React from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
@@ -10,13 +10,13 @@ import {
   TextView,
 } from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useNavigationHook} from '../../hooks';
+import {useLogin} from '../../hooks';
+
 const Login = () => {
-  const navigation = useNavigationHook();
-  const onSendOTP = () => {
-    Keyboard.dismiss();
-    navigation.navigate('OtpVerification');
-  };
+  const {
+    ref,
+    form: {handleSubmit, handleChange, errors, touched},
+  } = useLogin();
 
   return (
     <AppContainer>
@@ -36,12 +36,22 @@ const Login = () => {
             Enter Your Phone Number
           </TextView>
           <EditText
-            placeholder="+92-308-9273234"
+            reference={ref}
+            placeholder="0300xxxxxxx"
             keyboardType="number-pad"
-            onChangeText={() => {}}
+            onChangeText={handleChange('phone')}
+            errorMessage={errors?.phone && touched.phone ? errors.phone : ''}
+            errorTextStyle={{
+              marginLeft: 40,
+              marginHorizontal: 35,
+            }}
           />
           <Spacer height={5} />
-          <Button text={'SEND OTP'} onPress={onSendOTP} />
+          <Button
+            text={'SEND OTP'}
+            style={{marginTop: 5}}
+            onPress={handleSubmit}
+          />
         </View>
       </KeyboardAwareScrollView>
     </AppContainer>

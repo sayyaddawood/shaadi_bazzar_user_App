@@ -8,6 +8,7 @@ type Button = {
   text: string;
   onPress: () => void;
   type?: string;
+  disabled?: boolean;
   textColor?: string;
   rightIcon?: () => React.ReactNode;
   leftIcon?: () => React.ReactNode;
@@ -21,13 +22,16 @@ const Button = ({
   text,
   style,
   onPress,
+  disabled = false,
 }: Button) => {
   return (
     <Pressable
+      disabled={disabled}
       style={({pressed}) => [
         {opacity: pressed ? 0.9 : 1},
         styles.btn,
         type == 'outline' && styles.outline,
+        disabled && styles.disabledBtn,
         style,
       ]}
       onPress={onPress}>
@@ -43,6 +47,9 @@ const Button = ({
 export default Button;
 
 const styles = StyleSheet.create({
+  disabledBtn: {
+    backgroundColor: Colors.DarkGray,
+  },
   btn: {
     backgroundColor: Colors.PrimaryColor,
     marginHorizontal: 50,

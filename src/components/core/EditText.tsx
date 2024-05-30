@@ -100,7 +100,7 @@ const EditText = ({
         disabled={pointerEvent == 'none' ? false : true}
         onPress={() => {
           if (type == 'calender') {
-            setVisibility(true)
+            setVisibility(true);
           }
         }}>
         {rightIcon && rightIcon()}
@@ -151,11 +151,13 @@ const EditText = ({
         )}
       </Pressable>
 
-      {errorMessage && (
-        <TextView style={[styles.errorText, errorTextStyle]}>
-          {errorMessage}
+        <TextView
+          type="h7"
+          position="right"
+          style={[styles.errorText, errorTextStyle]}>
+          {errorMessage ? errorMessage : ""}
         </TextView>
-      )}
+      
 
       {type == 'calender' && (
         <DatePicker
@@ -164,7 +166,7 @@ const EditText = ({
             setVisibility,
             onConfirmDate(date) {
               console.log(date);
-              onChangeText(date)
+              onChangeText(date);
             },
           }}
         />
@@ -176,7 +178,7 @@ const EditText = ({
 export default EditText;
 
 const styles = StyleSheet.create({
-  errorText: {color: Colors.Red, marginTop: 5, marginLeft: 20},
+  errorText: {color: Colors.Blue, marginTop: -7, marginLeft: 35},
 
   container: {
     borderWidth: 0.9,

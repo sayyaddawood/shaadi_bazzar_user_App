@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
@@ -9,19 +9,10 @@ import {
   TextView,
 } from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useNavigationHook} from '../../hooks';
+import {useOtpVerification} from '../../hooks';
 
 const Login = () => {
-  const navigation = useNavigationHook();
-  const [value, setValue] = useState<string>('');
-  const onVerifyOTP = () => {
-    Keyboard.dismiss();
-    navigation.navigate('HomeTabs');
-  };
-
-  const onReSend = () => {
-    // navigation.navigate('Home');
-  };
+  const {phone, value, setValue, onReSend, onVerifyOTP} = useOtpVerification();
 
   return (
     <AppContainer>
@@ -32,12 +23,13 @@ const Login = () => {
           </TextView>
           <TextView type="h6" position="center" style={styles.sendOtp}>
             We sent a verification code to
-            <TextView type="h6"> 03089787678</TextView>
+            <TextView type="h6"> {phone}</TextView>
             {'\n'}Enter the code below
           </TextView>
           <ImageView uri={AssetsIcons.login} style={styles.image} />
           <OtpInput {...{value, setValue}} />
           <Button
+            disabled={value.length < 4 ? true : false}
             style={styles.btn}
             text={'VERIFY & PROCEED'}
             onPress={onVerifyOTP}

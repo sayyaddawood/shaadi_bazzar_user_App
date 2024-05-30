@@ -3,7 +3,9 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export type RootStackParamList = {
   Splash: undefined;
   Login: undefined;
-  OtpVerification: undefined;
+  OtpVerification: {
+    phone: string;
+  };
   Register: undefined;
   Onboarding: undefined;
   Home: undefined;
@@ -15,12 +17,12 @@ export type RootStackParamList = {
   WriteReview: {
     title: string;
   };
-  CheckAvailability: undefined
-  ViewAllAlbums: undefined
+  CheckAvailability: undefined;
+  ViewAllAlbums: undefined;
   AlbumGallery: {
-    activeIndexImage: number
-  },
-  UserSettings: undefined
+    activeIndexImage: number;
+  };
+  UserSettings: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
