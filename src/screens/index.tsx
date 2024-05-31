@@ -9,10 +9,12 @@ export {default as Register} from './auth/Register';
 
 // ... Home
 export {default as Home} from './home/Home';
-export {default as Ideas} from './home/Ideas';
-export {default as Invites} from './home/Invites';
-export {default as Packages} from './home/Packages';
+export {default as Planner} from './home/Planner';
+export {default as Inspirations} from './home/Inspirations';
+export {default as TodoList} from './home/TodoList';
 export {default as Vendors} from './home/Vendors';
+
+export {default as Search} from './home/Search';
 
 // ... Venue
 export {default as VenueDetail} from './venue/VenueDetail';

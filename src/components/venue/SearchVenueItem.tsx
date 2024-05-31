@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {StyleSheet} from 'react-native';
 import {EditText, Icons} from '../core';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 
-const SearchItem = () => {
+type SearchItem = {
+  editable?: boolean;
+  onPress?: () => void;
+};
+
+const SearchItem = ({editable = true, onPress}: SearchItem) => {
   return (
     <EditText
       onChangeText={() => {}}
@@ -12,6 +17,8 @@ const SearchItem = () => {
       style={styles.con}
       inputStyle={styles.inputStyle}
       input={styles.input}
+      onPress={onPress}
+      pointerEvent={editable ? undefined : 'none'}
       rightIcon={() => {
         return (
           <Icons
@@ -27,7 +34,7 @@ const SearchItem = () => {
   );
 };
 
-export default SearchItem;
+export default memo(SearchItem);
 
 const styles = StyleSheet.create({
   inputStyle: {

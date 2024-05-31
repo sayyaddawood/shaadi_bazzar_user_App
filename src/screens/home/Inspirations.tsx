@@ -2,12 +2,12 @@ import React from 'react';
 import {View} from 'react-native';
 import {AppContainer, TextView} from '../../components';
 
-const Invites = () => {
+const Inspirations = () => {
   return (
     <AppContainer style={{justifyContent: 'center'}}>
-      <TextView position='center' type="h1">Invites</TextView>
+      <TextView position='center' type="h1">Inspirations</TextView>
     </AppContainer>
   );
 };
 
-export default Invites;
+export default Inspirations;

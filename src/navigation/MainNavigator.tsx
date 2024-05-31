@@ -17,6 +17,7 @@ import {
   ViewAllAlbums,
   AlbumGallery,
   UserSettings,
+  Search,
 } from '../screens';
 import {navigationRef} from './navigationService';
 import {AppContainer} from '../components';
@@ -111,6 +112,12 @@ function MainNavigator() {
           <Stack.Screen
             name="UserSettings"
             component={UserSettings}
+            options={options}
+          />
+        
+          <Stack.Screen
+            name="Search"
+            component={Search}
             options={options}
           />
         </Stack.Navigator>

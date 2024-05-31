@@ -5,6 +5,7 @@ import VenueDashboardItem from '../venue/VenueDashboardItem';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import {venueListingData} from '../../data';
+import { useNavigationHook } from '../../hooks';
 
 type VenuesListingProps = {
   type: string;
@@ -22,6 +23,8 @@ const headingTypes: any = {
 };
 
 const VenuesListing = ({type}: VenuesListingProps) => {
+  const navigation = useNavigationHook()
+
   return (
     <View style={styles.mainContainer}>
       <TextView type="h6" numberOfLines={2} style={styles.text}>
@@ -43,7 +46,7 @@ const VenuesListing = ({type}: VenuesListingProps) => {
         text={headingTypes[type].btn}
         textColor={Colors.PrimaryColor}
         style={styles.btn}
-        onPress={() => {}}
+        onPress={() => navigation.navigate('VenueCategoriesList')}
         rightIcon={() => (
           <Icons
             type={IconsType.Entypo}

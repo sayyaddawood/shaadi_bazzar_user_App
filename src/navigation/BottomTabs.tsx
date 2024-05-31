@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native';
 
-import {Home, Ideas, Vendors, Invites, Packages} from '../screens';
+import {Home, Planner, Vendors, Inspirations, TodoList} from '../screens';
 import {Colors, Dimen, AssetsIcons} from '../theme';
 import {TextView} from '../components';
 import Fonts from '../theme/Fonts';
@@ -43,9 +43,9 @@ const BottomTabs = () => {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Vendors" component={Vendors} />
-      <Tab.Screen name="E-Invites" component={Invites} />
-      <Tab.Screen name="Ideas" component={Ideas} />
-      <Tab.Screen name="Packages" component={Packages} />
+      <Tab.Screen name="Inspirations" component={Inspirations} />
+      <Tab.Screen name="Planner" component={Planner} />
+      <Tab.Screen name="Todo List" component={TodoList} />
     </Tab.Navigator>
   );
 };
@@ -56,11 +56,11 @@ const getTabIcon = (name: string, focused: boolean) => {
     Vendors: (
       <TabIcon id={name} icon={AssetsIcons.vendors} isFocused={focused} />
     ),
-    'E-Invites': (
+    Inspirations: (
       <TabIcon id={name} icon={AssetsIcons.invites} isFocused={focused} />
     ),
-    Ideas: <TabIcon id={name} icon={AssetsIcons.ideas} isFocused={focused} />,
-    Packages: (
+    Planner: <TabIcon id={name} icon={AssetsIcons.ideas} isFocused={focused} />,
+    "Todo List": (
       <TabIcon id={name} icon={AssetsIcons.packages} isFocused={focused} />
     ),
   };

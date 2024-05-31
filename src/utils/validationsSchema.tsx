@@ -9,3 +9,8 @@ export const loginSchema = Yup.object().shape({
     .matches(regExp.phone, 'Phone number should be 11 digits and start with 0')
     .required('Phone number is required'),
 });
+
+export const registerSchema = Yup.object().shape({
+  name: Yup.string().required('Full name is required'),
+  city: Yup.string().required('City is required'),
+});

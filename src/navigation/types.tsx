@@ -23,6 +23,7 @@ export type RootStackParamList = {
     activeIndexImage: number;
   };
   UserSettings: undefined;
+  Search: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
+import {FlatList, Pressable, SafeAreaView, StyleSheet} from 'react-native';
 import {Header, Line, SearchVenueItem, VenueItem} from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook} from '../../hooks';
@@ -16,6 +16,10 @@ const VenueCategoriesList = () => {
     'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
   ];
 
+  const onSearchPress = () => {
+    navigation.navigate('Search');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header onBackPress={onBackPress} title={'Photographers'} />
@@ -25,7 +29,9 @@ const VenueCategoriesList = () => {
         renderItem={({item}) => {
           return <VenueItem {...{item}} />;
         }}
-        ListHeaderComponent={<SearchVenueItem />}
+        ListHeaderComponent={
+          <SearchVenueItem editable={false} onPress={onSearchPress} />
+        }
         showsVerticalScrollIndicator={false}
         style={{marginTop: 15}}
         keyExtractor={(_, index) => index.toString()}

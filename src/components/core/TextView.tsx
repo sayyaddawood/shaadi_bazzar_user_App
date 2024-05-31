@@ -7,6 +7,7 @@ type TextView = {
   children: React.ReactNode;
   style?: StyleProp<TextStyle>;
   color?: string;
+  numberOfLines?: number;
   onPress?: () => void;
   position?: 'center' | 'right' | 'left';
   type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8';
@@ -20,6 +21,7 @@ const TextView = ({
   position = 'left',
   style,
   onPress,
+  numberOfLines,
   ...props
 }: TextView) => {
   const fontStyle = styles[type];
@@ -27,6 +29,7 @@ const TextView = ({
   return (
     <Text
       {...props}
+      numberOfLines={numberOfLines}
       onPress={onPress}
       style={[
         styles.text,

@@ -15,6 +15,7 @@ import TextView from './TextView';
 import Fonts from '../../theme/Fonts';
 import Icons, {IconsType} from './Icons';
 import DatePicker from './DatePicker';
+import ErrorMessage from '../ErrorMessage';
 
 type EditTextType = {
   country?: boolean;
@@ -25,6 +26,7 @@ type EditTextType = {
   placeholder?: string;
   keyboardType?: KeyboardType;
   returnKey?: ReturnKeyType;
+  onPress?: () => void;
   onChangeText: (value: string) => void;
   onReset?: () => void | undefined;
   errorMessage?: string;
@@ -64,6 +66,7 @@ const EditText = ({
   onSubmitEditing,
   autoFocus = false,
   reference,
+  onPress,
   required = false,
   labelStyle,
   value,
@@ -101,7 +104,10 @@ const EditText = ({
         onPress={() => {
           if (type == 'calender') {
             setVisibility(true);
+            return;
           }
+
+          onPress && onPress();
         }}>
         {rightIcon && rightIcon()}
         <TextInput
@@ -151,13 +157,7 @@ const EditText = ({
         )}
       </Pressable>
 
-        <TextView
-          type="h7"
-          position="right"
-          style={[styles.errorText, errorTextStyle]}>
-          {errorMessage ? errorMessage : ""}
-        </TextView>
-      
+      <ErrorMessage {...{errorMessage}} />
 
       {type == 'calender' && (
         <DatePicker
@@ -178,8 +178,6 @@ const EditText = ({
 export default EditText;
 
 const styles = StyleSheet.create({
-  errorText: {color: Colors.Blue, marginTop: -7, marginLeft: 35},
-
   container: {
     borderWidth: 0.9,
     borderColor: Colors.LightestGray,
