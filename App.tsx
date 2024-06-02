@@ -5,9 +5,11 @@ import {Platform, StatusBar, StyleSheet} from 'react-native';
 import {MainNavigator} from './src/navigation';
 import {AppContainer} from './src/components';
 import {Colors} from './src/theme';
+import {ReactQueryClientProvider} from './src/network';
+import {UserData} from './src/models/RequestTypes';
 
 declare global {
-  var userInfo: any;
+  var userInfo: UserData;
   var isLogin: boolean;
   var deviceName: string;
   var hasNotch: boolean;
@@ -16,15 +18,17 @@ declare global {
 
 const App = () => {
   return (
-    <AppContainer safeAreaStyle={styles.bg}>
-      <StatusBar
-        backgroundColor={
-          Platform.OS == 'android' ? Colors.PrimaryColor : 'transparent'
-        }
-        barStyle={'dark-content'}
-      />
-      <MainNavigator />
-    </AppContainer>
+    <ReactQueryClientProvider>
+      <AppContainer safeAreaStyle={styles.bg}>
+        <StatusBar
+          backgroundColor={
+            Platform.OS == 'android' ? Colors.PrimaryColor : 'transparent'
+          }
+          barStyle={'dark-content'}
+        />
+        <MainNavigator />
+      </AppContainer>
+    </ReactQueryClientProvider>
   );
 };
 

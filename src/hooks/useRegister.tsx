@@ -1,14 +1,24 @@
 import useNavigationHook from './useNavigationHook';
 import {useFormik} from 'formik';
 import {RegisterFormType} from '../utils/schemaTypes';
-import {loginSchema, registerSchema} from '../utils/validationsSchema';
+import {registerSchema} from '../utils/validationsSchema';
 import {Keyboard, TextInput} from 'react-native';
-import {useEffect, useRef} from 'react';
+import {useEffect, useMemo, useRef} from 'react';
 import {CommonActions} from '@react-navigation/native';
+import {useMutation, useQuery} from '@tanstack/react-query';
+import {getCities, profileSetup} from '../network/serverRequests';
+import useUserInfo from './useUserInfo';
 
 const useRegister = () => {
   const navigation = useNavigationHook();
   const ref = useRef<TextInput>();
+  const {saveData, onLogout} = useUserInfo();
+
+  const {data: cities} = useQuery({
+    queryKey: ['cities'],
+    queryFn: getCities,
+  });
+
   const form = useFormik<RegisterFormType>({
     initialValues: {
       name: '',
@@ -17,12 +27,11 @@ const useRegister = () => {
     validationSchema: registerSchema,
     onSubmit: values => {
       Keyboard.dismiss();
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 0,
-          routes: [{name: 'HomeTabs'}],
-        }),
-      );
+      mutate({
+        name: values.name,
+        phone: global.userInfo.phone,
+        locationId: values.city,
+      });
     },
   });
 
@@ -32,9 +41,35 @@ const useRegister = () => {
     }
   }, []);
 
+  const {mutate} = useMutation({
+    mutationFn: profileSetup,
+    onSuccess: response => {
+      saveData(response?.result?.data);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'HomeTabs'}],
+        }),
+      );
+    },
+    onError: error => {
+      console.error('Error posting data:', error);
+    },
+  });
+
+  const formatCities = useMemo(() => {
+    if (cities?.result) {
+      return cities?.result?.map((item: any) => {
+        return {label: item.name, value: item.id};
+      });
+    }
+  }, [cities?.result]);
+
   return {
     form,
     ref,
+    cities: formatCities || [],
+    onLogout
   };
 };
 

@@ -1,16 +1,15 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {useNavigationHook} from '../../../hooks';
-import {BackButton, Header, Icons, ImageView} from '../../../components';
+import {AppStatusBar, BackButton, ImageView} from '../../../components';
 import {Colors, Dimen} from '../../../theme';
 import {BlurView} from '@react-native-community/blur';
-import {IconButton} from 'react-native-paper';
-import {IconsType} from '../../../components/core/Icons';
 import useRouteHook from '../../../hooks/useRouteHook';
+import {FlashList} from '@shopify/flash-list';
 
 const AlbumGallery = () => {
   const navigation = useNavigationHook();
-  const ref = useRef<FlatList>(null);
+  const ref = useRef<FlashList<any>>(null);
   const {activeIndexImage} = useRouteHook({screenName: 'AlbumGallery'}).params;
 
   const onBackPress = () => navigation.goBack();
@@ -33,40 +32,45 @@ const AlbumGallery = () => {
 
   return (
     <View style={styles.container}>
-      <Animated.FlatList
+      <AppStatusBar hidden />
+      <FlashList
         data={items}
         horizontal
         ref={ref}
         decelerationRate="fast"
         bounces={false}
-        scrollEventThrottle={1}
         keyExtractor={(_, index) => index.toString()}
         snapToInterval={Dimen.width}
         showsHorizontalScrollIndicator={false}
+        numColumns={1}
+        removeClippedSubviews={true}
         renderItem={({item, index}) => {
           return (
-            <View style={{}}>
-              <View>
+            <>
+              <View style={{}}>
                 <ImageView
                   uri={item}
-                  style={styles.backImage}
+                  style={[styles.backImage]}
                   resizeMode="cover"
                 />
 
                 <BlurView
-                  style={styles.blurView}
-                  blurType="dark"
-                  blurAmount={3}
+                  style={[
+                    styles.blurView,
+                    {opacity: Platform.OS == 'ios' ? 1 : 0.91},
+                  ]}
+                  blurType={Platform.OS == 'ios' ? 'dark' : 'dark'}
+                  blurAmount={9}
                   reducedTransparencyFallbackColor="white"
                 />
               </View>
 
               <ImageView
                 uri={item}
-                style={styles.frontImage}
+                style={[styles.frontImage, {zIndex: 1}]}
                 resizeMode="contain"
               />
-            </View>
+            </>
           );
         }}
         showsVerticalScrollIndicator={false}
@@ -93,10 +97,10 @@ const styles = StyleSheet.create({
     height: Dimen.height,
     width: Dimen.width,
     position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    // top: 0,
+    // right:0,
+    // left:0,
+    // bottom: 0,
   },
 
   backButton: {

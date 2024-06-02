@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {
   AppContainer,
+  AppStatusBar,
   Categories,
   HomeHeader,
   VenuesListing,
@@ -14,6 +15,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <AppContainer>
+        <AppStatusBar />
         <HomeHeader />
         <FlatList
           data={[1]}

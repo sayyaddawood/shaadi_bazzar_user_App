@@ -1,30 +1,34 @@
-import React, {useState} from 'react';
-import {Alert, Keyboard, SafeAreaView, StyleSheet, View} from 'react-native';
-import {AssetsIcons, Colors, Dimen} from '../../theme';
+import React from 'react';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Colors, Dimen} from '../../theme';
 import {
   AppContainer,
+  AppStatusBar,
   Button,
   DropDownPicker,
   EditText,
   Icons,
-  ImageView,
   Spacer,
   TextView,
 } from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useNavigationHook, useRegister} from '../../hooks';
+import {useRegister} from '../../hooks';
 import {IconButton} from 'react-native-paper';
 import {IconsType} from '../../components/core/Icons';
 
 const Register = () => {
   const {
     ref,
+    cities,
     form: {handleSubmit, handleChange, errors, touched, setFieldValue},
+    onLogout,
   } = useRegister();
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.White}}>
       <AppContainer>
+        <AppStatusBar />
+
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
           <View style={styles.content}>
             <TextView type="h3" position="center">
@@ -45,17 +49,13 @@ const Register = () => {
               }}
             />
             <Spacer height={8} />
-            <DropDownPicker
-              options={[
-                {label: 'Karachi', value: 'Karachi'},
-                {label: 'Hyderabad', value: 'Hyderabad'},
-              ]}
-              onChangeValue={value => {
-                alert(value)
-                setFieldValue('city', value);
-              }}
-              errorMessage={errors?.city && touched.city ? errors.city : ''}
-            />
+            {cities?.length > 0 && (
+              <DropDownPicker
+                options={cities}
+                onChangeValue={value => setFieldValue('city', value)}
+                errorMessage={errors?.city && touched.city ? errors.city : ''}
+              />
+            )}
             <Spacer height={5} />
             <Button
               style={styles.btn}
@@ -73,7 +73,7 @@ const Register = () => {
               )}
               size={10}
               style={styles.logout}
-              onPress={() => {}}
+              onPress={onLogout}
             />
           </View>
         </KeyboardAwareScrollView>

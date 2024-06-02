@@ -1,33 +1,13 @@
 import React from 'react';
-import {Alert, SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors} from '../../theme';
 import {BackButton, ImageView, Spacer, TextView} from '../../components';
-import {useNavigationHook} from '../../hooks';
+import {useNavigationHook, useUserInfo} from '../../hooks';
 import {TouchableRipple} from 'react-native-paper';
-import {CommonActions} from '@react-navigation/native';
 
 const UserSettings = () => {
   const navigation = useNavigationHook();
-
-  const onLogout = () => {
-    Alert.alert('Alert', 'Are you sure want to sign out?', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-      },
-      {
-        text: 'Yes',
-        onPress: () => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'Login'}],
-            }),
-          );
-        },
-      },
-    ]);
-  };
+  const {getUserData, onLogout} = useUserInfo();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -40,7 +20,7 @@ const UserSettings = () => {
           style={styles.image}
         />
         <View style={styles.usernameContainer}>
-          <TextView>Taha Shaikh</TextView>
+          <TextView>{global.userInfo.user_name}</TextView>
           <TextView type="h8" style={styles.txtBasicUser}>
             Basic User
           </TextView>

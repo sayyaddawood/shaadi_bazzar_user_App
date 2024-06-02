@@ -4,10 +4,26 @@ import {LoginFormType} from '../utils/schemaTypes';
 import {loginSchema} from '../utils/validationsSchema';
 import {Keyboard, TextInput} from 'react-native';
 import {useEffect, useRef} from 'react';
+import {useMutation} from '@tanstack/react-query';
+import {phoneVerification} from '../network';
 
 const useLogin = () => {
   const navigation = useNavigationHook();
   const ref = useRef<TextInput>();
+  const {mutateAsync, isPending} = useMutation({
+    mutationFn: phoneVerification,
+    onSuccess: response => {
+      const {
+        result: {
+          data: {phone},
+        },
+      } = response;
+      navigation.navigate('OtpVerification', {phone: phone});
+    },
+    onError: error => {
+      console.error('Error posting data:', error);
+    },
+  });
   const form = useFormik<LoginFormType>({
     initialValues: {
       phone: '',
@@ -15,7 +31,7 @@ const useLogin = () => {
     validationSchema: loginSchema,
     onSubmit: values => {
       Keyboard.dismiss();
-      navigation.navigate('OtpVerification', {phone: values.phone});
+      mutateAsync(values.phone);
     },
   });
 
@@ -28,6 +44,7 @@ const useLogin = () => {
   return {
     form,
     ref,
+    isLoading: isPending,
   };
 };
 

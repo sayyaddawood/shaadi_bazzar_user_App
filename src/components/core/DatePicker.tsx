@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 type DatePickerType = {
@@ -14,7 +14,7 @@ const DatePicker = ({
 }: DatePickerType) => {
   const handleConfirm = (date: Date) => {
     onConfirmDate(date);
-    setVisibility(false)
+    setVisibility(false);
   };
 
   return (

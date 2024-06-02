@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, View} from 'react-native';
+import {Pressable} from 'react-native';
 import {ImageView} from '../core';
 import {Dimen} from '../../theme';
 import {useNavigationHook} from '../../hooks';

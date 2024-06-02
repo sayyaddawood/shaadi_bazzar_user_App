@@ -1,13 +1,6 @@
 import React from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
-import {
-  Header,
-  ImageView,
-  Line,
-  SearchVenueItem,
-  TextView,
-  VenueItem,
-} from '../../components';
+import {Header, ImageView, SearchVenueItem, TextView} from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook} from '../../hooks';
 
@@ -118,7 +111,6 @@ const SearchItem = ({item}: any) => {
 };
 
 const SuggestionItem = () => {
-
   const suggestion = [
     'Banquet in Karachi',
     'Banquet in Hyderabad',

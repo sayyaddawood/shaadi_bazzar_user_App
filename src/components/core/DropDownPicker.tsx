@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import ErrorMessage from '../ErrorMessage';
 

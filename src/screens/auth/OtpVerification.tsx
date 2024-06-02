@@ -12,7 +12,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useOtpVerification} from '../../hooks';
 
 const Login = () => {
-  const {phone, value, setValue, onReSend, onVerifyOTP} = useOtpVerification();
+  const {isLoading, phone, value, setValue, onReSend, onVerifyOTP} = useOtpVerification();
 
   return (
     <AppContainer>
@@ -29,6 +29,7 @@ const Login = () => {
           <ImageView uri={AssetsIcons.login} style={styles.image} />
           <OtpInput {...{value, setValue}} />
           <Button
+            isLoading={isLoading}
             disabled={value.length < 4 ? true : false}
             style={styles.btn}
             text={'VERIFY & PROCEED'}

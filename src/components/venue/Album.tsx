@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, Pressable, StyleSheet, View} from 'react-native';
 import {Button, ImageView, TextView} from '../core';
-import {AssetsIcons, Colors, Dimen} from '../../theme';
+import {Colors, Dimen} from '../../theme';
 import Icons, {IconsType} from '../core/Icons';
 import Line from '../Line';
 import {useNavigationHook} from '../../hooks';

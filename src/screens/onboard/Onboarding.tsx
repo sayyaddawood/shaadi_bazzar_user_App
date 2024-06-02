@@ -1,6 +1,12 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {AppContainer, Button, ImageView, TextView} from '../../components';
+import {
+  AppContainer,
+  AppStatusBar,
+  Button,
+  ImageView,
+  TextView,
+} from '../../components';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import LinearGradient from 'react-native-linear-gradient';
 import Fonts from '../../theme/Fonts';
@@ -30,6 +36,7 @@ const Onboarding = () => {
 
   return (
     <AppContainer>
+      <AppStatusBar hidden />
       <FlatList
         data={Data}
         horizontal
@@ -55,7 +62,7 @@ const Onboarding = () => {
               />
 
               <View style={[styles.descriptionView, {bottom: 130}]}>
-                <TextView type="h5" position='center' style={styles.title}>
+                <TextView type="h5" position="center" style={styles.title}>
                   {item.title}
                 </TextView>
               </View>

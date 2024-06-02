@@ -1,6 +1,6 @@
 import React from 'react';
-import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
-import {Album, AlbumItem, Header} from '../../../components';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {Album, Header} from '../../../components';
 import {Colors} from '../../../theme';
 import {useNavigationHook} from '../../../hooks';
 

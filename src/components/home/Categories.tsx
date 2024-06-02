@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 5,
-    maxWidth: 80,
+    maxWidth: 85,
     textAlign: 'center',
-    letterSpacing: 0.8,
+    letterSpacing: 0.5,
   },
 });

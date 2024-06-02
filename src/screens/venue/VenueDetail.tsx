@@ -1,20 +1,15 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {
   AppContainer,
   Header,
   ImageSlider,
-  TextView,
-  Line,
-  Icons,
-  Spacer,
   PrimaryInfo,
   PriceInfo,
   Reviews,
   Album,
 } from '../../components';
-import {Colors, Dimen} from '../../theme';
-import {IconsType} from '../../components/core/Icons';
+import {Colors} from '../../theme';
 import {useNavigationHook} from '../../hooks';
 import {FlatList} from 'react-native';
 

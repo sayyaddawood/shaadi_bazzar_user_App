@@ -48,6 +48,7 @@ const WriteReview = () => {
             label="Your Experience"
             style={{marginHorizontal: 0}}
             inputStyle={{marginHorizontal: 0, height: 100, paddingTop: 7}}
+            input={{textAlignVertical: 'top'}}
             max={500}
             onChangeText={() => {}}
           />

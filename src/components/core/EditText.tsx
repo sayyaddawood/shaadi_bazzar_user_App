@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {
   TextInput,
   StyleProp,
@@ -165,7 +165,6 @@ const EditText = ({
             visible,
             setVisibility,
             onConfirmDate(date) {
-              console.log(date);
               onChangeText(date);
             },
           }}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {StyleProp, StyleSheet, Text, TextStyle} from 'react-native';
 import Fonts, {FontScale} from '../../theme/Fonts';
 import {Colors} from '../../theme';
@@ -25,7 +25,6 @@ const TextView = ({
   ...props
 }: TextView) => {
   const fontStyle = styles[type];
-  console.log(type);
   return (
     <Text
       {...props}
@@ -42,7 +41,7 @@ const TextView = ({
   );
 };
 
-export default TextView;
+export default memo(TextView);
 
 const styles = StyleSheet.create({
   text: {

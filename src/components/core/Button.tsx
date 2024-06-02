@@ -2,6 +2,7 @@ import React from 'react';
 import {Pressable, StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import {Colors} from '../../theme';
 import TextView from './TextView';
+import Loader from './Loader';
 
 type Button = {
   style?: StyleProp<ViewStyle>;
@@ -9,12 +10,14 @@ type Button = {
   onPress: () => void;
   type?: string;
   disabled?: boolean;
+  isLoading?: boolean;
   textColor?: string;
   rightIcon?: () => React.ReactNode;
   leftIcon?: () => React.ReactNode;
 };
 
 const Button = ({
+  isLoading = false,
   rightIcon,
   leftIcon,
   type = 'fill',
@@ -26,7 +29,7 @@ const Button = ({
 }: Button) => {
   return (
     <Pressable
-      disabled={disabled}
+      disabled={disabled || isLoading}
       style={({pressed}) => [
         {opacity: pressed ? 0.9 : 1},
         styles.btn,
@@ -35,11 +38,20 @@ const Button = ({
         style,
       ]}
       onPress={onPress}>
-      {leftIcon && leftIcon()}
-      <TextView type="h6" color={textColor ?? Colors.White} style={styles.text}>
-        {text}
-      </TextView>
-      {rightIcon && rightIcon()}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {leftIcon && leftIcon()}
+          <TextView
+            type="h6"
+            color={textColor ?? Colors.White}
+            style={styles.text}>
+            {text}
+          </TextView>
+          {rightIcon && rightIcon()}
+        </>
+      )}
     </Pressable>
   );
 };

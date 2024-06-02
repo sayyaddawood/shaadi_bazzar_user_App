@@ -19,8 +19,6 @@ const ImageView = ({
   const isNetworkImage =
     typeof uri === 'string' ? (uri as string).startsWith('http') : false;
 
-    console.log(uri)
-
   return (
     <FastImage
       style={[styles.container, style]}

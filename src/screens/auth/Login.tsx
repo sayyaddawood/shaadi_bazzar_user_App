@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
+  AppStatusBar,
   Button,
   EditText,
   ImageView,
@@ -14,12 +15,15 @@ import {useLogin} from '../../hooks';
 
 const Login = () => {
   const {
+    isLoading,
     ref,
     form: {handleSubmit, handleChange, errors, touched},
   } = useLogin();
 
   return (
     <AppContainer>
+      <AppStatusBar />
+
       <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
         <View style={styles.content}>
           <TextView type="h1" position="center">
@@ -45,9 +49,11 @@ const Login = () => {
               marginLeft: 40,
               marginHorizontal: 35,
             }}
+            onSubmitEditing={handleSubmit}
           />
           <Spacer height={5} />
           <Button
+            isLoading={isLoading}
             text={'SEND OTP'}
             style={{marginTop: 5}}
             onPress={handleSubmit}

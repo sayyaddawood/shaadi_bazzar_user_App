@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Pressable, SafeAreaView, StyleSheet} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
 import {Header, Line, SearchVenueItem, VenueItem} from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook} from '../../hooks';
