@@ -4,29 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {Colors} from '../../theme';
 import Line from '../Line';
 
-const PriceInfo = () => {
-  const items = [
-    {
-      name: 'Photo Package',
-      price: '20,000',
-    },
-    {
-      name: 'Photo + Video',
-      price: '30,000',
-    },
-    {
-      name: 'Candid Photography',
-      price: '15,000',
-    },
-    {
-      name: 'Cinematography',
-      price: '18,000',
-    },
-    {
-      name: 'Studio Photography',
-      price: '10,000',
-    },
-  ];
+const PriceInfo = ({info}: {info: Package[]}) => {
   return (
     <>
       <TextView position="left" type="h5">
@@ -35,7 +13,7 @@ const PriceInfo = () => {
 
       <Spacer height={10} />
 
-      {items?.map(it => {
+      {info?.map(it => {
         return (
           <View style={styles.container}>
             <View style={styles.subContainer}>
@@ -46,6 +24,22 @@ const PriceInfo = () => {
                 RS {it.price}
               </TextView>
             </View>
+
+            <View style={[styles.subContainer, {alignItems: 'flex-start'}]}>
+              <TextView position="left" type="h8" style={[styles.location]}>
+                Booking Price
+              </TextView>
+              <TextView position="left" type="h8" style={styles.location}>
+                RS {it.booking_price}
+              </TextView>
+            </View>
+
+            <TextView
+              position="left"
+              type="h8"
+              style={[styles.location, {flex: 1}]}>
+              Details: {it.details}
+            </TextView>
 
             <View style={styles.dashed}>
               <View style={styles.dashedLines} />

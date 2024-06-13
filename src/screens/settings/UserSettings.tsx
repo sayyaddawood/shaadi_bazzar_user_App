@@ -7,7 +7,7 @@ import {TouchableRipple} from 'react-native-paper';
 
 const UserSettings = () => {
   const navigation = useNavigationHook();
-  const {getUserData, onLogout} = useUserInfo();
+  const {onLogout} = useUserInfo();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -20,7 +20,7 @@ const UserSettings = () => {
           style={styles.image}
         />
         <View style={styles.usernameContainer}>
-          <TextView>{global.userInfo.user_name}</TextView>
+          <TextView>{global.userInfo.name}</TextView>
           <TextView type="h8" style={styles.txtBasicUser}>
             Basic User
           </TextView>

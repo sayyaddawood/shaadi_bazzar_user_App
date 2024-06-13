@@ -10,20 +10,16 @@ import {
   Album,
 } from '../../components';
 import {Colors} from '../../theme';
-import {useNavigationHook} from '../../hooks';
+import {useNavigationHook, useRouteHook} from '../../hooks';
 import {FlatList} from 'react-native';
+import useVendor from '../../hooks/useVendor';
 
 const VenueDetail = () => {
   const navigation = useNavigationHook();
+  const {id} = useRouteHook({screenName: 'VenueDetail'}).params;
+  const {data, imagesList} = useVendor({id, fetchDetail: true});
 
   const onBackPress = () => navigation.goBack();
-
-  const items = [
-    'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-    'https://i.pinimg.com/564x/4f/96/d1/4f96d1769c0d96bae46f3b4371ccf0ef.jpg',
-    'https://i.pinimg.com/564x/ae/34/f8/ae34f8e89d05d28e6287b3deac4bf59e.jpg',
-    'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,17 +34,20 @@ const VenueDetail = () => {
                   onBackPress={onBackPress}
                   title={'Venues in Hyderabad'}
                 />
-                <ImageSlider images={items} />
+                {imagesList.length > 0 && <ImageSlider images={imagesList} />}
 
                 <View style={styles.body}>
-                  <PrimaryInfo />
-                  <PriceInfo />
-                  <Album {...{items}} />
+                  {data?.vendorDetails && (
+                    <PrimaryInfo info={data?.vendorDetails} />
+                  )}
+                  {data?.packages && <PriceInfo info={data?.packages} />}
+                  <Album {...{id}} />
 
                   <Reviews
+                    id={id}
                     onWriteAReviewPress={() =>
                       navigation.navigate('WriteReview', {
-                        title: 'Sari Banquet Convention & Lawns',
+                        title: data?.vendorDetails.business_name || 'Vendor',
                       })
                     }
                   />

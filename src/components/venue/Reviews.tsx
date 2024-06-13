@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Icons, Spacer, TextView} from '../core';
-import {StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {Colors} from '../../theme';
 import Line from '../Line';
 import {IconsType} from '../core/Icons';
 import Fonts from '../../theme/Fonts';
+import useVendor from '../../hooks/useVendor';
+import moment from 'moment';
 
 type ReviewsType = {
   onWriteAReviewPress: () => void;
+  id: string;
 };
 
-const Reviews = ({onWriteAReviewPress}: ReviewsType) => {
+const Reviews = ({id, onWriteAReviewPress}: ReviewsType) => {
+  const {reviewsData, reviewsLoading} = useVendor({id, fetchReviews: true});
+
   return (
     <>
       <View style={styles.writeReview}>
@@ -49,9 +54,9 @@ const Reviews = ({onWriteAReviewPress}: ReviewsType) => {
           color={Colors.PrimaryColor}
         />
         <TextView position="left" type="h6" style={styles.ratingText}>
-          5.0 Review Score{' '}
+          {reviewsData?.combinedReviews?.averageScore?.toFixed(1)} Review Score{' '}
           <TextView type="h7" style={styles.des}>
-            (13 Reviews)
+            ({reviewsData?.combinedReviews?.count} Reviews)
           </TextView>
         </TextView>
       </View>
@@ -59,16 +64,19 @@ const Reviews = ({onWriteAReviewPress}: ReviewsType) => {
       <Spacer height={10} />
 
       <Line style={[styles.line, {marginTop: 5}]} />
-      {Array(3)
-        .fill('*')
-        .map((it, index) => {
-          return <ReviewsItem {...{index}} />;
-        })}
+
+      <FlatList
+        data={reviewsData?.reviews ?? []}
+        renderItem={({item, index}) => {
+          return <ReviewsItem {...{item, index}} />;
+        }}
+        keyExtractor={(_, index) => index.toString()}
+      />
     </>
   );
 };
 
-export default Reviews;
+export default memo(Reviews);
 
 const styles = StyleSheet.create({
   location: {
@@ -136,15 +144,16 @@ const styles = StyleSheet.create({
 });
 
 type ReviewItem = {
-  index: number
-}
+  item: Review;
+  index: number;
+};
 
-const ReviewsItem = ({index} : ReviewItem) => {
+const ReviewsItem = ({item, index}: ReviewItem) => {
   return (
     <View key={index} style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <TextView position="left" type="h7" style={{marginRight: 5}}>
-          Dawood Ali Khan
+          {item.user.name}
         </TextView>
 
         <Icons
@@ -154,7 +163,7 @@ const ReviewsItem = ({index} : ReviewItem) => {
           color={Colors.PrimaryColor}
         />
         <TextView position="left" type="h7" style={styles.ratingText}>
-          5.0
+          {item.rating}
         </TextView>
       </View>
       <TextView
@@ -162,7 +171,7 @@ const ReviewsItem = ({index} : ReviewItem) => {
         type="h8"
         color={Colors.Gray}
         style={{fontFamily: Fonts.light, marginTop: 2}}>
-        Reviewed 5 months ago
+        Reviewed {moment(item.createdAt).fromNow()}
       </TextView>
 
       <Spacer height={10} />
@@ -172,8 +181,7 @@ const ReviewsItem = ({index} : ReviewItem) => {
         type="h7"
         color={Colors.Gray}
         style={{fontFamily: Fonts.light, marginTop: 2}}>
-        Lorem ipsum dolor sit amet lore mauris diam lore m curves diam lore m
-        felis diam lorem
+        {item.feedback}
       </TextView>
 
       <Line style={[styles.line, {marginTop: 5}]} />

@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { Vendor } from '../models/RequestTypes';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -10,10 +11,17 @@ export type RootStackParamList = {
   Onboarding: undefined;
   Home: undefined;
   HomeTabs: undefined;
-  VenueDetail: undefined;
-  VenueCategoriesList: undefined;
+  VenueDetail: {
+    id: string;
+  };
+  VenueCategoriesList: {
+    list: Vendor[]
+    title: string
+  };
   SendMessage: undefined;
-  AlbumListing: undefined;
+  AlbumListing: {
+    list: VendorAlbumMedia[];
+  };
   WriteReview: {
     title: string;
   };
@@ -21,9 +29,12 @@ export type RootStackParamList = {
   ViewAllAlbums: undefined;
   AlbumGallery: {
     activeIndexImage: number;
+    itemsImages: VendorAlbumMedia[];
   };
   UserSettings: undefined;
-  Search: undefined;
+  Search: {
+    id: string
+  };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

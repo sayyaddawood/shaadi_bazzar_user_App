@@ -5,15 +5,12 @@ import {Dimen} from '../../theme';
 import {useNavigationHook} from '../../hooks';
 
 type AlbumItemType = {
-  it: string;
+  it: VendorAlbumMedia;
   index: number;
+  onPress: () => void;
 };
 
-const AlbumItem = ({it, index}: AlbumItemType) => {
-  const navigation = useNavigationHook();
-  const onPress = () =>
-    navigation.navigate('AlbumGallery', {activeIndexImage: index});
-
+const AlbumItem = ({it, index, onPress}: AlbumItemType) => {
   return (
     <Pressable
       style={({pressed}) => [
@@ -26,7 +23,8 @@ const AlbumItem = ({it, index}: AlbumItemType) => {
       onPress={onPress}
       key={index}>
       <ImageView
-        uri={it}
+        uri={it.path}
+        type="ONLINE"
         style={{width: Dimen.width, height: 200}}
         resizeMode="cover"
       />

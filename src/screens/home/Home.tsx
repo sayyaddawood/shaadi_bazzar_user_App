@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
 import {
   AppContainer,
   AppStatusBar,
@@ -7,11 +7,12 @@ import {
   HomeHeader,
   VenuesListing,
 } from '../../components';
-import {useNavigationHook} from '../../hooks';
+import {useHome} from '../../hooks';
 import {Colors} from '../../theme';
 
 const Home = () => {
-  const navigation = useNavigationHook();
+  const {isLoading, data} = useHome();
+
   return (
     <SafeAreaView style={styles.container}>
       <AppContainer>
@@ -25,8 +26,12 @@ const Home = () => {
             return (
               <>
                 <Categories />
-                <VenuesListing type={'venue'} />
-                <VenuesListing type={'photographer'} />
+
+                {data?.map(it => {
+                  return (
+                    <VenuesListing title={it?.categoryName} data={it.vendors} />
+                  );
+                })}
               </>
             );
           }}

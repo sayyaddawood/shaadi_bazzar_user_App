@@ -1,80 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Header, ImageView, SearchVenueItem, TextView} from '../../components';
 import {Colors} from '../../theme';
-import {useNavigationHook} from '../../hooks';
+import {useNavigationHook, useRouteHook} from '../../hooks';
+import useVendor from '../../hooks/useVendor';
 
 const Search = () => {
   const navigation = useNavigationHook();
+  const {id} = useRouteHook({screenName: 'Search'}).params;
+  const [search, setSearch] = useState('');
   const onBackPress = () => navigation.goBack();
 
-  const items = [
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Little Bit of Adoniah',
-      location: 'Karachi',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Five Star',
-      location: 'Hyderabad',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Little Bit of Adoniah',
-      location: 'Karachi',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Five Star',
-      location: 'Hyderabad',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Five Star',
-      location: 'Hyderabad',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Five Star',
-      location: 'Hyderabad',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Little Bit of Adoniah',
-      location: 'Karachi',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Five Star',
-      location: 'Hyderabad',
-    },
-    {
-      image:
-        'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg',
-      title: 'Five Star',
-      location: 'Hyderabad',
-    },
-  ];
+  const {searchedList, searchLoading} = useVendor({
+    id,
+    fetchSearch: true,
+    searchText: search,
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       <Header onBackPress={onBackPress} title={'Search'} />
 
-      <SearchVenueItem />
+      <SearchVenueItem {...{search, setSearch}} />
 
       {/* <SuggestionItem /> */}
 
       <FlatList
-        data={items}
+        data={searchedList}
         renderItem={({item}) => {
           return <SearchItem {...{item}} />;
         }}
@@ -88,22 +40,21 @@ const Search = () => {
 
 export default Search;
 
-// TODO: Remove any and define type
-
-const SearchItem = ({item}: any) => {
+const SearchItem = ({item}: {item: VendorSearchResult}) => {
   return (
     <View style={styles.itemContainer}>
       <ImageView
-        uri={item?.image}
+        uri={item?.vendorMedia[0].path}
+        type="ONLINE"
         resizeMode="cover"
         style={styles.searchItem}
       />
       <View style={styles.row}>
         <TextView numberOfLines={2} type="h6">
-          {item?.title}
+          {item?.business_name}
         </TextView>
         <TextView type="h7" color={Colors.Gray} style={{marginTop: 3}}>
-          {item?.location}
+          {item?.address.full_address}
         </TextView>
       </View>
     </View>

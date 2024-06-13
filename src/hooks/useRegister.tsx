@@ -8,11 +8,12 @@ import {CommonActions} from '@react-navigation/native';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {getCities, profileSetup} from '../network/serverRequests';
 import useUserInfo from './useUserInfo';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const useRegister = () => {
   const navigation = useNavigationHook();
   const ref = useRef<TextInput>();
-  const {saveData, onLogout} = useUserInfo();
+  const {saveData, setAccessToken, getUserData, onLogout} = useUserInfo();
 
   const {data: cities} = useQuery({
     queryKey: ['cities'],
@@ -25,12 +26,20 @@ const useRegister = () => {
       city: '',
     },
     validationSchema: registerSchema,
-    onSubmit: values => {
+    onSubmit: async values => {
       Keyboard.dismiss();
-      mutate({
+      const user = await getUserData();
+
+      mutateAsync({
+        phone: user?.data?.phone || '',
+        businessName: 'string',
         name: values.name,
-        phone: global.userInfo.phone,
-        locationId: values.city,
+        parentId: 0,
+        categoryIds: [0],
+        userType: 'customer',
+        businessphone: 'string',
+        locationId: Number(values.city),
+        address: 'string',
       });
     },
   });
@@ -41,10 +50,14 @@ const useRegister = () => {
     }
   }, []);
 
-  const {mutate} = useMutation({
+  const {mutateAsync} = useMutation({
     mutationFn: profileSetup,
     onSuccess: response => {
-      saveData(response?.result?.data);
+
+      console.log("@data ", JSON.stringify(response))
+
+      setAccessToken(response?.result?.access_token);
+      saveData(response?.result);
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
@@ -69,7 +82,7 @@ const useRegister = () => {
     form,
     ref,
     cities: formatCities || [],
-    onLogout
+    onLogout,
   };
 };
 

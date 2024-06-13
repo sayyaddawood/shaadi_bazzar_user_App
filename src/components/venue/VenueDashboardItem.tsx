@@ -4,11 +4,19 @@ import {Icons, ImageView, TextView} from '../core';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import {useNavigationHook} from '../../hooks';
+import {Vendor} from '../../models/RequestTypes';
 
-const VenueDashboardItem = ({item}) => {
+type VenueDashboardItemProps = {
+  item: Vendor;
+};
+
+const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
   const navigation = useNavigationHook();
 
-  const onPress = () => navigation.navigate('VenueDetail');
+  const onPress = () =>
+    navigation.navigate('VenueDetail', {
+      id: item?.id,
+    });
 
   return (
     <Pressable
@@ -17,15 +25,20 @@ const VenueDashboardItem = ({item}) => {
         styles.itemContainer,
       ]}
       onPress={onPress}>
-      <ImageView uri={item?.image} style={styles.image} resizeMode="cover" />
+      <ImageView
+        uri={item?.vendorMedia[0].path}
+        type="ONLINE"
+        style={styles.image}
+        resizeMode="cover"
+      />
       <TextView type="h6" numberOfLines={1} style={styles.text}>
-        {item?.title}
+        {item.business_name}
       </TextView>
       <TextView type="h7" numberOfLines={1} style={styles.txtLocation}>
-        {item?.location}
+        {item?.address?.full_address}
       </TextView>
       <TextView type="h6" numberOfLines={1} style={styles.txtPrice}>
-        {item?.price}
+        {item?.f_price}
       </TextView>
 
       <View style={styles.rating}>
@@ -37,7 +50,7 @@ const VenueDashboardItem = ({item}) => {
           color={Colors.White}
         />
         <TextView type="h7" style={styles.txtRating}>
-          5.0
+          {parseFloat(item.avgRating).toFixed(1)}
         </TextView>
       </View>
     </Pressable>

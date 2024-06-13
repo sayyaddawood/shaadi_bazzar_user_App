@@ -5,34 +5,43 @@ import {Colors, Dimen} from '../../theme';
 import Icons, {IconsType} from '../core/Icons';
 import Line from '../Line';
 import {useNavigationHook} from '../../hooks';
+import useAlbums from '../../hooks/useAlbum';
 
 type AlbumType = {
-  items: string[];
   isViewAll?: boolean;
+  id: string;
 };
 
-const Album = ({items, isViewAll = false}: AlbumType) => {
+const Album = ({id, isViewAll = false}: AlbumType) => {
   const navigation = useNavigationHook();
+
+  const {data: items} = useAlbums({id});
+
   return (
     <View>
       {!isViewAll && (
         <TextView position="left" type="h5" style={isViewAll && styles.albums}>
-          Albums {items.length}
+          Albums {items?.length}
         </TextView>
       )}
 
       <FlatList
-        data={items}
+        data={!isViewAll ? items.filter((_, index) => index < 4) : items}
         contentContainerStyle={[
           styles.contentContainer,
           isViewAll && {
             paddingBottom: 80,
           },
         ]}
+        columnWrapperStyle={{
+          justifyContent: 'space-between',
+        }}
         showsVerticalScrollIndicator={false}
-        renderItem={({item}) => {
+        renderItem={({item, index}) => {
           const onPress = () => {
-            navigation.navigate('AlbumListing');
+            navigation.navigate('AlbumListing', {
+              list: item?.vendorMedia,
+            });
           };
 
           return (
@@ -41,11 +50,16 @@ const Album = ({items, isViewAll = false}: AlbumType) => {
                 {opacity: pressed ? 0.9 : 1, marginTop: 20},
               ]}
               onPress={onPress}>
-              <ImageView uri={item} style={styles.image} resizeMode="cover" />
+              <ImageView
+                uri={item?.vendorMedia[0].path}
+                style={[styles.image]}
+                type="ONLINE"
+                resizeMode="cover"
+              />
 
               <View style={styles.row}>
                 <TextView position="left" type="h7">
-                  Albums {items.length}
+                  {item?.name}
                 </TextView>
 
                 <View style={styles.totalnumView}>
@@ -57,7 +71,7 @@ const Album = ({items, isViewAll = false}: AlbumType) => {
                   />
 
                   <TextView position="left" type="h8" style={{marginLeft: 3}}>
-                    {items.length}
+                    {item?.vendorMedia.length}
                   </TextView>
                 </View>
               </View>
@@ -93,12 +107,10 @@ const styles = StyleSheet.create({
   image: {
     height: 160,
     width: Dimen.width / 2.3,
-    marginHorizontal: 5,
     borderRadius: 10,
   },
   contentContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    marginHorizontal: 20,
   },
   row: {
     alignItems: 'center',

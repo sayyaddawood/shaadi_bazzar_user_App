@@ -5,33 +5,24 @@ import VenueDashboardItem from '../venue/VenueDashboardItem';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import {venueListingData} from '../../data';
-import { useNavigationHook } from '../../hooks';
+import {useNavigationHook} from '../../hooks';
+import {Vendor} from '../../models/RequestTypes';
 
 type VenuesListingProps = {
-  type: string;
+  title: string;
+  data: Vendor[];
 };
 
-const headingTypes: any = {
-  photographer: {
-    title: 'Photographer for you',
-    btn: 'View all photographer',
-  },
-  venue: {
-    title: 'Venues in your city',
-    btn: 'View all venues',
-  },
-};
-
-const VenuesListing = ({type}: VenuesListingProps) => {
-  const navigation = useNavigationHook()
+const VenuesListing = ({title, data}: VenuesListingProps) => {
+  const navigation = useNavigationHook();
 
   return (
     <View style={styles.mainContainer}>
       <TextView type="h6" numberOfLines={2} style={styles.text}>
-        {headingTypes[type].title}
+        {title}
       </TextView>
       <FlatList
-        data={venueListingData}
+        data={data}
         style={{marginTop: 15}}
         renderItem={({item}) => {
           return <VenueDashboardItem {...{item}} />;
@@ -43,10 +34,12 @@ const VenuesListing = ({type}: VenuesListingProps) => {
 
       <Button
         type="outline"
-        text={headingTypes[type].btn}
+        text={'View ALL ' + title}
         textColor={Colors.PrimaryColor}
         style={styles.btn}
-        onPress={() => navigation.navigate('VenueCategoriesList')}
+        onPress={() =>
+          navigation.navigate('VenueCategoriesList', {title, list: data})
+        }
         rightIcon={() => (
           <Icons
             type={IconsType.Entypo}
@@ -86,6 +79,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
   },
-  text: {
-  },
+  text: {},
 });

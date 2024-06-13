@@ -7,7 +7,7 @@ import Line from '../Line';
 import {IconButton} from 'react-native-paper';
 import {useNavigationHook} from '../../hooks';
 
-const PrimaryInfo = () => {
+const PrimaryInfo = ({info}: {info: VendorDetails}) => {
   const navigation = useNavigationHook();
 
   const onPressCall = () => alert('Navigated to call');
@@ -17,7 +17,7 @@ const PrimaryInfo = () => {
     <>
       <View style={styles.row}>
         <TextView position="left" type="h5">
-          Sari Banquet Convention & Lawns
+          {info.business_name}
         </TextView>
 
         <View style={styles.rowMessage}>
@@ -51,13 +51,13 @@ const PrimaryInfo = () => {
       </View>
 
       <TextView position="left" type="h8" style={styles.des}>
-        (Formerly known as Sari banquet convention & lawns)
+        ({info.address.full_address})
       </TextView>
       <TextView position="left" type="h7" style={styles.location}>
-        Latifabad, Hyderabad
+        {info.address.location.name}
       </TextView>
 
-      <View style={styles.rating}>
+      {/* <View style={styles.rating}>
         <Icons
           type={IconsType.FontAwesome}
           name={'star'}
@@ -70,20 +70,20 @@ const PrimaryInfo = () => {
             (13 Reviews)
           </TextView>
         </TextView>
-      </View>
+      </View> */}
 
-      <Line style={{marginLeft: -20, marginVertical: 10}} />
+      {/* <Line style={{marginLeft: -20, marginVertical: 10}} /> */}
 
-      <TextView position="left" type="h8" style={styles.location}>
+      {/* <TextView position="left" type="h8" style={styles.location}>
         Photo + Video
-      </TextView>
+      </TextView> */}
 
-      <TextView position="left" type="h5" style={{marginTop: 3}}>
+      {/* <TextView position="left" type="h5" style={{marginTop: 3}}>
         50,000{' '}
         <TextView position="left" type="h8" style={styles.des}>
           per day
         </TextView>
-      </TextView>
+      </TextView> */}
 
       <Line style={styles.line} />
     </>
@@ -95,7 +95,7 @@ export default PrimaryInfo;
 const styles = StyleSheet.create({
   des: {
     color: Colors.Gray,
-    marginTop: Platform.OS == 'ios' ? 2 : -2,
+    marginTop: Platform.OS == 'ios' ? -5 : -2,
   },
   location: {
     color: Colors.Gray,

@@ -6,10 +6,10 @@ import {MainNavigator} from './src/navigation';
 import {AppContainer} from './src/components';
 import {Colors} from './src/theme';
 import {ReactQueryClientProvider} from './src/network';
-import {UserData} from './src/models/RequestTypes';
+import { UserDetails } from './src/models/UserDataType';
 
 declare global {
-  var userInfo: UserData;
+  var userInfo: UserDetails;
   var isLogin: boolean;
   var deviceName: string;
   var hasNotch: boolean;

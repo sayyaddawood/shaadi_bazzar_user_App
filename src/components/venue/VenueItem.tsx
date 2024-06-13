@@ -1,14 +1,15 @@
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {Button, Icons, ImageView, TextView} from '../core';
-import {Colors} from '../../theme';
+import {AssetsIcons, Colors} from '../../theme';
 import Fonts from '../../theme/Fonts';
 import {IconsType} from '../core/Icons';
 import {IconButton} from 'react-native-paper';
 import {useNavigationHook} from '../../hooks';
+import {Vendor} from '../../models/RequestTypes';
 
 type VenueItemType = {
-  item: any; // Todo: remove any when type defined
+  item: Vendor;
 };
 
 const VenueItem = ({item}: VenueItemType) => {
@@ -16,16 +17,21 @@ const VenueItem = ({item}: VenueItemType) => {
   return (
     <Pressable
       style={styles.itemCon}
-      onPress={() => navigation.navigate('VenueDetail')}>
-      <ImageView uri={item} resizeMode="cover" style={styles.image} />
+      onPress={() => navigation.navigate('VenueDetail', {id: item.id})}>
+      <ImageView
+        uri={item?.vendorMedia[0]?.path ?? AssetsIcons.placeholder}
+        resizeMode="cover"
+        type="ONLINE"
+        style={styles.image}
+      />
       <TextView type="h7" color={Colors.Black} style={styles.mt}>
-        Pakistan
+        {item.address.full_address}
       </TextView>
       <TextView type="h6" color={Colors.Black} style={styles.textTitle}>
-        Little Bit of Adoniah
+        {item.business_name}
       </TextView>
       <TextView type="h6" style={styles.priceText}>
-        Rs 60,000{' '}
+        Rs {item.f_price ?? '0'}{' '}
         <TextView position="left" type="h8" style={styles.des}>
           per day
         </TextView>

@@ -1,5 +1,6 @@
 import axios, {AxiosRequestConfig, Method} from 'axios';
 import {BASE_URL} from './const';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export interface BaseModel {
   code?: string;
@@ -40,6 +41,28 @@ type RequestApiConfig = {
   onUploadProgress?: (progress: number) => void;
 };
 
+const apiClient = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    accept: '*/*',
+    'Content-Type': 'application/json',
+  },
+  responseType: 'json',
+});
+
+apiClient.interceptors.request.use(
+  async config => {
+    const token = await AsyncStorage.getItem('@token'); // Get token from local storage or any other storage
+    if (token) {
+      config.headers.Authorization = `${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  },
+);
+
 export const requestApi = async ({
   uri,
   method,
@@ -59,11 +82,11 @@ export const requestApi = async ({
       'Content-Type': contentType,
     },
     responseType: 'json',
-    validateStatus: (status: number) => status < HTTP_SERVER_ERROR_STATUS,
+    // validateStatus: (status: number) => status < HTTP_SERVER_ERROR_STATUS,
   };
 
   return new Promise((resolve, reject) => {
-    axios
+    apiClient
       .request(config)
       .then(response => {
         if (response.status < HTTP_CLIENT_ERROR_STATUS) {
@@ -112,6 +135,9 @@ export async function requestFetch<Type>(
       .then(response => {
         return response.json().then(data => {
           const responseModel: BaseModel = data as BaseModel;
+
+          console.log('@' + responseModel);
+
           if (responseModel.code === '200') {
             resolve(responseModel as Type);
           } else {

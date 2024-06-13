@@ -9,6 +9,7 @@ import {
   Animated,
   TouchableWithoutFeedback,
 } from 'react-native';
+import {BASE_URL_IMAGE} from '../../network/const';
 let {width} = Dimensions.get('window');
 // import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
@@ -42,7 +43,7 @@ const ImageSlider = ({style, images}: ImageSliderProps) => {
                   height: 240,
                   resizeMode: 'cover',
                 }}
-                source={{uri: image}}
+                source={{uri: BASE_URL_IMAGE + image}}
               />
             </TouchableWithoutFeedback>
           );

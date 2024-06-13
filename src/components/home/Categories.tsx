@@ -1,14 +1,21 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {ImageView, TextView} from '../core';
-import {categoriesData} from '../../data';
-import {Colors} from '../../theme';
+import {AssetsIcons, Colors} from '../../theme';
+import useVendor from '../../hooks/useVendor';
 
 const Categories = () => {
+  const {categories} = useVendor({fetchCategory: true});
+  const trimCategories = categories?.filter((_, index) => index < 5);
+
   return (
     <View style={styles.mainContainer}>
       <FlatList
-        data={[...categoriesData, {flag: true}]}
+        data={
+          categories?.length > 5
+            ? [...trimCategories, {flag: true}]
+            : trimCategories
+        }
         renderItem={({item, index}) => {
           return <CategoryItem {...{item, index}} />;
         }}
@@ -22,7 +29,12 @@ const Categories = () => {
 
 export default Categories;
 
-const CategoryItem = ({item, index}) => {
+type CategoryItemType = {
+  item: VendorCategory;
+  index: number;
+};
+
+const CategoryItem = ({item, index}: CategoryItemType) => {
   if (item?.flag) {
     return (
       <View style={styles.itemContainer}>
@@ -43,9 +55,13 @@ const CategoryItem = ({item, index}) => {
 
   return (
     <View style={styles.itemContainer}>
-      <ImageView uri={item?.image} style={styles.image} resizeMode="cover" />
+      <ImageView
+        uri={item?.icon || AssetsIcons.placeholder}
+        style={styles.image}
+        resizeMode="cover"
+      />
       <TextView type="h8" numberOfLines={2} style={styles.text}>
-        {item?.title}
+        {item?.name}
       </TextView>
     </View>
   );
@@ -67,6 +83,8 @@ const styles = StyleSheet.create({
     height: 65,
     resizeMode: 'contain',
     borderRadius: 65 / 2,
+    borderWidth: 0.1,
+    borderColor: Colors.LightestGray,
   },
   itemContainer: {
     alignItems: 'center',

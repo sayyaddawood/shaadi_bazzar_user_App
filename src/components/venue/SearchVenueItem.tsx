@@ -7,14 +7,23 @@ import {IconsType} from '../core/Icons';
 type SearchItem = {
   editable?: boolean;
   onPress?: () => void;
+
+  search?: string;
+  setSearch?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const SearchItem = ({editable = true, onPress}: SearchItem) => {
+const SearchItem = ({
+  editable = true,
+  onPress,
+  search,
+  setSearch,
+}: SearchItem) => {
   return (
     <EditText
-      onChangeText={() => {}}
+      onChangeText={txt => setSearch && setSearch(txt)}
       placeholder="Search..."
       style={styles.con}
+      value={search}
       inputStyle={styles.inputStyle}
       input={styles.input}
       onPress={onPress}

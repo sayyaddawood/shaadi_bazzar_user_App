@@ -11,7 +11,7 @@ const Splash = () => {
     (async () => {
       const isUserFound = await getUserData();
       if (isUserFound) {
-        if (isUserFound && !isUserFound.is_account_verified) {
+        if (isUserFound && !isUserFound.data?.is_account_verified) {
           navigation.replace('Register');
           return;
         }

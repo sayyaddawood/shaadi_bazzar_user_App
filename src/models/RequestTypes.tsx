@@ -42,3 +42,29 @@ interface City {
 }
 
 export type CityList = City[];
+
+interface VendorMedia {
+  path: string;
+}
+
+interface Address {
+  full_address: string;
+}
+
+export interface Vendor {
+  business_name: string;
+  f_price: number | null;
+  avgRating: string;
+  id: string;
+  address: Address;
+  vendorMedia: VendorMedia[];
+}
+
+interface Category {
+  categoryName: string;
+  categoryId: number;
+  vendors: Vendor[];
+}
+
+export type HomeScreenList = Category[];
+

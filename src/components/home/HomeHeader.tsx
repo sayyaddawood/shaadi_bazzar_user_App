@@ -27,7 +27,11 @@ const HomeHeader = ({}: HomeHeaderProps) => {
         )}
         size={15}
         style={{backgroundColor: Colors.Halfwit}}
-        onPress={() => navigation.navigate('Search')}
+        onPress={() => {
+          navigation.navigate('Search', {
+            id: '-1',
+          });
+        }}
       />
       <IconButton
         icon={() => (

@@ -13,6 +13,7 @@ let AssetsIcons = {
   rating: require('../assets/images/rating.png'),
   information: require('../assets/images/information.png'),
   logout: require('../assets/images/logout.png'),
+  placeholder: require('../assets/images/placeholder.png'),
 
 };
 
