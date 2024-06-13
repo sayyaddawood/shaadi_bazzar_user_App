@@ -24,8 +24,11 @@ export type RootStackParamList = {
   };
   WriteReview: {
     title: string;
+    vendorId: number;
   };
-  CheckAvailability: undefined;
+  CheckAvailability: {
+    dates: LockedDate[]
+  };
   ViewAllAlbums: undefined;
   AlbumGallery: {
     activeIndexImage: number;

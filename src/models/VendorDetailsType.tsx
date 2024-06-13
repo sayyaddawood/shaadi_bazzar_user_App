@@ -47,10 +47,18 @@ interface VendorAlbum {
   vendorMedia: VendorAlbumMedia[];
 }
 
+interface LockedDate {
+  date: string; // ISO string
+  day: boolean;
+  night: boolean;
+  vendor_id: number;
+}
+
 interface VendorDetailResult {
   vendorDetails: VendorDetails;
   packages: Package[];
   vendorAlbums: VendorAlbum[];
+  lockedDates: LockedDate[];
 }
 
 interface ResultVendorAlbum {

@@ -5,7 +5,8 @@ import {
   getVenueDetail,
   getVenueReviews,
 } from '../network/serverRequests';
-import {useEffect, useMemo} from 'react';
+import {useMemo} from 'react';
+import {useIsFocused} from '@react-navigation/native';
 
 type useVendorType = {
   id?: string;
@@ -24,6 +25,8 @@ const useVendor = ({
   fetchSearch = false,
   searchText,
 }: useVendorType) => {
+  const isFocused = useIsFocused();
+
   const {data: categories, isPending: isCategoryLoading} = useQuery({
     queryKey: ['vendorCategories'],
     queryFn: getVendorCategory,
@@ -39,7 +42,7 @@ const useVendor = ({
   const {data: reviewsData, isPending: reviewsLoading} = useQuery({
     queryKey: ['vendorReviews', id],
     queryFn: ({queryKey}) => getVenueReviews(queryKey[1]),
-    enabled: fetchReviews,
+    enabled: fetchReviews && isFocused,
   });
 
   const imagesList = useMemo(() => {
@@ -47,10 +50,7 @@ const useVendor = ({
     return data?.result?.vendorDetails?.vendorMedia?.map(it => it.path);
   }, [data?.result]);
 
-  const {
-    data: searchData,
-    isPending: searchLoading,
-  } = useQuery({
+  const {data: searchData, isPending: searchLoading} = useQuery({
     queryKey: ['searchVendor', id, searchText],
     queryFn: ({queryKey}) => getSearchVenue(queryKey[1], queryKey[2]),
     enabled: fetchSearch && searchText && searchText?.length > 0 ? true : false,

@@ -18,6 +18,7 @@ export enum EndPointConstants {
   vendorAlbum = 'customerapp/vendorAlbums/', 
   vendorReviews = 'customerapp/vendorReviews/', 
   vendorSearch = 'customerapp/searchVendor', 
+  addReview = "customerapp/addReview"
 }
 
 export const getEndpointUrl = (endPoint: EndPointConstants): string => {

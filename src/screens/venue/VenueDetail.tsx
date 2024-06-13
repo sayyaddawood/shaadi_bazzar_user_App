@@ -38,7 +38,14 @@ const VenueDetail = () => {
 
                 <View style={styles.body}>
                   {data?.vendorDetails && (
-                    <PrimaryInfo info={data?.vendorDetails} />
+                    <PrimaryInfo
+                      info={data?.vendorDetails}
+                      onCalenderPress={() =>
+                        navigation.navigate('CheckAvailability', {
+                          dates: data.lockedDates,
+                        })
+                      }
+                    />
                   )}
                   {data?.packages && <PriceInfo info={data?.packages} />}
                   <Album {...{id}} />
@@ -48,6 +55,7 @@ const VenueDetail = () => {
                     onWriteAReviewPress={() =>
                       navigation.navigate('WriteReview', {
                         title: data?.vendorDetails.business_name || 'Vendor',
+                        vendorId: Number(data?.vendorDetails.id),
                       })
                     }
                   />

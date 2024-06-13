@@ -1,5 +1,6 @@
 import {
   ApiResponse,
+  ApiResponseBase,
   CityList,
   HomeScreenList,
   LoginResponseData,
@@ -128,11 +129,28 @@ export const getSearchVenue = async (id?: string, searchText?: string) => {
     url += `&catId=${id}`;
   }
 
-  console.log("@url ", url)
-  
+  console.log('@url ', url);
+
   let result = await requestApi({
     uri: url,
     method: 'GET',
   });
   return result as ApiResponse<VendorSearchResult[]>;
+};
+
+type bodyTypes = {
+  vendorId: number;
+  userId: number;
+  rating: number;
+  feedback: string;
+};
+
+export const onSubmitReview = async (body: bodyTypes) => {
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.addReview),
+    method: 'POST',
+    body: body,
+  });
+
+  return result as ApiResponseBase;
 };

@@ -10,12 +10,13 @@ import {
   TextView,
 } from '../../components';
 import {Colors} from '../../theme';
-import {useNavigationHook} from '../../hooks';
+import {useNavigationHook, useWriteReview} from '../../hooks';
 import useRouteHook from '../../hooks/useRouteHook';
 
 const WriteReview = () => {
   const navigation = useNavigationHook();
-  const {title} = useRouteHook({screenName: 'WriteReview'}).params;
+  const {title, vendorId} = useRouteHook({screenName: 'WriteReview'}).params;
+  const {state, setState, onPress, isLoading} = useWriteReview();
   const onBackPress = () => {
     Alert.alert('Alert', 'Are you sure want to go back?', [
       {
@@ -39,7 +40,7 @@ const WriteReview = () => {
             size={20}
             containerStyle={{marginTop: 5}}
             style={{width: 30}}
-            onChange={rating => {}}
+            onChange={rt => setState({...state, rating: rt})}
           />
           <Spacer height={30} />
           <EditText
@@ -49,10 +50,10 @@ const WriteReview = () => {
             style={{marginHorizontal: 0}}
             inputStyle={{marginHorizontal: 0, height: 100, paddingTop: 7}}
             input={{textAlignVertical: 'top'}}
-            max={500}
-            onChangeText={() => {}}
+            max={200}
+            onChangeText={txt => setState({...state, feedback: txt})}
           />
-          <EditText
+          {/* <EditText
             label="Event Date*"
             placeholder="Select Event Date"
             pointerEvent={'none'}
@@ -61,10 +62,12 @@ const WriteReview = () => {
             editable={false}
             type="calender"
             onChangeText={date => {}}
-          />
+          /> */}
           <Button
-            onPress={() => {}}
+            onPress={() => onPress(vendorId)}
             style={styles.btn}
+            disabled={isLoading}
+            isLoading={isLoading}
             text={'Sign In/Register'}
           />
         </View>

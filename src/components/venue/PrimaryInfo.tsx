@@ -7,12 +7,13 @@ import Line from '../Line';
 import {IconButton} from 'react-native-paper';
 import {useNavigationHook} from '../../hooks';
 
-const PrimaryInfo = ({info}: {info: VendorDetails}) => {
-  const navigation = useNavigationHook();
-
-  const onPressCall = () => alert('Navigated to call');
-  const onPressMessage = () => navigation.navigate('CheckAvailability');
-
+const PrimaryInfo = ({
+  info,
+  onCalenderPress,
+}: {
+  info: VendorDetails;
+  onCalenderPress: () => void;
+}) => {
   return (
     <>
       <View style={styles.row}>
@@ -32,7 +33,7 @@ const PrimaryInfo = ({info}: {info: VendorDetails}) => {
             )}
             size={18}
             style={{marginRight: 0, backgroundColor: Colors.PrimaryColor}}
-            onPress={onPressMessage}
+            onPress={onCalenderPress}
           />
           {/* <IconButton
             icon={() => (
