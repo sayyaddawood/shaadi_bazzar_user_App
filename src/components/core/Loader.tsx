@@ -5,9 +5,10 @@ import {Colors} from '../../theme';
 type LoaderTypes = {
   loaderSize?: number;
   area?: number;
+  color?: string
 };
 
-const Loader = ({loaderSize, area}: LoaderTypes) => {
+const Loader = ({loaderSize, area, color = Colors.PrimaryColor}: LoaderTypes) => {
   const size = loaderSize ? loaderSize : 7;
   const dim = area ? area : 20;
   const animation = useRef(new Animated.Value(0)).current;
@@ -140,7 +141,7 @@ const Loader = ({loaderSize, area}: LoaderTypes) => {
     inputRange: [0, 1],
     outputRange: ['0deg', '720deg'],
   });
-  const backgroundColor = Colors.White;
+  const backgroundColor = color;
 
   return (
     <View style={styles.container}>

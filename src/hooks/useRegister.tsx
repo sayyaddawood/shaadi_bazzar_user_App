@@ -50,7 +50,7 @@ const useRegister = () => {
     }
   }, []);
 
-  const {mutateAsync} = useMutation({
+  const {mutateAsync, isPending} = useMutation({
     mutationFn: profileSetup,
     onSuccess: response => {
 
@@ -83,6 +83,7 @@ const useRegister = () => {
     ref,
     cities: formatCities || [],
     onLogout,
+    isLoading: isPending
   };
 };
 

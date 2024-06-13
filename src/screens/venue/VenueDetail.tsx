@@ -8,6 +8,7 @@ import {
   PriceInfo,
   Reviews,
   Album,
+  Loader,
 } from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook, useRouteHook} from '../../hooks';
@@ -17,54 +18,64 @@ import useVendor from '../../hooks/useVendor';
 const VenueDetail = () => {
   const navigation = useNavigationHook();
   const {id} = useRouteHook({screenName: 'VenueDetail'}).params;
-  const {data, imagesList} = useVendor({id, fetchDetail: true});
+  const {data, imagesList, isLoading} = useVendor({id, fetchDetail: true});
 
   const onBackPress = () => navigation.goBack();
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={[1]}
-        showsVerticalScrollIndicator={false}
-        renderItem={({}) => {
-          return (
-            <>
-              <AppContainer>
-                <Header
-                  onBackPress={onBackPress}
-                  title={'Venues in Hyderabad'}
-                />
-                {imagesList.length > 0 && <ImageSlider images={imagesList} />}
-
-                <View style={styles.body}>
-                  {data?.vendorDetails && (
-                    <PrimaryInfo
-                      info={data?.vendorDetails}
-                      onCalenderPress={() =>
-                        navigation.navigate('CheckAvailability', {
-                          dates: data.lockedDates,
-                        })
-                      }
-                    />
-                  )}
-                  {data?.packages && <PriceInfo info={data?.packages} />}
-                  <Album {...{id}} />
-
-                  <Reviews
-                    id={id}
-                    onWriteAReviewPress={() =>
-                      navigation.navigate('WriteReview', {
-                        title: data?.vendorDetails.business_name || 'Vendor',
-                        vendorId: Number(data?.vendorDetails.id),
-                      })
-                    }
+      {isLoading ? (
+        <Loader area={25} loaderSize={8} />
+      ) : (
+        <FlatList
+          data={[1]}
+          showsVerticalScrollIndicator={false}
+          renderItem={({}) => {
+            return (
+              <>
+                <AppContainer>
+                  <Header
+                    onBackPress={onBackPress}
+                    title={'Venues in Hyderabad'}
                   />
-                </View>
-              </AppContainer>
-            </>
-          );
-        }}
-      />
+
+                  <>
+                    {imagesList.length > 0 && (
+                      <ImageSlider images={imagesList} />
+                    )}
+
+                    <View style={styles.body}>
+                      {data?.vendorDetails && (
+                        <PrimaryInfo
+                          info={data?.vendorDetails}
+                          onCalenderPress={() =>
+                            navigation.navigate('CheckAvailability', {
+                              dates: data.lockedDates,
+                            })
+                          }
+                        />
+                      )}
+                      {data?.packages && <PriceInfo info={data?.packages} />}
+                      <Album {...{id}} />
+
+                      <Reviews
+                        id={id}
+                        onWriteAReviewPress={() =>
+                          navigation.navigate('WriteReview', {
+                            title:
+                              data?.vendorDetails.business_name || 'Vendor',
+                            vendorId: Number(data?.vendorDetails.id),
+                          })
+                        }
+                      />
+                    </View>
+                  </>
+                </AppContainer>
+              </>
+            );
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };

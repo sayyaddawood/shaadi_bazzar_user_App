@@ -32,6 +32,7 @@ const Login = () => {
             isLoading={isLoading}
             disabled={value.length < 4 ? true : false}
             style={styles.btn}
+            loaderColor={Colors.White}
             text={'VERIFY & PROCEED'}
             onPress={onVerifyOTP}
           />

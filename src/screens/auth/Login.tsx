@@ -55,6 +55,7 @@ const Login = () => {
           <Button
             isLoading={isLoading}
             text={'SEND OTP'}
+            loaderColor={Colors.White}
             style={{marginTop: 5}}
             onPress={handleSubmit}
           />

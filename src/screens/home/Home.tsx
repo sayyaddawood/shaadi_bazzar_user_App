@@ -5,6 +5,7 @@ import {
   AppStatusBar,
   Categories,
   HomeHeader,
+  Loader,
   VenuesListing,
 } from '../../components';
 import {useHome} from '../../hooks';
@@ -18,24 +19,32 @@ const Home = () => {
       <AppContainer>
         <AppStatusBar />
         <HomeHeader />
-        <FlatList
-          data={[1]}
-          contentContainerStyle={styles.scrollView}
-          showsVerticalScrollIndicator={false}
-          renderItem={({}) => {
-            return (
-              <>
-                <Categories />
 
-                {data?.map(it => {
-                  return (
-                    <VenuesListing title={it?.categoryName} data={it.vendors} />
-                  );
-                })}
-              </>
-            );
-          }}
-        />
+        {isLoading ? (
+          <Loader area={25} loaderSize={8} />
+        ) : (
+          <FlatList
+            data={[1]}
+            contentContainerStyle={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+            renderItem={({}) => {
+              return (
+                <>
+                  <Categories />
+
+                  {data?.map(it => {
+                    return (
+                      <VenuesListing
+                        title={it?.categoryName}
+                        data={it.vendors}
+                      />
+                    );
+                  })}
+                </>
+              );
+            }}
+          />
+        )}
       </AppContainer>
     </SafeAreaView>
   );

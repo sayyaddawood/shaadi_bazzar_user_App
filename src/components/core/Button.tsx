@@ -12,6 +12,7 @@ type Button = {
   disabled?: boolean;
   isLoading?: boolean;
   textColor?: string;
+  loaderColor?: string;
   rightIcon?: () => React.ReactNode;
   leftIcon?: () => React.ReactNode;
 };
@@ -26,6 +27,7 @@ const Button = ({
   style,
   onPress,
   disabled = false,
+  loaderColor
 }: Button) => {
   return (
     <Pressable
@@ -39,7 +41,7 @@ const Button = ({
       ]}
       onPress={onPress}>
       {isLoading ? (
-        <Loader />
+        <Loader color={loaderColor ?? Colors.PrimaryColor}   />
       ) : (
         <>
           {leftIcon && leftIcon()}

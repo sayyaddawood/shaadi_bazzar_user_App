@@ -22,6 +22,7 @@ const Register = () => {
     cities,
     form: {handleSubmit, handleChange, errors, touched, setFieldValue},
     onLogout,
+    isLoading
   } = useRegister();
 
   return (
@@ -61,6 +62,8 @@ const Register = () => {
               style={styles.btn}
               text={'Continue'}
               onPress={handleSubmit}
+              isLoading={isLoading}
+              loaderColor={Colors.White}
             />
             <IconButton
               icon={() => (
