@@ -16,7 +16,7 @@ import {FlatList} from 'react-native';
 import useVendor from '../../hooks/useVendor';
 
 const VenueDetail = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {id} = useRouteHook({screenName: 'VenueDetail'}).params;
   const {data, imagesList, isLoading} = useVendor({id, fetchDetail: true});
 
@@ -51,6 +51,11 @@ const VenueDetail = () => {
                           onCalenderPress={() =>
                             navigation.navigate('CheckAvailability', {
                               dates: data.lockedDates,
+                            })
+                          }
+                          onMessagePress={() =>
+                            navigation.navigate('SendMessage', {
+                              vendorPhone: data?.vendorDetails.business_phone,
                             })
                           }
                         />

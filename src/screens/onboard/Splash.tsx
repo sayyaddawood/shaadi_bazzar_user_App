@@ -5,7 +5,7 @@ import {AppContainer, AppStatusBar, TextView} from '../../components';
 import {useNavigationHook, useUserInfo} from '../../hooks';
 
 const Splash = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {getUserData} = useUserInfo();
   useEffect(() => {
     (async () => {

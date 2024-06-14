@@ -6,7 +6,7 @@ import {useNavigationHook, useUserInfo} from '../../hooks';
 import {TouchableRipple} from 'react-native-paper';
 
 const UserSettings = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {onLogout} = useUserInfo();
 
   return (

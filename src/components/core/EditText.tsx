@@ -40,7 +40,7 @@ type EditTextType = {
   editable?: boolean;
   multiline?: boolean;
   labelStyle?: StyleProp<TextStyle>;
-  errorTextStyle?: StyleProp<ViewStyle>;
+  errorTextStyle?: StyleProp<TextStyle>;
   value?: string;
   autoCapitalize?: any;
   max?: any;
@@ -128,7 +128,7 @@ const EditText = ({
           placeholderTextColor={placeholderColor}
           autoCapitalize={autoCapitalize}
           maxLength={max}
-          style={[styles.input, {fontFamily: Fonts.regular}, input]}
+          style={[styles.input, {fontFamily: Fonts.regular}, input,]}
           secureTextEntry={isPassword}
           keyboardType={keyboardType}
           returnKeyType={returnKey}
@@ -157,7 +157,7 @@ const EditText = ({
         )}
       </Pressable>
 
-      <ErrorMessage {...{errorMessage}} />
+      <ErrorMessage {...{errorMessage, errorTextStyle}} />
 
       {type == 'calender' && (
         <DatePicker

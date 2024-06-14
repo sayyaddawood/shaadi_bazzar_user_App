@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, TextStyle} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 import {Colors} from '../theme';
 import {TextView} from './core';
 
 type ErrorMessageType = {
   errorMessage?: string;
-  errorTextStyle?: TextStyle;
+  errorTextStyle?: StyleProp<TextStyle>;
 };
 
 const ErrorMessage = ({errorMessage, errorTextStyle}: ErrorMessageType) => {

@@ -30,7 +30,7 @@ const Data = [
 ];
 
 const Onboarding = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
 
   const onSignInPress = () => navigation.replace('Login');
 

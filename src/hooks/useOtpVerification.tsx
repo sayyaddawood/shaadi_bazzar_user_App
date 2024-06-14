@@ -8,7 +8,7 @@ import {useMutation} from '@tanstack/react-query';
 import useUserInfo from './useUserInfo';
 
 const useOtpVerification = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {phone} = useRouteHook({screenName: 'OtpVerification'}).params;
   const [value, setValue] = useState<string>('');
   const {saveData, setAccessToken} = useUserInfo();

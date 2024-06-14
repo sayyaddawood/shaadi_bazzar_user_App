@@ -5,7 +5,7 @@ import {Colors} from '../../theme';
 import {useNavigationHook, useRouteHook} from '../../hooks';
 
 const VenueCategoriesList = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {title, list: items} = useRouteHook({
     screenName: 'VenueCategoriesList',
   }).params;

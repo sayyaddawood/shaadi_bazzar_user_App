@@ -8,7 +8,7 @@ import {FlashList} from '@shopify/flash-list';
 import {BASE_URL_IMAGE} from '../../../network/const';
 
 const AlbumGallery = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const ref = useRef<FlashList<any>>(null);
   const {activeIndexImage, itemsImages} = useRouteHook({
     screenName: 'AlbumGallery',
@@ -24,7 +24,6 @@ const AlbumGallery = () => {
     }
   }, []);
 
-  console.log('@itemsImages ', JSON.stringify(itemsImages));
 
   return (
     <View style={styles.container}>

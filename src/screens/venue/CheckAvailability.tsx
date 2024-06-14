@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {CalendarList} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 import {Colors} from '../../theme';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
@@ -8,7 +8,7 @@ import {useNavigationHook, useRouteHook} from '../../hooks';
 import moment from 'moment';
 
 const CheckAvailability = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const [currentMonth, setCurrentMonth] = useState(new Date().toString());
   const {dates} = useRouteHook({screenName: 'CheckAvailability'}).params;
   const markedDates = useMemo(() => {
@@ -34,8 +34,9 @@ const CheckAvailability = () => {
       <AppContainer>
         <Header onBackPress={onBackPress} title={'Check Availability'} />
 
-        <CalendarList
+        <Calendar
           current={currentMonth}
+          minDate={new Date().toDateString()}
           headerStyle={styles.header}
           theme={{
             arrowWidth: 10,

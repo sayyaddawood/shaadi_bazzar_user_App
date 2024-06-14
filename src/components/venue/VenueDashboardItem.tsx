@@ -11,7 +11,7 @@ type VenueDashboardItemProps = {
 };
 
 const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
 
   const onPress = () =>
     navigation.navigate('VenueDetail', {

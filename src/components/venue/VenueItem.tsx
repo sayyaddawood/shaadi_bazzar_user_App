@@ -13,7 +13,7 @@ type VenueItemType = {
 };
 
 const VenueItem = ({item}: VenueItemType) => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   return (
     <Pressable
       style={styles.itemCon}

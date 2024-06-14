@@ -5,14 +5,15 @@ import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import Line from '../Line';
 import {IconButton} from 'react-native-paper';
-import {useNavigationHook} from '../../hooks';
 
 const PrimaryInfo = ({
   info,
   onCalenderPress,
+  onMessagePress,
 }: {
   info: VendorDetails;
   onCalenderPress: () => void;
+  onMessagePress: () => void;
 }) => {
   return (
     <>
@@ -27,27 +28,27 @@ const PrimaryInfo = ({
               <Icons
                 type={IconsType.Ionicons}
                 name={'calendar-outline'}
-                size={20}
+                size={18}
                 color={Colors.White}
               />
             )}
-            size={18}
+            size={15}
             style={{marginRight: 0, backgroundColor: Colors.PrimaryColor}}
             onPress={onCalenderPress}
           />
-          {/* <IconButton
+          <IconButton
             icon={() => (
               <Icons
-                type={IconsType.Ionicons}
-                name={'call'}
-                size={15}
+                type={IconsType.Fontisto}
+                name={'whatsapp'}
+                size={18}
                 color={Colors.White}
               />
             )}
-            size={12}
+            size={15}
             style={{backgroundColor: 'green', padding: 3}}
-            onPress={onPressCall}
-          /> */}
+            onPress={onMessagePress}
+          />
         </View>
       </View>
 

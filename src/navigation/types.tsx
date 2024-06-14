@@ -18,7 +18,9 @@ export type RootStackParamList = {
     list: Vendor[]
     title: string
   };
-  SendMessage: undefined;
+  SendMessage: {
+    vendorPhone: string;
+  };
   AlbumListing: {
     list: VendorAlbumMedia[];
   };
@@ -29,7 +31,9 @@ export type RootStackParamList = {
   CheckAvailability: {
     dates: LockedDate[]
   };
-  ViewAllAlbums: undefined;
+  ViewAllAlbums: {
+    id: string
+  };
   AlbumGallery: {
     activeIndexImage: number;
     itemsImages: VendorAlbumMedia[];

@@ -8,7 +8,7 @@ import {useMutation} from '@tanstack/react-query';
 import {phoneVerification} from '../network';
 
 const useLogin = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const ref = useRef<TextInput>();
   const {mutateAsync, isPending} = useMutation({
     mutationFn: phoneVerification,

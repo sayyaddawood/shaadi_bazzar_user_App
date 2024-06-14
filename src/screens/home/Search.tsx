@@ -6,7 +6,7 @@ import {useNavigationHook, useRouteHook} from '../../hooks';
 import useVendor from '../../hooks/useVendor';
 
 const Search = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {id} = useRouteHook({screenName: 'Search'}).params;
   const [search, setSearch] = useState('');
   const onBackPress = () => navigation.goBack();

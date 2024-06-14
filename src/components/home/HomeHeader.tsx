@@ -9,7 +9,7 @@ import {useNavigationHook} from '../../hooks';
 type HomeHeaderProps = {};
 
 const HomeHeader = ({}: HomeHeaderProps) => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   return (
     <View style={styles.container}>
       <TextView type="h5" style={styles.text}>

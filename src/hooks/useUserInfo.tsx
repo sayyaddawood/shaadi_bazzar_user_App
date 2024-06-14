@@ -1,13 +1,12 @@
-import {UserData} from '../models/RequestTypes';
 import AsyncStorage from '@react-native-community/async-storage';
 import useNavigationHook from './useNavigationHook';
 import {CommonActions} from '@react-navigation/native';
 import {Alert} from 'react-native';
-import {Data, UserDetails, UserDetailsResult} from '../models/UserDataType';
+import {UserDetails, UserDetailsResult} from '../models/UserDataType';
 import {useQueryClient} from '@tanstack/react-query';
 
 const useUserInfo = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const queryClient = useQueryClient();
   const saveData = async (data: UserDetailsResult) => {
     await AsyncStorage.setItem('@userInfo', JSON.stringify(data));

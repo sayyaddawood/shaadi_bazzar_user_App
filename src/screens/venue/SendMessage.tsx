@@ -8,66 +8,95 @@ import {
   TextView,
 } from '../../components';
 import {Colors} from '../../theme';
-import {useNavigationHook} from '../../hooks';
+import {useSendMessage} from '../../hooks';
+import moment from 'moment';
 
 const SendMessage = () => {
-  
-    const navigation = useNavigationHook();
-
-  const onBackPress = () => navigation.goBack();
+  const {
+    form: {handleSubmit, handleChange, errors, touched, setFieldValue, values},
+    goBackWithAlert,
+  } = useSendMessage();
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppContainer>
-          <Header onBackPress={onBackPress} title={'Send Message'} />
+          <Header onBackPress={goBackWithAlert} title={'Send Message'} />
 
           <View style={styles.content}>
-            <TextView style={styles.text}>Hi FlipOn Media</TextView>
+            <TextView style={styles.text}>
+              Hi, Please fill this form with your details.
+            </TextView>
             <EditText
               label="Full Name*"
               placeholder="Enter Full Name"
-              style={{marginHorizontal: 0, marginTop: 15}}
+              style={{marginHorizontal: 0, marginTop: 20}}
               inputStyle={{marginHorizontal: 0}}
-              onChangeText={() => {}}
+              value={values.name}
+              onChangeText={handleChange('name')}
+              errorMessage={errors?.name && touched.name ? errors.name : ''}
+              errorTextStyle={styles.errorTextStyle}
             />
             <EditText
               label="Mobile Number*"
               placeholder="+92308xxxxxxx"
               style={{marginHorizontal: 0, marginTop: 5}}
-              inputStyle={{marginHorizontal: 0}}
-              onChangeText={() => {}}
+              editable={false}
+              input={styles.phoneInput}
+              inputStyle={{marginHorizontal: 0, paddingHorizontal: 0.5}}
+              onChangeText={handleChange('phone')}
+              errorMessage={errors?.phone && touched.phone ? errors.phone : ''}
+              errorTextStyle={styles.errorTextStyle}
+              value={values.phone}
             />
             <EditText
-              label="Email Address*"
+              label="Email Address"
               placeholder="Enter Email Address"
               style={{marginHorizontal: 0, marginTop: 5}}
               inputStyle={{marginHorizontal: 0}}
-              onChangeText={() => {}}
+              onChangeText={handleChange('email')}
+              errorMessage={errors?.email && touched.email ? errors.email : ''}
+              errorTextStyle={styles.errorTextStyle}
+              value={values.email}
             />
             <EditText
               label="Event Date*"
               placeholder="Select Event Date"
+              pointerEvent={'none'}
               style={{marginHorizontal: 0, marginTop: 5}}
               inputStyle={{marginHorizontal: 0}}
-              onChangeText={() => {}}
+              editable={false}
+              type="calender"
+              onChangeText={date =>
+                setFieldValue('date', moment(date).format('YYYY-MM-DD'))
+              }
+              errorMessage={errors?.date && touched.date ? errors.date : ''}
+              errorTextStyle={styles.errorTextStyle}
+              value={values.date}
             />
             <EditText
               multiline={true}
               placeholder="Details about my event*"
               style={{marginHorizontal: 0, marginTop: 5}}
-              inputStyle={{marginHorizontal: 0, height: 100, paddingTop: 7}}
-              onChangeText={() => {}}
+              inputStyle={{
+                marginHorizontal: 0,
+                height: 100,
+                paddingTop: 7,
+                textVerticalAlign: 'top',
+              }}
+              input={{textAlignVertical: 'top'}}
+              onChangeText={handleChange('details')}
+              errorMessage={
+                errors?.details && touched.details ? errors.details : ''
+              }
+              errorTextStyle={styles.errorTextStyle}
+              value={values.details}
             />
           </View>
         </AppContainer>
       </ScrollView>
 
-      <Button
-        text={'Send Message'}
-        style={styles.btn}
-        onPress={() => alert('Message Sent successfully')}
-      />
+      <Button text={'Send Message'} style={styles.btn} onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
@@ -111,5 +140,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Halfwit,
     marginLeft: -20,
     marginVertical: 15,
+  },
+
+  errorTextStyle: {
+    marginRight: 0,
+  },
+  phoneInput: {
+    backgroundColor: Colors.DisabledInput,
+    paddingLeft: 10,
+    borderRadius: 4,
   },
 });

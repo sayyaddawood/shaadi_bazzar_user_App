@@ -8,10 +8,9 @@ import {CommonActions} from '@react-navigation/native';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {getCities, profileSetup} from '../network/serverRequests';
 import useUserInfo from './useUserInfo';
-import AsyncStorage from '@react-native-community/async-storage';
 
 const useRegister = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const ref = useRef<TextInput>();
   const {saveData, setAccessToken, getUserData, onLogout} = useUserInfo();
 

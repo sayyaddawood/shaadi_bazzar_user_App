@@ -5,7 +5,7 @@ import {Alert} from 'react-native';
 import useNavigationHook from './useNavigationHook';
 
 const useWriteReview = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const [state, setState] = useState({rating: 3, feedback: ''});
   const {mutateAsync, isPending} = useMutation({
     mutationFn: onSubmitReview,

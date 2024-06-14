@@ -1,10 +1,9 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {Button, Icons, ImageView, TextView} from '../core';
+import {Button, Icons, TextView} from '../core';
 import VenueDashboardItem from '../venue/VenueDashboardItem';
 import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
-import {venueListingData} from '../../data';
 import {useNavigationHook} from '../../hooks';
 import {Vendor} from '../../models/RequestTypes';
 
@@ -14,7 +13,7 @@ type VenuesListingProps = {
 };
 
 const VenuesListing = ({title, data}: VenuesListingProps) => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
 
   return (
     <View style={styles.mainContainer}>

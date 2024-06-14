@@ -5,7 +5,7 @@ import {Colors} from '../../../theme';
 import {useNavigationHook, useRouteHook} from '../../../hooks';
 
 const AlbumListing = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
   const {list} = useRouteHook({screenName: 'AlbumListing'}).params;
 
   const onBackPress = () => navigation.goBack();

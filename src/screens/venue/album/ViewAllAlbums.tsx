@@ -1,18 +1,19 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {Album, Header} from '../../../components';
 import {Colors} from '../../../theme';
-import {useNavigationHook} from '../../../hooks';
+import {useNavigationHook, useRouteHook} from '../../../hooks';
 
 const ViewAllAlbums = () => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
+  const {id} = useRouteHook({screenName: 'ViewAllAlbums'}).params;
 
   const onBackPress = () => navigation.goBack();
   return (
     <SafeAreaView style={styles.container}>
       <Header onBackPress={onBackPress} title={'Albums'} />
 
-        <Album {...{isViewAll: true}} />
+      <Album {...{id, isViewAll: true}} />
     </SafeAreaView>
   );
 };

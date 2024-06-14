@@ -13,7 +13,7 @@ type AlbumType = {
 };
 
 const Album = ({id, isViewAll = false}: AlbumType) => {
-  const navigation = useNavigationHook();
+  const {navigation} = useNavigationHook();
 
   const {data: items} = useAlbums({id});
 
@@ -89,7 +89,7 @@ const Album = ({id, isViewAll = false}: AlbumType) => {
             text="View All Albums"
             textColor={Colors.PrimaryColor}
             style={styles.btn}
-            onPress={() => navigation.navigate('ViewAllAlbums')}
+            onPress={() => navigation.navigate('ViewAllAlbums', {id})}
           />
 
           <Line style={[styles.line, {marginTop: 25}]} />

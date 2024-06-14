@@ -14,23 +14,14 @@ import {useNavigationHook, useWriteReview} from '../../hooks';
 import useRouteHook from '../../hooks/useRouteHook';
 
 const WriteReview = () => {
-  const navigation = useNavigationHook();
+  const {goBackWithAlert} = useNavigationHook();
   const {title, vendorId} = useRouteHook({screenName: 'WriteReview'}).params;
   const {state, setState, onPress, isLoading} = useWriteReview();
-  const onBackPress = () => {
-    Alert.alert('Alert', 'Are you sure want to go back?', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-      },
-      {text: 'Yes', onPress: () => navigation.goBack()},
-    ]);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
       <AppContainer>
-        <Header onBackPress={onBackPress} title={'Rate & Review Vendor'} />
+        <Header onBackPress={goBackWithAlert} title={'Rate & Review Vendor'} />
         <View style={styles.body}>
           <TextView type="h5">Review: {title}</TextView>
           <Spacer height={30} />

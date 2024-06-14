@@ -7,11 +7,12 @@ const Colors = {
   Icon: '#000000',
   LightestGray: 'rgba(39, 45, 55, .5)',
   Halfwit: '#eee',
-  Green: "green",
-  LightGray: "#f1f1f1",
-  light: "#ecf0f1",
-  Blue: "#3498db",
-  DarkGray: "#ccc",
+  Green: 'green',
+  LightGray: '#f1f1f1',
+  light: '#ecf0f1',
+  Blue: '#3498db',
+  DarkGray: '#ccc',
+  DisabledInput: '#dfe6e9',
 };
 
 export default Colors;
