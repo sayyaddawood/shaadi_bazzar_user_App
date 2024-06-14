@@ -9,6 +9,7 @@ const api = 'api/';
 
 export enum EndPointConstants {
   login = 'auth/authentication',
+  reSendCode = "auth/resendCode",
   OtpVerification = 'auth/verfication',
   profileSetup = 'auth/profileSetup',
   city = 'location',

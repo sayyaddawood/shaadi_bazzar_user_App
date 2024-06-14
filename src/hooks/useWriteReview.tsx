@@ -3,18 +3,23 @@ import {onSubmitReview} from '../network/serverRequests';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import useNavigationHook from './useNavigationHook';
+import Toast from 'react-native-toast-message';
 
 const useWriteReview = () => {
-  const {navigation} = useNavigationHook();
+  const {navigation, goBack} = useNavigationHook();
   const [state, setState] = useState({rating: 3, feedback: ''});
   const {mutateAsync, isPending} = useMutation({
     mutationFn: onSubmitReview,
     onSuccess: response => {
       console.log(response);
       if (response.code == 200 && response.message == 'Success') {
-        Alert.alert('Thank You', 'Your feedback has been sent', [
-          {text: 'Go back', onPress: () => navigation.goBack()},
-        ]);
+        goBack();
+        Toast.show({
+          type: 'success',
+          text1: 'Thank You',
+          text2: 'Your feedback has been sent',
+          position: 'bottom',
+        });
       }
     },
     onError: error => {
@@ -24,7 +29,11 @@ const useWriteReview = () => {
 
   const onPress = (vendorId: number) => {
     if (state.feedback === '') {
-      alert('Feedback is required');
+      Toast.show({
+        type: 'error',
+        text1: 'Feedback is required',
+        position: 'bottom',
+      });
       return;
     }
 

@@ -5,6 +5,7 @@ import {
   AppContainer,
   Button,
   ImageView,
+  Loader,
   OtpInput,
   TextView,
 } from '../../components';
@@ -12,7 +13,15 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useOtpVerification} from '../../hooks';
 
 const Login = () => {
-  const {isLoading, phone, value, setValue, onReSend, onVerifyOTP} = useOtpVerification();
+  const {
+    isLoading,
+    phone,
+    value,
+    isResendLoading,
+    setValue,
+    onReSend,
+    onVerifyOTP,
+  } = useOtpVerification();
 
   return (
     <AppContainer>
@@ -36,12 +45,18 @@ const Login = () => {
             text={'VERIFY & PROCEED'}
             onPress={onVerifyOTP}
           />
-          <TextView type="h6" position="center" style={styles.receivedCode}>
-            Didn't Receive Code?{' '}
-            <TextView type="h6" onPress={onReSend}>
-              Resend Code
+          {isResendLoading ? (
+            <View style={styles.loader}>
+              <Loader />
+            </View>
+          ) : (
+            <TextView type="h6" position="center" style={styles.receivedCode}>
+              Didn't Receive Code?{' '}
+              <TextView type="h6" onPress={onReSend}>
+                Resend Code
+              </TextView>
             </TextView>
-          </TextView>
+          )}
         </View>
       </KeyboardAwareScrollView>
     </AppContainer>
@@ -51,6 +66,9 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
+  loader: {
+    marginTop: 10,
+  },
   mainContainer: {
     flex: 1,
     backgroundColor: Colors.White,

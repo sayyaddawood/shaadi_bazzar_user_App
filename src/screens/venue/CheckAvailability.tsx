@@ -6,6 +6,7 @@ import {StyleSheet} from 'react-native';
 import {AppContainer, Header} from '../../components';
 import {useNavigationHook, useRouteHook} from '../../hooks';
 import moment from 'moment';
+import Toast from 'react-native-toast-message';
 
 const CheckAvailability = () => {
   const {navigation} = useNavigationHook();
@@ -51,7 +52,11 @@ const CheckAvailability = () => {
           markedDates={markedDates}
           onDayPress={day => {
             if (markedDates.hasOwnProperty(day.dateString)) {
-              alert('This date already booked.');
+              Toast.show({
+                type: 'error',
+                text1: 'This date already booked.',
+                position: 'bottom',
+              });
             }
           }}
           hideExtraDays={true}

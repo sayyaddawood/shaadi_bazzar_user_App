@@ -7,6 +7,7 @@ import {AppContainer} from './src/components';
 import {Colors} from './src/theme';
 import {ReactQueryClientProvider} from './src/network';
 import { UserDetails } from './src/models/UserDataType';
+import Toast from 'react-native-toast-message';
 
 declare global {
   var userInfo: UserDetails;
@@ -27,6 +28,7 @@ const App = () => {
           barStyle={'dark-content'}
         />
         <MainNavigator />
+        <Toast />
       </AppContainer>
     </ReactQueryClientProvider>
   );

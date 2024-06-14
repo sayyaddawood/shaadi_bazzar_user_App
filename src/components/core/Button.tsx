@@ -62,7 +62,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   disabledBtn: {
-    backgroundColor: Colors.DarkGray,
+    backgroundColor: Colors.LightGray,
   },
   btn: {
     backgroundColor: Colors.PrimaryColor,

@@ -1,4 +1,5 @@
 import {Linking} from 'react-native';
+import Toast from 'react-native-toast-message';
 
 const useHelper = () => {
   const goToWhatsapp = (phone: string, text: string) => {
@@ -7,7 +8,11 @@ const useHelper = () => {
       : `${phone}`;
     const url = 'whatsapp://send?text=' + text + '&phone=' + number;
     Linking.openURL(url).catch(e => {
-      alert('Whatsapp is not installed');
+      Toast.show({
+        type: 'success',
+        text1: 'Whatsapp is not installed',
+        position: 'bottom',
+      });
     });
   };
 

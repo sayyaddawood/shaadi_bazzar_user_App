@@ -12,6 +12,11 @@ export interface LoginResponseData {
   userType: string;
 }
 
+export interface ResendCodeResult {
+  message: string;
+  data: LoginResponseData;
+}
+
 export interface Result<T> {
   data: T;
 }
@@ -67,4 +72,3 @@ interface Category {
 }
 
 export type HomeScreenList = Category[];
-

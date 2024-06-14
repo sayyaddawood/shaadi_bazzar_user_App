@@ -4,6 +4,7 @@ import {
   CityList,
   HomeScreenList,
   LoginResponseData,
+  ResendCodeResult,
   Result,
   Results,
 } from '../models/RequestTypes';
@@ -33,16 +34,28 @@ type codeType = {
 
 export const codeVerification = async (body: codeType) => {
   body['userType'] = 'customer';
-
-  console.log(JSON.stringify(body));
-
-  let result = await requestApi({
+  const result = await requestApi({
     uri: getEndpointUrl(EndPointConstants.OtpVerification),
     method: 'POST',
     body: body,
   });
 
   return result as ApiResponse<UserDetailsResult>;
+};
+
+export const resendCode = async (number: string) => {
+  const body = {
+    phoneNumber: number,
+    userType: 'customer',
+  };
+
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.reSendCode),
+    method: 'put',
+    body: body,
+  });
+
+  return result as ApiResponse<ResendCodeResult>;
 };
 
 type profileSetupType = {
@@ -58,7 +71,7 @@ type profileSetupType = {
 };
 
 export const profileSetup = async (body: profileSetupType) => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: getEndpointUrl(EndPointConstants.profileSetup),
     method: 'POST',
     body: body,
@@ -67,7 +80,7 @@ export const profileSetup = async (body: profileSetupType) => {
 };
 
 export const getCities = async () => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: getEndpointUrl(EndPointConstants.city),
     method: 'GET',
   });
@@ -76,7 +89,7 @@ export const getCities = async () => {
 };
 
 export const getHomeScreenData = async () => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: getEndpointUrl(EndPointConstants.home),
     method: 'GET',
   });
@@ -85,7 +98,7 @@ export const getHomeScreenData = async () => {
 };
 
 export const getVenueDetail = async (id?: string) => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: `${getEndpointUrl(EndPointConstants.vendorDetail)}/${id}`,
     method: 'GET',
   });
@@ -93,7 +106,7 @@ export const getVenueDetail = async (id?: string) => {
 };
 
 export const getVenueAlbum = async (id: string) => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: `${getEndpointUrl(
       EndPointConstants.vendorAlbum,
     )}${id}?/page=1&pageSize=50`,
@@ -103,7 +116,7 @@ export const getVenueAlbum = async (id: string) => {
 };
 
 export const getVendorCategory = async () => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: `${getEndpointUrl(EndPointConstants.vendorCategory)}`,
     method: 'GET',
   });
@@ -111,7 +124,7 @@ export const getVendorCategory = async () => {
 };
 
 export const getVenueReviews = async (id?: string) => {
-  let result = await requestApi({
+  const result = await requestApi({
     uri: `${getEndpointUrl(
       EndPointConstants.vendorReviews,
     )}${id}?/page=1&pageSize=50`,
@@ -121,7 +134,7 @@ export const getVenueReviews = async (id?: string) => {
 };
 
 export const getSearchVenue = async (id?: string, searchText?: string) => {
-  let url = `${getEndpointUrl(EndPointConstants.vendorSearch)}?locationId=${
+  const url = `${getEndpointUrl(EndPointConstants.vendorSearch)}?locationId=${
     global.userInfo.location_id
   }&keyword=${searchText}`;
 
@@ -131,7 +144,7 @@ export const getSearchVenue = async (id?: string, searchText?: string) => {
 
   console.log('@url ', url);
 
-  let result = await requestApi({
+  const result = await requestApi({
     uri: url,
     method: 'GET',
   });

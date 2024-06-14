@@ -82,7 +82,7 @@ export const requestApi = async ({
       'Content-Type': contentType,
     },
     responseType: 'json',
-    // validateStatus: (status: number) => status < HTTP_SERVER_ERROR_STATUS,
+    validateStatus: (status: number) => status < HTTP_SERVER_ERROR_STATUS,
   };
 
   return new Promise((resolve, reject) => {
@@ -97,7 +97,6 @@ export const requestApi = async ({
             const errorMessage =
               'Model data is not mapped, kindly check your API response.';
             reject(errorMessage);
-            console.error(errorMessage);
           }
         } else {
           reject(
@@ -107,6 +106,7 @@ export const requestApi = async ({
         }
       })
       .catch(error => {
+        console.log('@Error APi ', error);
         reject(`Something went wrong --> ${error}`);
       });
   });
