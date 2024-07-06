@@ -12,13 +12,13 @@ import {useHome} from '../../hooks';
 import {Colors} from '../../theme';
 
 const Home = () => {
-  const {isLoading, data} = useHome();
+  const {isLoading, data, onSelectedCity} = useHome();
 
   return (
     <SafeAreaView style={styles.container}>
       <AppContainer>
         <AppStatusBar />
-        <HomeHeader />
+        <HomeHeader onSelectedCity={c => onSelectedCity(c)} />
 
         {isLoading ? (
           <Loader area={25} loaderSize={8} />
@@ -27,6 +27,7 @@ const Home = () => {
             data={[1]}
             contentContainerStyle={styles.scrollView}
             showsVerticalScrollIndicator={false}
+            style={{zIndex: 1}}
             renderItem={({}) => {
               return (
                 <>

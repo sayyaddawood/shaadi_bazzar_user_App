@@ -3,21 +3,18 @@ import {useFormik} from 'formik';
 import {RegisterFormType} from '../utils/schemaTypes';
 import {registerSchema} from '../utils/validationsSchema';
 import {Keyboard, TextInput} from 'react-native';
-import {useEffect, useMemo, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import {CommonActions} from '@react-navigation/native';
-import {useMutation, useQuery} from '@tanstack/react-query';
-import {getCities, profileSetup} from '../network/serverRequests';
+import {useMutation} from '@tanstack/react-query';
+import {profileSetup} from '../network/serverRequests';
 import useUserInfo from './useUserInfo';
+import useCities from './useCities';
 
 const useRegister = () => {
   const {navigation} = useNavigationHook();
   const ref = useRef<TextInput>();
+  const {cities} = useCities();
   const {saveData, setAccessToken, getUserData, onLogout} = useUserInfo();
-
-  const {data: cities} = useQuery({
-    queryKey: ['cities'],
-    queryFn: getCities,
-  });
 
   const form = useFormik<RegisterFormType>({
     initialValues: {
@@ -52,8 +49,7 @@ const useRegister = () => {
   const {mutateAsync, isPending} = useMutation({
     mutationFn: profileSetup,
     onSuccess: response => {
-
-      console.log("@data ", JSON.stringify(response))
+      console.log('@data ', JSON.stringify(response));
 
       setAccessToken(response?.result?.access_token);
       saveData(response?.result);
@@ -69,20 +65,12 @@ const useRegister = () => {
     },
   });
 
-  const formatCities = useMemo(() => {
-    if (cities?.result) {
-      return cities?.result?.map((item: any) => {
-        return {label: item.name, value: item.id};
-      });
-    }
-  }, [cities?.result]);
-
   return {
     form,
     ref,
-    cities: formatCities || [],
+    cities: cities || [],
     onLogout,
-    isLoading: isPending
+    isLoading: isPending,
   };
 };
 

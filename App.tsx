@@ -6,12 +6,13 @@ import {MainNavigator} from './src/navigation';
 import {AppContainer} from './src/components';
 import {Colors} from './src/theme';
 import {ReactQueryClientProvider} from './src/network';
-import { UserDetails } from './src/models/UserDataType';
+import {UserDetails} from './src/models/UserDataType';
 import Toast from 'react-native-toast-message';
 
 declare global {
   var userInfo: UserDetails;
   var isLogin: boolean;
+  var selectedLocId: string;
   var deviceName: string;
   var hasNotch: boolean;
   var notificationToken: any;

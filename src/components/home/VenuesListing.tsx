@@ -15,13 +15,17 @@ type VenuesListingProps = {
 const VenuesListing = ({title, data}: VenuesListingProps) => {
   const {navigation} = useNavigationHook();
 
+  const trimCategories = data?.filter((_, index) => index < 5);
+
+  if (trimCategories?.length == 0) return;
+
   return (
     <View style={styles.mainContainer}>
       <TextView type="h6" numberOfLines={2} style={styles.text}>
         {title}
       </TextView>
       <FlatList
-        data={data}
+        data={trimCategories}
         style={{marginTop: 15}}
         renderItem={({item}) => {
           return <VenueDashboardItem {...{item}} />;
@@ -31,24 +35,26 @@ const VenuesListing = ({title, data}: VenuesListingProps) => {
         keyExtractor={(_, i) => i.toString()}
       />
 
-      <Button
-        type="outline"
-        text={'View ALL ' + title}
-        textColor={Colors.PrimaryColor}
-        style={styles.btn}
-        onPress={() =>
-          navigation.navigate('VenueCategoriesList', {title, list: data})
-        }
-        rightIcon={() => (
-          <Icons
-            type={IconsType.Entypo}
-            name={'chevron-small-right'}
-            size={25}
-            color={Colors.PrimaryColor}
-            style={styles.btnIcon}
-          />
-        )}
-      />
+      {trimCategories?.length > 5 && (
+        <Button
+          type="outline"
+          text={'View ALL ' + title}
+          textColor={Colors.PrimaryColor}
+          style={styles.btn}
+          onPress={() =>
+            navigation.navigate('VenueCategoriesList', {title, list: data})
+          }
+          rightIcon={() => (
+            <Icons
+              type={IconsType.Entypo}
+              name={'chevron-small-right'}
+              size={25}
+              color={Colors.PrimaryColor}
+              style={styles.btnIcon}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
@@ -60,12 +66,12 @@ const styles = StyleSheet.create({
   btn: {
     marginHorizontal: 0,
     marginRight: 15,
-    marginTop: 25,
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   mainContainer: {
-    marginTop: 25,
+    marginTop: 20,
     marginLeft: 15,
   },
   image: {

@@ -59,7 +59,7 @@ const WriteReview = () => {
             style={styles.btn}
             disabled={isLoading}
             isLoading={isLoading}
-            text={'Sign In/Register'}
+            text={'Submit Review'}
           />
         </View>
       </AppContainer>

@@ -1,20 +1,24 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {IconButton} from 'react-native-paper';
-import {Icons, TextView} from '../core';
+import {Icons} from '../core';
 import {IconsType} from '../core/Icons';
 import {Colors} from '../../theme';
 import {useNavigationHook} from '../../hooks';
+import SelectCity from './SelectCity';
 
-type HomeHeaderProps = {};
+type HomeHeaderProps = {
+  onSelectedCity: (selectedCity: string) => void;
+};
 
-const HomeHeader = ({}: HomeHeaderProps) => {
+const HomeHeader = ({onSelectedCity}: HomeHeaderProps) => {
   const {navigation} = useNavigationHook();
+
   return (
     <View style={styles.container}>
-      <TextView type="h5" style={styles.text}>
-        Hyderabad
-      </TextView>
+      <View style={styles.row}>
+        <SelectCity onSelectedCity={onSelectedCity} />
+      </View>
 
       <IconButton
         icon={() => (
@@ -33,7 +37,7 @@ const HomeHeader = ({}: HomeHeaderProps) => {
           });
         }}
       />
-      <IconButton
+      {/* <IconButton
         icon={() => (
           <Icons
             type={IconsType.AntDesign}
@@ -45,7 +49,7 @@ const HomeHeader = ({}: HomeHeaderProps) => {
         size={15}
         style={{backgroundColor: Colors.Halfwit}}
         onPress={() => navigation.navigate('UserSettings')}
-      />
+      /> */}
     </View>
   );
 };
@@ -53,6 +57,11 @@ const HomeHeader = ({}: HomeHeaderProps) => {
 export default HomeHeader;
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
   container: {
     height: 50,
     flexDirection: 'row',
@@ -61,7 +70,6 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 10,
-    flex: 1,
     color: Colors.PrimaryColor,
   },
 });

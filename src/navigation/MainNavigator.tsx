@@ -18,6 +18,7 @@ import {
   AlbumGallery,
   UserSettings,
   Search,
+  VendorsSubCategories,
 } from '../screens';
 import {navigationRef} from './navigationService';
 import {AppContainer} from '../components';
@@ -118,6 +119,11 @@ function MainNavigator() {
           <Stack.Screen
             name="Search"
             component={Search}
+            options={options}
+          />
+          <Stack.Screen
+            name="VendorsSubCategories"
+            component={VendorsSubCategories}
             options={options}
           />
         </Stack.Navigator>

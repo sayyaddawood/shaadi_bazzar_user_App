@@ -14,6 +14,7 @@ import moment from 'moment';
 const SendMessage = () => {
   const {
     form: {handleSubmit, handleChange, errors, touched, setFieldValue, values},
+    isLoading,
     goBackWithAlert,
   } = useSendMessage();
 
@@ -76,6 +77,7 @@ const SendMessage = () => {
             />
             <EditText
               multiline={true}
+              label='Envent Details'
               placeholder="Details about my event*"
               style={{marginHorizontal: 0, marginTop: 5}}
               inputStyle={{
@@ -96,7 +98,12 @@ const SendMessage = () => {
         </AppContainer>
       </ScrollView>
 
-      <Button text={'Send Message'} style={styles.btn} onPress={handleSubmit} />
+      <Button
+        text={'Send Message'}
+        isLoading={isLoading}
+        style={styles.btn}
+        onPress={handleSubmit}
+      />
     </SafeAreaView>
   );
 };

@@ -9,7 +9,14 @@ import {
   Platform,
 } from 'react-native';
 
-import {Home, Planner, Vendors, Inspirations, TodoList} from '../screens';
+import {
+  Home,
+  Planner,
+  Vendors,
+  Inspirations,
+  TodoList,
+  UserSettings,
+} from '../screens';
 import {Colors, Dimen, AssetsIcons} from '../theme';
 import {TextView} from '../components';
 import Fonts from '../theme/Fonts';
@@ -19,6 +26,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabs = () => {
   return (
     <Tab.Navigator
+      initialRouteName='Home'
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => getTabIcon(route.name, focused),
@@ -41,26 +49,34 @@ const BottomTabs = () => {
           },
         ],
       })}>
-      <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Vendors" component={Vendors} />
-      <Tab.Screen name="Inspirations" component={Inspirations} />
-      <Tab.Screen name="Planner" component={Planner} />
-      <Tab.Screen name="Todo List" component={TodoList} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Settings" component={UserSettings} />
+      {/* <Tab.Screen name="Planner" component={Planner} /> */}
+      {/* <Tab.Screen name="Todo List" component={TodoList} /> */}
     </Tab.Navigator>
   );
 };
 
 const getTabIcon = (name: string, focused: boolean) => {
   const tabs: any = {
-    Home: <TabIcon id={name} icon={AssetsIcons.home} isFocused={focused} />,
+    Home: (
+      <View style={styles.halfCircle}>
+        <TabIcon
+          id={'Explore'}
+          icon={AssetsIcons.explore}
+          imageStyle={{width: 40, height: 40, marginTop: 10}}
+          isFocused={focused}
+          textStyle={{marginTop: 5}}
+        />
+      </View>
+    ),
     Vendors: (
-      <TabIcon id={name} icon={AssetsIcons.vendors} isFocused={focused} />
+      <TabIcon id={name} icon={AssetsIcons.category} isFocused={focused} />
     ),
-    Inspirations: (
-      <TabIcon id={name} icon={AssetsIcons.invites} isFocused={focused} />
-    ),
+    Settings: <TabIcon id={name} icon={AssetsIcons.user} isFocused={focused} />,
     Planner: <TabIcon id={name} icon={AssetsIcons.ideas} isFocused={focused} />,
-    "Todo List": (
+    'Todo List': (
       <TabIcon id={name} icon={AssetsIcons.packages} isFocused={focused} />
     ),
   };
@@ -71,7 +87,7 @@ const getTabIcon = (name: string, focused: boolean) => {
 export default BottomTabs;
 
 type TabIconProps = {
-  id: string;
+  id?: string;
   icon: any;
   isFocused: boolean;
   imageStyle?: StyleProp<ImageStyle>;
@@ -96,14 +112,16 @@ const TabIcon = ({
         ]}
       />
 
-      <TextView
-        style={[
-          styles.tabIconText,
-          {color: isFocused ? Colors.PrimaryColor : '#95a5a6'},
-          textStyle,
-        ]}>
-        {id}
-      </TextView>
+      {id && (
+        <TextView
+          style={[
+            styles.tabIconText,
+            {color: isFocused ? Colors.PrimaryColor : '#95a5a6'},
+            textStyle,
+          ]}>
+          {id}
+        </TextView>
+      )}
     </View>
   );
 };
@@ -116,6 +134,16 @@ var styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     position: 'absolute',
+
+    shadowColor: '#000',
+    marginTop: -50,
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2.84,
+    elevation: 5,
   },
 
   tabIcon: {
@@ -141,5 +169,28 @@ var styles = StyleSheet.create({
     height: Dimen.width / 7,
     resizeMode: 'contain',
     marginTop: 10,
+  },
+
+  badgeRibbonCircle: {
+    width: 100,
+    height: 100,
+    marginTop: 0,
+    backgroundColor: Colors.White,
+    borderRadius: 100 / 2,
+    borderWidth: 0.5,
+    borderColor: '#eee',
+  },
+
+  halfCircle: {
+    width: 80,
+    height: 40, // Half of the circle's diameter
+    backgroundColor: 'white',
+    borderTopLeftRadius: 90 / 2,
+    borderTopRightRadius: 90 / 2,
+    marginTop: -45,
+
+    borderTopWidth: 1,
+    borderColor: Colors.Halfwit
+
   },
 });

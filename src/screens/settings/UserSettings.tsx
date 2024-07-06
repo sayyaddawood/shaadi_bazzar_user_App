@@ -2,13 +2,14 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors} from '../../theme';
 import {BackButton, ImageView, Spacer, TextView} from '../../components';
-import {useNavigationHook, useUserInfo} from '../../hooks';
+import {useHelper, useNavigationHook, useUserInfo} from '../../hooks';
 import {TouchableRipple} from 'react-native-paper';
+import Fonts from '../../theme/Fonts';
 
 const UserSettings = () => {
   const {navigation} = useNavigationHook();
   const {onLogout} = useUserInfo();
-
+  const {goToWhatsapp, rateApp, shareApp} = useHelper();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -29,13 +30,23 @@ const UserSettings = () => {
 
       <Spacer height={20} />
 
-      <ListItem icon={AssetsIcons.information} label={'Information'} />
-      <ListItem icon={AssetsIcons.support} label={'Contact Support'} />
+      <ListItem
+        icon={AssetsIcons.support}
+        label={'Contact Support'}
+        onPress={() =>
+          goToWhatsapp('+92 320 3033680', 'Hello! I need assistance.')
+        }
+      />
       <ListItem
         icon={AssetsIcons.rating}
         label={'Rate this app on play store'}
+        onPress={rateApp}
       />
-      <ListItem icon={AssetsIcons.share} label={'Share with your friends'} />
+      <ListItem
+        icon={AssetsIcons.share}
+        label={'Share with your friends'}
+        onPress={shareApp}
+      />
       <ListItem
         icon={AssetsIcons.logout}
         label={'Sign out'}
@@ -86,8 +97,8 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 23,
-    height: 23,
+    width: 20,
+    height: 20,
     resizeMode: 'contain',
   },
 
@@ -107,6 +118,6 @@ const styles = StyleSheet.create({
   },
 
   txtBasicUser: {color: Colors.LightestGray, marginTop: 2},
-  txtLabel: {marginLeft: 10},
+  txtLabel: {marginLeft: 10, fontFamily: Fonts.thin, fontWeight: '400'},
   usernameContainer: {marginLeft: 10},
 });

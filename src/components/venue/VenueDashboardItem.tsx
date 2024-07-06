@@ -5,6 +5,7 @@ import {Colors} from '../../theme';
 import {IconsType} from '../core/Icons';
 import {useNavigationHook} from '../../hooks';
 import {Vendor} from '../../models/RequestTypes';
+import RatingView from './RatingView';
 
 type VenueDashboardItemProps = {
   item: Vendor;
@@ -23,6 +24,7 @@ const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
       style={({pressed}) => [
         {opacity: pressed ? 0.9 : 1},
         styles.itemContainer,
+        {flex: 1},
       ]}
       onPress={onPress}>
       <ImageView
@@ -38,21 +40,10 @@ const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
         {item?.address?.full_address}
       </TextView>
       <TextView type="h6" numberOfLines={1} style={styles.txtPrice}>
-        {item?.f_price}
+        Rs: {item?.f_price ?? 0}
       </TextView>
 
-      <View style={styles.rating}>
-        <Icons
-          type={IconsType.Entypo}
-          name={'star'}
-          size={12}
-          style={{marginRight: 2}}
-          color={Colors.White}
-        />
-        <TextView type="h7" style={styles.txtRating}>
-          {parseFloat(item.avgRating).toFixed(1)}
-        </TextView>
-      </View>
+      <RatingView avgRating={item?.avgRating}  style={styles.rating} />
     </Pressable>
   );
 };
@@ -61,18 +52,11 @@ export default VenueDashboardItem;
 
 const styles = StyleSheet.create({
   txtPrice: {marginTop: 5, color: Colors.PrimaryColor},
-  txtLocation: {marginTop: 5, color: Colors.LightestGray},
+  txtLocation: {marginTop: 5, color: Colors.LightestGray, maxWidth: 180},
   rating: {
-    backgroundColor: Colors.PrimaryColor,
-    flexDirection: 'row',
-    height: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
     position: 'absolute',
     right: 20,
-    paddingHorizontal: 5,
     top: 5,
-    borderRadius: 3,
   },
   txtRating: {
     color: Colors.White,

@@ -17,6 +17,10 @@ const Album = ({id, isViewAll = false}: AlbumType) => {
 
   const {data: items} = useAlbums({id});
 
+  if(items?.length == 0){
+    return
+  }
+
   return (
     <View>
       {!isViewAll && (

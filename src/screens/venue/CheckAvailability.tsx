@@ -2,20 +2,33 @@ import React, {useMemo, useState} from 'react';
 import {Calendar} from 'react-native-calendars';
 import {Colors} from '../../theme';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {StyleSheet} from 'react-native';
-import {AppContainer, Header} from '../../components';
+import {StyleSheet, Switch} from 'react-native';
+import {AppContainer, Header, TextView} from '../../components';
 import {useNavigationHook, useRouteHook} from '../../hooks';
 import moment from 'moment';
 import Toast from 'react-native-toast-message';
+import {View} from 'react-native';
 
 const CheckAvailability = () => {
   const {navigation} = useNavigationHook();
-  const [currentMonth, setCurrentMonth] = useState(new Date().toString());
   const {dates} = useRouteHook({screenName: 'CheckAvailability'}).params;
+
+  const onBackPress = () => navigation.goBack();
+
+  const [booked, setBooked] = useState({partially: true, completely: false});
+
   const markedDates = useMemo(() => {
     const d: any = {};
     dates.forEach(date => {
-      if (date.day || date.night) {
+      if (date.day && booked.partially) {
+        dates.forEach(date => {
+          const formattedDate = moment(date.date).format('yyyy-MM-DD');
+          d[formattedDate] = {
+            selected: true,
+            selectedColor: Colors.PrimaryColor,
+          };
+        });
+      } else if (date.night && booked.completely) {
         dates.forEach(date => {
           const formattedDate = moment(date.date).format('yyyy-MM-DD');
           d[formattedDate] = {
@@ -26,9 +39,7 @@ const CheckAvailability = () => {
       }
     });
     return d;
-  }, [dates]);
-
-  const onBackPress = () => navigation.goBack();
+  }, [dates, booked.completely, booked.partially]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,7 +47,7 @@ const CheckAvailability = () => {
         <Header onBackPress={onBackPress} title={'Check Availability'} />
 
         <Calendar
-          current={currentMonth}
+          current={new Date().toString()}
           minDate={new Date().toDateString()}
           headerStyle={styles.header}
           theme={{
@@ -62,6 +73,23 @@ const CheckAvailability = () => {
           hideExtraDays={true}
           markingType={'custom'}
         />
+
+        <View style={styles.row}>
+          <TextView type="h6">Partially Booked</TextView>
+          <Switch
+            value={booked.partially}
+            onChange={() => setBooked({completely: false, partially: true})}
+            trackColor={{true: Colors.PrimaryColor}}
+          />
+        </View>
+        <View style={styles.row}>
+          <TextView type="h6">Completely Booked</TextView>
+          <Switch
+            value={booked.completely}
+            onChange={() => setBooked({completely: true, partially: false})}
+            trackColor={{true: Colors.PrimaryColor}}
+          />
+        </View>
       </AppContainer>
     </SafeAreaView>
   );
@@ -77,5 +105,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
     paddingBottom: 10,
+  },
+  row: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: 20,
   },
 });

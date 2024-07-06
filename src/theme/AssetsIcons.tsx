@@ -14,6 +14,9 @@ let AssetsIcons = {
   information: require('../assets/images/information.png'),
   logout: require('../assets/images/logout.png'),
   placeholder: require('../assets/images/placeholder.png'),
+  user: require('../assets/images/user.png'),
+  category: require('../assets/images/category.png'),
+  explore: require('../assets/images/explore.png'),
 
 };
 

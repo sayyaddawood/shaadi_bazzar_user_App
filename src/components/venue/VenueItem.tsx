@@ -5,8 +5,9 @@ import {AssetsIcons, Colors} from '../../theme';
 import Fonts from '../../theme/Fonts';
 import {IconsType} from '../core/Icons';
 import {IconButton} from 'react-native-paper';
-import {useNavigationHook} from '../../hooks';
+import {useHelper, useNavigationHook} from '../../hooks';
 import {Vendor} from '../../models/RequestTypes';
+import RatingView from './RatingView';
 
 type VenueItemType = {
   item: Vendor;
@@ -14,6 +15,7 @@ type VenueItemType = {
 
 const VenueItem = ({item}: VenueItemType) => {
   const {navigation} = useNavigationHook();
+  const {makeACall} = useHelper();
   return (
     <Pressable
       style={styles.itemCon}
@@ -24,9 +26,17 @@ const VenueItem = ({item}: VenueItemType) => {
         type="ONLINE"
         style={styles.image}
       />
-      <TextView type="h7" color={Colors.Black} style={styles.mt}>
-        {item.address.full_address}
-      </TextView>
+      <View style={[styles.row, styles.mt]}>
+        <TextView
+          numberOfLines={1}
+          type="h7"
+          color={Colors.Black}
+          style={styles.txtAddress}>
+          {item.address.full_address}
+        </TextView>
+        <RatingView style={styles.rating} avgRating={item?.avgRating} />
+      </View>
+
       <TextView type="h6" color={Colors.Black} style={styles.textTitle}>
         {item.business_name}
       </TextView>
@@ -43,7 +53,11 @@ const VenueItem = ({item}: VenueItemType) => {
           text="Message"
           textColor={Colors.PrimaryColor}
           style={styles.btn}
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('SendMessage', {
+              vendorPhone: '03089274681', // TODO: change this with real data.
+            });
+          }}
           leftIcon={() => (
             <Icons
               type={IconsType.AntDesign}
@@ -66,7 +80,7 @@ const VenueItem = ({item}: VenueItemType) => {
           )}
           size={22}
           style={styles.btnCall}
-          onPress={() => {}}
+          onPress={() => makeACall(`${item?.phone}`)}
         />
       </View>
     </Pressable>
@@ -76,6 +90,17 @@ const VenueItem = ({item}: VenueItemType) => {
 export default VenueItem;
 
 const styles = StyleSheet.create({
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+  },
+  rating: {
+    // position: 'absolute',
+    // right: 0,
+    // top: 5,
+  },
   itemCon: {
     marginHorizontal: 20,
     borderRadius: 10,
@@ -123,4 +148,6 @@ const styles = StyleSheet.create({
     color: Colors.Gray,
     marginTop: 2,
   },
+
+  txtAddress: {flex: 1},
 });

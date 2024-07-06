@@ -30,7 +30,7 @@ const Splash = () => {
       <AppStatusBar bgColor={Colors.PrimaryColor} barStyle={'light-content'} />
 
       <TextView type="h1" style={styles.text}>
-        Shadi Bazaar
+        WedEasy
       </TextView>
     </AppContainer>
   );

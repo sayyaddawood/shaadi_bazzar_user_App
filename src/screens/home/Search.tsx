@@ -1,6 +1,18 @@
 import React, {useState} from 'react';
-import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
-import {Header, ImageView, SearchVenueItem, TextView} from '../../components';
+import {
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {
+  Header,
+  ImageView,
+  Line,
+  SearchVenueItem,
+  TextView,
+} from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook, useRouteHook} from '../../hooks';
 import useVendor from '../../hooks/useVendor';
@@ -23,8 +35,6 @@ const Search = () => {
 
       <SearchVenueItem {...{search, setSearch}} />
 
-      {/* <SuggestionItem /> */}
-
       <FlatList
         data={searchedList}
         renderItem={({item}) => {
@@ -41,23 +51,30 @@ const Search = () => {
 export default Search;
 
 const SearchItem = ({item}: {item: VendorSearchResult}) => {
+  const {navigation} = useNavigationHook();
+  const onPress = () =>
+    navigation.navigate('VenueDetail', {id: item?.id?.toString()});
+
   return (
-    <View style={styles.itemContainer}>
-      <ImageView
-        uri={item?.vendorMedia[0].path}
-        type="ONLINE"
-        resizeMode="cover"
-        style={styles.searchItem}
-      />
-      <View style={styles.row}>
-        <TextView numberOfLines={2} type="h6">
-          {item?.business_name}
-        </TextView>
-        <TextView type="h7" color={Colors.Gray} style={{marginTop: 3}}>
-          {item?.address.full_address}
-        </TextView>
-      </View>
-    </View>
+    <>
+      <Pressable style={styles.itemContainer} onPress={onPress}>
+        <ImageView
+          uri={item?.vendorMedia[0].path}
+          type="ONLINE"
+          resizeMode="cover"
+          style={styles.searchItem}
+        />
+        <View style={styles.row}>
+          <TextView numberOfLines={2} type="h6">
+            {item?.business_name}
+          </TextView>
+          <TextView type="h7" color={Colors.Gray} style={{marginTop: 3}}>
+            {item?.address.full_address}
+          </TextView>
+        </View>
+      </Pressable>
+      <Line style={styles.line} />
+    </>
   );
 };
 
@@ -88,16 +105,10 @@ const SuggestionItem = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: Colors.White},
-  line: {
-    height: 5,
-    backgroundColor: Colors.Halfwit,
-    marginTop: 12,
-    marginBottom: 15,
-  },
 
   searchItem: {
-    width: 75,
-    height: 60,
+    width: 55,
+    height: 45,
     borderRadius: 5,
   },
 
@@ -129,4 +140,5 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginTop: -5,
   },
+  line: {marginTop: 10, height: 1, backgroundColor: Colors.Halfwit},
 });

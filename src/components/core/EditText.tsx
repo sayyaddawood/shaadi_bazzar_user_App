@@ -178,7 +178,7 @@ export default EditText;
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 0.9,
+    borderWidth: 0.5,
     borderColor: Colors.LightestGray,
     paddingHorizontal: 10,
     marginVertical: 10,

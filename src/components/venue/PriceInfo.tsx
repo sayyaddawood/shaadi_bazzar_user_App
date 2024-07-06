@@ -3,6 +3,7 @@ import {Spacer, TextView} from '../core';
 import {StyleSheet, View} from 'react-native';
 import {Colors} from '../../theme';
 import Line from '../Line';
+import Fonts from '../../theme/Fonts';
 
 const PriceInfo = ({info}: {info: Package[]}) => {
   return (
@@ -26,10 +27,10 @@ const PriceInfo = ({info}: {info: Package[]}) => {
             </View>
 
             <View style={[styles.subContainer, {alignItems: 'flex-start'}]}>
-              <TextView position="left" type="h8" style={[styles.location]}>
+              <TextView position="left" type="h8" style={[styles.bookingPrice]}>
                 Booking Price
               </TextView>
-              <TextView position="left" type="h8" style={styles.location}>
+              <TextView position="left" type="h8" style={styles.bookingPrice}>
                 RS {it.booking_price}
               </TextView>
             </View>
@@ -37,7 +38,7 @@ const PriceInfo = ({info}: {info: Package[]}) => {
             <TextView
               position="left"
               type="h8"
-              style={[styles.location, {flex: 1}]}>
+              style={[styles.bookingPrice, {flex: 1}]}>
               Details: {it.details}
             </TextView>
 
@@ -58,6 +59,12 @@ export default PriceInfo;
 const styles = StyleSheet.create({
   location: {
     color: Colors.Gray,
+    marginTop: 5,
+  },
+  bookingPrice: {
+    color: Colors.Gray,
+    fontFamily: Fonts.light,
+    fontWeight: '400',
     marginTop: 5,
   },
   line: {

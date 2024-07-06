@@ -7,6 +7,8 @@ import {
   ResendCodeResult,
   Result,
   Results,
+  Vendor,
+  VendorSubCategoryResult,
 } from '../models/RequestTypes';
 import {UserDetailsResult} from '../models/UserDataType';
 import {requestApi} from './apiClient';
@@ -88,9 +90,11 @@ export const getCities = async () => {
   return result as ApiResponse<Results<CityList>>;
 };
 
-export const getHomeScreenData = async () => {
+export const getHomeScreenData = async (cityId: string) => {
+  const url = `${getEndpointUrl(EndPointConstants.home)}${cityId}`;
+  console.log('@url ', url);
   const result = await requestApi({
-    uri: getEndpointUrl(EndPointConstants.home),
+    uri: url,
     method: 'GET',
   });
 
@@ -115,9 +119,14 @@ export const getVenueAlbum = async (id: string) => {
   return result as ApiResponse<ResultVendorAlbum>;
 };
 
-export const getVendorCategory = async () => {
+export const getVendorCategory = async (id?: string) => {
+  const idAvailable = id != '-1' ? id : '';
+  const url = `${getEndpointUrl(
+    EndPointConstants.vendorCategory,
+  )}${idAvailable}`;
+  console.log('@url ', url);
   const result = await requestApi({
-    uri: `${getEndpointUrl(EndPointConstants.vendorCategory)}`,
+    uri: `${url}`,
     method: 'GET',
   });
   return result as ApiResponse<VendorCategory[]>;
@@ -134,7 +143,7 @@ export const getVenueReviews = async (id?: string) => {
 };
 
 export const getSearchVenue = async (id?: string, searchText?: string) => {
-  const url = `${getEndpointUrl(EndPointConstants.vendorSearch)}?locationId=${
+  let url = `${getEndpointUrl(EndPointConstants.vendorSearch)}?locationId=${
     global.userInfo.location_id
   }&keyword=${searchText}`;
 
@@ -166,4 +175,38 @@ export const onSubmitReview = async (body: bodyTypes) => {
   });
 
   return result as ApiResponseBase;
+};
+
+type bodyTypeLeads = {
+  user_id: number;
+  vendor_id: number;
+  leads_contact_type: string;
+  phone?: string;
+  name?: string;
+  email?: string;
+  details?: string;
+  lead_date?: string;
+};
+export const onSubmitLeads = async (body: bodyTypeLeads) => {
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.customerLead),
+    method: 'POST',
+    body: body,
+  });
+
+  console.log('@result ', JSON.stringify(result));
+
+  return result as ApiResponseBase;
+};
+
+export const getSubCategories = async (id?: string) => {
+  const url = `${getEndpointUrl(EndPointConstants.subCategories)}?loc_id=${
+    global.selectedLocId ?? global.userInfo.location_id
+  }&cat_id=${id}&page=1&pageSize=50`;
+  console.log('@url ', url);
+  const result = await requestApi({
+    uri: `${url}`,
+    method: 'GET',
+  });
+  return result as ApiResponse<Results<VendorSubCategoryResult>>;
 };

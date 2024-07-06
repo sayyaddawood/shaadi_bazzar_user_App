@@ -63,6 +63,7 @@ export interface Vendor {
   id: string;
   address: Address;
   vendorMedia: VendorMedia[];
+  phone: string
 }
 
 interface Category {
@@ -72,3 +73,8 @@ interface Category {
 }
 
 export type HomeScreenList = Category[];
+
+export interface VendorSubCategoryResult {
+  categoryId: string;
+  vendors: Vendor[]
+}

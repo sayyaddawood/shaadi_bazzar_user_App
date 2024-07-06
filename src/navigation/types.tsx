@@ -11,6 +11,7 @@ export type RootStackParamList = {
   Onboarding: undefined;
   Home: undefined;
   HomeTabs: undefined;
+  Vendors: undefined;
   VenueDetail: {
     id: string;
   };
@@ -42,6 +43,10 @@ export type RootStackParamList = {
   Search: {
     id: string
   };
+  VendorsSubCategories: {
+    children: VendorCategoryChild[]
+    title: string
+  }
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

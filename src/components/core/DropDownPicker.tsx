@@ -6,6 +6,7 @@ import ErrorMessage from '../ErrorMessage';
 type DropDownPickerType = {
   style?: any;
   selectedValue?: string;
+  placeholder?: string;
   onChangeValue: (value: string) => void;
   options?: any[]; // TODO remove any
   errorMessage?: string;
@@ -17,6 +18,7 @@ const DropDownPicker = ({
   onChangeValue,
   options,
   errorMessage,
+  placeholder,
 }: DropDownPickerType) => {
   const [value, setValue] = useState<string>('');
 
@@ -34,6 +36,7 @@ const DropDownPicker = ({
         selectedTextStyle={styles.selectedTextStyle}
         data={options}
         maxHeight={300}
+        placeholder={placeholder ?? 'Select'}
         labelField="label"
         valueField="value"
         value={value}

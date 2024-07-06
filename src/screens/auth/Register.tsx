@@ -1,6 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Colors, Dimen} from '../../theme';
+import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
   AppStatusBar,
@@ -8,6 +8,7 @@ import {
   DropDownPicker,
   EditText,
   Icons,
+  ImageView,
   Spacer,
   TextView,
 } from '../../components';
@@ -15,6 +16,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useRegister} from '../../hooks';
 import {IconButton} from 'react-native-paper';
 import {IconsType} from '../../components/core/Icons';
+import {Image} from 'react-native';
+import Fonts from '../../theme/Fonts';
 
 const Register = () => {
   const {
@@ -22,64 +25,106 @@ const Register = () => {
     cities,
     form: {handleSubmit, handleChange, errors, touched, setFieldValue},
     onLogout,
-    isLoading
+    isLoading,
   } = useRegister();
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: Colors.White}}>
+    <SafeAreaView style={styles.con}>
       <AppContainer>
         <AppStatusBar />
 
-        <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}>
-          <View style={styles.content}>
-            <TextView type="h3" position="center">
-              Your Information
-            </TextView>
-            <Spacer height={30} />
-            <EditText
-              label="Name"
-              reference={ref}
-              placeholder="Enter your full name"
-              style={{marginHorizontal: 0}}
-              labelStyle={{marginHorizontal: 35}}
-              onChangeText={handleChange('name')}
-              errorMessage={errors?.name && touched.name ? errors.name : ''}
-              errorTextStyle={{
-                marginLeft: 40,
-                marginHorizontal: 35,
+        <View style={styles.content}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginLeft: 35,
+              marginBottom: 20,
+            }}>
+            <Image
+              source={AssetsIcons.explore}
+              style={{
+                height: 30,
+                width: 30,
+                tintColor: Colors.PrimaryColor,
+                marginRight: 5,
               }}
             />
-            <Spacer height={8} />
-            {cities?.length > 0 && (
+            <View>
+              <TextView type="h4" position="left">
+                WedEasy
+              </TextView>
+            </View>
+          </View>
+
+          <View style={{marginLeft: 35, marginBottom: 20}}>
+            <TextView type="h6" position="left">
+              Hi! Welcome to WedEasy
+            </TextView>
+
+            <TextView
+              type="h8"
+              position="left"
+              style={{
+                marginTop: 2,
+                fontFamily: Fonts.thin,
+                fontWeight: '400',
+                color: Colors.Gray,
+                letterSpacing: -0.2,
+              }}>
+              Complete your profile
+            </TextView>
+          </View>
+
+          <EditText
+            label="Name"
+            reference={ref}
+            placeholder="Enter your full name"
+            style={{marginHorizontal: 0}}
+            labelStyle={{marginHorizontal: 35}}
+            onChangeText={handleChange('name')}
+            errorMessage={errors?.name && touched.name ? errors.name : ''}
+            errorTextStyle={{
+              marginLeft: 40,
+              marginHorizontal: 35,
+            }}
+          />
+
+          {cities?.length > 0 && (
+            <>
+              <TextView style={styles.label}>City</TextView>
               <DropDownPicker
                 options={cities}
+                placeholder={'Select your city'}
                 onChangeValue={value => setFieldValue('city', value)}
                 errorMessage={errors?.city && touched.city ? errors.city : ''}
               />
-            )}
-            <Spacer height={5} />
-            <Button
-              style={styles.btn}
-              text={'Continue'}
-              onPress={handleSubmit}
-              isLoading={isLoading}
-              loaderColor={Colors.White}
+            </>
+          )}
+          <Spacer height={5} />
+        </View>
+
+        <Button
+          style={styles.btn}
+          text={'Continue'}
+          onPress={handleSubmit}
+          isLoading={isLoading}
+          loaderColor={Colors.White}
+        />
+
+        <IconButton
+          icon={() => (
+            <Icons
+              type={IconsType.AntDesign}
+              name={'logout'}
+              size={20}
+              color={Colors.Black}
             />
-            <IconButton
-              icon={() => (
-                <Icons
-                  type={IconsType.AntDesign}
-                  name={'logout'}
-                  size={20}
-                  color={Colors.Black}
-                />
-              )}
-              size={10}
-              style={styles.logout}
-              onPress={onLogout}
-            />
-          </View>
-        </KeyboardAwareScrollView>
+          )}
+          size={10}
+          style={styles.logout}
+          onPress={onLogout}
+        />
       </AppContainer>
     </SafeAreaView>
   );
@@ -104,7 +149,7 @@ const styles = StyleSheet.create({
     marginTop: Dimen.height / 35,
     marginBottom: Dimen.height / 15,
   },
-  content: {},
+  content: {marginTop: 100},
   sendOtp: {
     fontWeight: 'normal',
     marginTop: 15,
@@ -115,8 +160,12 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    marginTop: 20,
+    marginTop: 15,
     marginHorizontal: 35,
+    position: 'absolute',
+    bottom: 15,
+    left: 0,
+    right: 0,
   },
 
   icon: {
@@ -124,4 +173,6 @@ const styles = StyleSheet.create({
     width: 40,
   },
   logout: {position: 'absolute', top: -5, right: 15},
+  label: {marginLeft: 35, marginBottom: 5},
+  con: {flex: 1, backgroundColor: Colors.White},
 });

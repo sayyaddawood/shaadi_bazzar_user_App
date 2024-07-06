@@ -1,6 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import {
   getSearchVenue,
+  getSubCategories,
   getVendorCategory,
   getVenueDetail,
   getVenueReviews,
@@ -11,6 +12,7 @@ import {useIsFocused} from '@react-navigation/native';
 type useVendorType = {
   id?: string;
   searchText?: string;
+  fetchSubCategory?: boolean;
   fetchCategory?: boolean;
   fetchDetail?: boolean;
   fetchReviews?: boolean;
@@ -19,6 +21,7 @@ type useVendorType = {
 
 const useVendor = ({
   id,
+  fetchSubCategory = false,
   fetchCategory = false,
   fetchDetail = false,
   fetchReviews = false,
@@ -28,8 +31,8 @@ const useVendor = ({
   const isFocused = useIsFocused();
 
   const {data: categories, isPending: isCategoryLoading} = useQuery({
-    queryKey: ['vendorCategories'],
-    queryFn: getVendorCategory,
+    queryKey: ['vendorCategories', id || '-1'],
+    queryFn: ({queryKey}) => getVendorCategory(queryKey[1]),
     enabled: fetchCategory,
   });
 
@@ -56,6 +59,12 @@ const useVendor = ({
     enabled: fetchSearch && searchText && searchText?.length > 0 ? true : false,
   });
 
+  const {data: subCategories, isPending: isSubCatLoading} = useQuery({
+    queryKey: ['vendorSubCategories', id],
+    queryFn: ({queryKey}) => getSubCategories(queryKey[1]),
+    enabled: fetchSubCategory,
+  });
+
   return {
     isLoading: isPending,
     data: data?.result,
@@ -65,6 +74,8 @@ const useVendor = ({
     reviewsLoading,
     searchedList: searchData?.result || [],
     searchLoading,
+    subCategories: subCategories?.result?.vendors || [],
+    isSubCatLoading,
   };
 };
 

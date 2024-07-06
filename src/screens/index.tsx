@@ -13,6 +13,7 @@ export {default as Planner} from './home/Planner';
 export {default as Inspirations} from './home/Inspirations';
 export {default as TodoList} from './home/TodoList';
 export {default as Vendors} from './home/Vendors';
+export {default as VendorsSubCategories} from './home/Vendors/VendorsSubCategories';
 
 export {default as Search} from './home/Search';
 

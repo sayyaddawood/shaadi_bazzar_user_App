@@ -13,13 +13,17 @@ export enum EndPointConstants {
   OtpVerification = 'auth/verfication',
   profileSetup = 'auth/profileSetup',
   city = 'location',
-  home = 'customerapp/homescreen/1',
-  vendorCategory = 'customerapp/vendorCategories/', // pending
+  home = 'customerapp/homescreen/',
+  vendorCategory = 'customerapp/vendorCategories/', 
   vendorDetail = 'customerapp/vendorDetails',
   vendorAlbum = 'customerapp/vendorAlbums/', 
   vendorReviews = 'customerapp/vendorReviews/', 
   vendorSearch = 'customerapp/searchVendor', 
-  addReview = "customerapp/addReview"
+  addReview = "customerapp/addReview",
+  subCategories = "customerapp/vendors",
+  customerLead = "customerLeads",
+
+
 }
 
 export const getEndpointUrl = (endPoint: EndPointConstants): string => {

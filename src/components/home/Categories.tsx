@@ -1,8 +1,9 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, Pressable, StyleSheet, View} from 'react-native';
 import {ImageView, TextView} from '../core';
-import {AssetsIcons, Colors} from '../../theme';
+import {Colors} from '../../theme';
 import useVendor from '../../hooks/useVendor';
+import {useNavigationHook} from '../../hooks';
 
 const Categories = () => {
   const {categories} = useVendor({fetchCategory: true});
@@ -17,7 +18,7 @@ const Categories = () => {
             : trimCategories
         }
         renderItem={({item, index}) => {
-          return <CategoryItem {...{item, index}} />;
+          return <CategoryItem {...{item, index, length: categories.length}} />;
         }}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -32,15 +33,29 @@ export default Categories;
 type CategoryItemType = {
   item: VendorCategory;
   index: number;
+  length: number;
 };
 
-const CategoryItem = ({item, index}: CategoryItemType) => {
+const CategoryItem = ({item, index, length}: CategoryItemType) => {
+  const {navigation} = useNavigationHook();
+
+  const onPress = () => {
+    if (item?.flag) {
+      navigation.navigate('Vendors');
+    } else {
+      navigation.navigate('VendorsSubCategories', {
+        children: item.children || [],
+        title: item.name || '',
+      });
+    }
+  };
+
   if (item?.flag) {
     return (
-      <View style={styles.itemContainer}>
+      <Pressable style={styles.itemContainer} onPress={onPress}>
         <View style={[styles.image, styles.viewAllContainer]}>
           <TextView type="h5" style={[styles.text, styles.viewAllText]}>
-            +19
+            +{length}
           </TextView>
         </View>
         <TextView
@@ -49,21 +64,17 @@ const CategoryItem = ({item, index}: CategoryItemType) => {
           style={[styles.text, styles.txtAllCategory]}>
           All Categories
         </TextView>
-      </View>
+      </Pressable>
     );
   }
 
   return (
-    <View style={styles.itemContainer}>
-      <ImageView
-        uri={item?.icon || AssetsIcons.placeholder}
-        style={styles.image}
-        resizeMode="cover"
-      />
+    <Pressable style={styles.itemContainer} onPress={onPress}>
+      <ImageView uri={item?.icon} style={styles.image} resizeMode="cover" />
       <TextView type="h8" numberOfLines={2} style={styles.text}>
         {item?.name}
       </TextView>
-    </View>
+    </Pressable>
   );
 };
 

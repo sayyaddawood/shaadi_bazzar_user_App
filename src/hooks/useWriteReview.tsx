@@ -16,8 +16,8 @@ const useWriteReview = () => {
         goBack();
         Toast.show({
           type: 'success',
-          text1: 'Thank You',
-          text2: 'Your feedback has been sent',
+          text1: 'Review Sent',
+          text2: 'Thank you for leaving review.',
           position: 'bottom',
         });
       }

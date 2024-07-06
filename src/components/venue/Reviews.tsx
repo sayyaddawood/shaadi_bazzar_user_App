@@ -67,6 +67,7 @@ const Reviews = ({id, onWriteAReviewPress}: ReviewsType) => {
 
       <FlatList
         data={reviewsData?.reviews ?? []}
+        inverted
         renderItem={({item, index}) => {
           return <ReviewsItem {...{item, index}} />;
         }}
