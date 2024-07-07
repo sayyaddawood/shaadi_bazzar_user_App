@@ -46,7 +46,11 @@ const SelectCity = ({onSelectedCity}: SelectCityProps) => {
             setSelectedCity(it?.label);
             global.selectedLocId = it?.value;
           };
-          return <MenuItem onPress={onPress}>{it?.label}</MenuItem>;
+          return (
+            <MenuItem onPress={onPress} textStyle={{color: Colors.Black}}>
+              {it?.label}
+            </MenuItem>
+          );
         })}
     </Menu>
   );

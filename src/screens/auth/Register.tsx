@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
@@ -34,22 +34,8 @@ const Register = () => {
         <AppStatusBar />
 
         <View style={styles.content}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginLeft: 35,
-              marginBottom: 20,
-            }}>
-            <Image
-              source={AssetsIcons.explore}
-              style={{
-                height: 30,
-                width: 30,
-                tintColor: Colors.PrimaryColor,
-                marginRight: 5,
-              }}
-            />
+          <View style={styles.imageCon}>
+            <Image source={AssetsIcons.explore} style={styles.imageLogo} />
             <View>
               <TextView type="h4" position="left">
                 WedEasy
@@ -57,7 +43,7 @@ const Register = () => {
             </View>
           </View>
 
-          <View style={{marginLeft: 35, marginBottom: 20}}>
+          <View style={styles.welcomeCon}>
             <TextView type="h6" position="left">
               Hi! Welcome to WedEasy
             </TextView>
@@ -65,13 +51,7 @@ const Register = () => {
             <TextView
               type="h8"
               position="left"
-              style={{
-                marginTop: 2,
-                fontFamily: Fonts.thin,
-                fontWeight: '400',
-                color: Colors.Gray,
-                letterSpacing: -0.2,
-              }}>
+              style={styles.completeProfileTxt}>
               Complete your profile
             </TextView>
           </View>
@@ -175,4 +155,24 @@ const styles = StyleSheet.create({
   logout: {position: 'absolute', top: -5, right: 15},
   label: {marginLeft: 35, marginBottom: 5},
   con: {flex: 1, backgroundColor: Colors.White},
+  completeProfileTxt: {
+    marginTop: 2,
+    color: Colors.Gray,
+    letterSpacing: -0.2,
+    fontFamily: Platform.OS == 'ios' ? Fonts.thin : Fonts.light,
+    fontWeight: Platform.OS == 'ios' ? '400' : undefined,
+  },
+  welcomeCon: {marginLeft: 35, marginBottom: 20},
+  imageCon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 35,
+    marginBottom: 20,
+  },
+  imageLogo: {
+    height: 30,
+    width: 30,
+    tintColor: Colors.PrimaryColor,
+    marginRight: 5,
+  },
 });

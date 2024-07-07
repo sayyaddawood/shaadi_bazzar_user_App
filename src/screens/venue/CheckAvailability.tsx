@@ -80,6 +80,7 @@ const CheckAvailability = () => {
             value={booked.partially}
             onChange={() => setBooked({completely: false, partially: true})}
             trackColor={{true: Colors.PrimaryColor}}
+            thumbColor={Colors.White}
           />
         </View>
         <View style={styles.row}>
@@ -88,6 +89,7 @@ const CheckAvailability = () => {
             value={booked.completely}
             onChange={() => setBooked({completely: true, partially: false})}
             trackColor={{true: Colors.PrimaryColor}}
+            thumbColor={Colors.White}
           />
         </View>
       </AppContainer>

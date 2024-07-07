@@ -17,3 +17,6 @@ export { default as HomeHeader } from './home/HomeHeader'
 export { default as Categories } from './home/Categories'
 export { default as VenuesListing } from './home/VenuesListing'
 export { default as BackButton } from './BackButton'
+
+export { default as NoView } from './NoView'
+

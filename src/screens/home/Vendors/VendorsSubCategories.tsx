@@ -12,6 +12,8 @@ import {
   AppStatusBar,
   Header,
   Line,
+  Loader,
+  NoView,
   TextView,
   VenueItem,
 } from '../../../components';
@@ -28,10 +30,12 @@ const VendorsSubCategories = () => {
     subCategoriesLabel[0]?.id?.toString(),
   );
 
-  const {subCategories} = useVendor({
+  const {subCategories, isSubCatLoading} = useVendor({
     id: selectedCategory,
     fetchSubCategory: true,
   });
+
+  console.log(!isSubCatLoading && subCategories.length == 0)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,16 +51,22 @@ const VendorsSubCategories = () => {
           }}
         />
 
-        <FlatList
-          data={subCategories}
-          renderItem={({item}) => {
-            return <VenueItem {...{item}} />;
-          }}
-          showsVerticalScrollIndicator={false}
-          style={{marginTop: 15}}
-          keyExtractor={(_, index) => index.toString()}
-          ItemSeparatorComponent={<Line style={styles.line} />}
-        />
+        {isSubCatLoading ? (
+          <Loader />
+        ) : !isSubCatLoading && subCategories.length == 0 ? (
+          <NoView />
+        ) : (
+          <FlatList
+            data={subCategories}
+            renderItem={({item}) => {
+              return <VenueItem {...{item}} />;
+            }}
+            showsVerticalScrollIndicator={false}
+            style={{marginTop: 15}}
+            keyExtractor={(_, index) => index.toString()}
+            ItemSeparatorComponent={<Line style={styles.line} />}
+          />
+        )}
       </AppContainer>
     </SafeAreaView>
   );
@@ -96,7 +106,9 @@ const VendorCategories = ({
                   : Colors.White,
               }}
               onPress={() => onPress(it.id.toString())}>
-              <TextView type="h6" color={isSelected ? Colors.White : Colors.PrimaryColor}>
+              <TextView
+                type="h6"
+                color={isSelected ? Colors.White : Colors.PrimaryColor}>
                 {it.name}
               </TextView>
             </Pressable>

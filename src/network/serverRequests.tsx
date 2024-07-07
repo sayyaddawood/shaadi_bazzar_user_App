@@ -144,7 +144,7 @@ export const getVenueReviews = async (id?: string) => {
 
 export const getSearchVenue = async (id?: string, searchText?: string) => {
   let url = `${getEndpointUrl(EndPointConstants.vendorSearch)}?locationId=${
-    global.userInfo.location_id
+    global.selectedLocId ?? global.userInfo.location_id
   }&keyword=${searchText}`;
 
   if (id != '-1') {

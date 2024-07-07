@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors} from '../../theme';
 import {BackButton, ImageView, Spacer, TextView} from '../../components';
 import {useHelper, useNavigationHook, useUserInfo} from '../../hooks';
@@ -118,6 +118,10 @@ const styles = StyleSheet.create({
   },
 
   txtBasicUser: {color: Colors.LightestGray, marginTop: 2},
-  txtLabel: {marginLeft: 10, fontFamily: Fonts.thin, fontWeight: '400'},
+  txtLabel: {
+    marginLeft: 10,
+    fontFamily: Platform.OS == 'ios' ? Fonts.thin : Fonts.light,
+    fontWeight: Platform.OS == 'ios' ? '400' : undefined,
+  },
   usernameContainer: {marginLeft: 10},
 });

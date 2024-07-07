@@ -6,13 +6,15 @@ import {
   Categories,
   HomeHeader,
   Loader,
+  NoView,
   VenuesListing,
 } from '../../components';
 import {useHome} from '../../hooks';
-import {Colors} from '../../theme';
+import {Colors, Dimen} from '../../theme';
 
 const Home = () => {
-  const {isLoading, data, onSelectedCity} = useHome();
+  const {isLoading, data, noData, onSelectedCity} = useHome();
+  console.log('@d ', noData);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -33,14 +35,18 @@ const Home = () => {
                 <>
                   <Categories />
 
-                  {data?.map(it => {
-                    return (
-                      <VenuesListing
-                        title={it?.categoryName}
-                        data={it.vendors}
-                      />
-                    );
-                  })}
+                  {noData ? (
+                    <NoView style={styles.noData} />
+                  ) : (
+                    data?.map(it => {
+                      return (
+                        <VenuesListing
+                          title={it?.categoryName}
+                          data={it.vendors}
+                        />
+                      );
+                    })
+                  )}
                 </>
               );
             }}
@@ -56,4 +62,5 @@ export default Home;
 const styles = StyleSheet.create({
   container: {backgroundColor: Colors.White, flex: 1},
   scrollView: {paddingBottom: 70},
+  noData: {marginTop: Dimen.height / 7},
 });
