@@ -61,6 +61,7 @@ export interface Vendor {
   f_price: number | null;
   avgRating: string;
   id: string;
+  business_phone: string,
   address: Address;
   vendorMedia: VendorMedia[];
   phone: string

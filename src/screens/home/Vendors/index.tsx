@@ -47,8 +47,9 @@ const Vendors = () => {
                       });
                       return;
                     }
+
                     navigation.navigate('VendorsSubCategories', {
-                      children: item.children || [],
+                      children: categories[index].children || [],
                       title: item.name || '',
                     });
                   },
@@ -74,11 +75,8 @@ const VendorCategory = ({
   onPress: () => void;
 }) => {
   const {generateRandomColor} = useHelper();
-  const subCat =
-    item?.children && item?.children.length > 3
-      ? item?.children?.splice(0, 3)
-      : item?.children || [];
-
+  const cats = item?.children ? [...item?.children] : [];
+  const subCat = cats?.length > 3 ? cats?.splice(0, 3) : cats || [];
   return (
     <Pressable
       style={[

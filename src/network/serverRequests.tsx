@@ -124,7 +124,7 @@ export const getVendorCategory = async (id?: string) => {
   const url = `${getEndpointUrl(
     EndPointConstants.vendorCategory,
   )}${idAvailable}`;
-  console.log('@url ', url);
+  console.log('@url -- ', url);
   const result = await requestApi({
     uri: `${url}`,
     method: 'GET',

@@ -5,7 +5,7 @@ import {AssetsIcons, Colors} from '../../theme';
 import Fonts from '../../theme/Fonts';
 import {IconsType} from '../core/Icons';
 import {IconButton} from 'react-native-paper';
-import {useHelper, useNavigationHook} from '../../hooks';
+import {useHelper, useLeads, useNavigationHook} from '../../hooks';
 import {Vendor} from '../../models/RequestTypes';
 import RatingView from './RatingView';
 
@@ -16,6 +16,7 @@ type VenueItemType = {
 const VenueItem = ({item}: VenueItemType) => {
   const {navigation} = useNavigationHook();
   const {makeACall} = useHelper();
+  const {onSendLeads, isLoading} = useLeads();
   return (
     <Pressable
       style={styles.itemCon}
@@ -49,13 +50,14 @@ const VenueItem = ({item}: VenueItemType) => {
 
       <View style={styles.btnCon}>
         <Button
+          isLoading={isLoading}
           type="outline"
           text="Message"
           textColor={Colors.PrimaryColor}
           style={styles.btn}
           onPress={() => {
             navigation.navigate('SendMessage', {
-              vendorPhone: '03089274681', // TODO: change this with real data.
+              vendorPhone: item?.business_phone,
             });
           }}
           leftIcon={() => (
@@ -74,13 +76,22 @@ const VenueItem = ({item}: VenueItemType) => {
             <Icons
               type={IconsType.Ionicons}
               name={'call'}
-              size={20}
+              size={22}
               color={Colors.Green}
             />
           )}
-          size={22}
+          size={25}
           style={styles.btnCall}
-          onPress={() => makeACall(`${item?.phone}`)}
+          onPress={async () => {
+            const body = {
+              user_id: global.userInfo.id,
+              vendor_id: 1, // TODO: remove id
+              leads_contact_type: 'phone',
+              phone: item.business_phone,
+            };
+            await onSendLeads(body);
+            makeACall(`${item?.phone}`);
+          }}
         />
       </View>
     </Pressable>

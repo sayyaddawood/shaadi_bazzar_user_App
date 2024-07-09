@@ -8,6 +8,7 @@ import {Colors} from './src/theme';
 import {ReactQueryClientProvider} from './src/network';
 import {UserDetails} from './src/models/UserDataType';
 import Toast from 'react-native-toast-message';
+import useFCMNotification from './src/hooks/useFCMNotification';
 
 declare global {
   var userInfo: UserDetails;
@@ -19,6 +20,8 @@ declare global {
 }
 
 const App = () => {
+  useFCMNotification();
+
   return (
     <ReactQueryClientProvider>
       <AppContainer safeAreaStyle={styles.bg}>

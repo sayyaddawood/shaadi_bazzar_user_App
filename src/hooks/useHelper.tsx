@@ -10,13 +10,7 @@ const useHelper = () => {
       phone = `+${phone}`; // Remove '+' sign
     }
     const url = 'whatsapp://send?text=' + text + '&phone=' + phone;
-    Linking.openURL(url).catch(e => {
-      Toast.show({
-        type: 'success',
-        text1: 'Whatsapp is not installed',
-        position: 'bottom',
-      });
-    });
+    Linking.openURL(url).catch(e => {});
   };
 
   const makeACall = (phoneNumber: string) => {

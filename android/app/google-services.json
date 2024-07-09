@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "34582114116",
+    "project_id": "wedeasy-3c6d6",
+    "storage_bucket": "wedeasy-3c6d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34582114116:android:1d910881fb7f6c81c8b111",
+        "android_client_info": {
+          "package_name": "com.shadibazaar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7uqiVGzUlWhCdzzEMT_hGoNpk0_BdOFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34582114116:android:70a5baae8ac2be54c8b111",
+        "android_client_info": {
+          "package_name": "com.vendor_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7uqiVGzUlWhCdzzEMT_hGoNpk0_BdOFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

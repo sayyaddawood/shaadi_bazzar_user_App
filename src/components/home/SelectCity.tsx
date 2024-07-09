@@ -38,7 +38,6 @@ const SelectCity = ({onSelectedCity}: SelectCityProps) => {
       }
       onRequestClose={() => setShowCity(false)}>
       {cities &&
-        cities?.length > 0 &&
         cities?.map(it => {
           const onPress = () => {
             setShowCity(false);

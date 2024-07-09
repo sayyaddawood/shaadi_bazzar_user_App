@@ -14,7 +14,6 @@ import {Colors, Dimen} from '../../theme';
 
 const Home = () => {
   const {isLoading, data, noData, onSelectedCity} = useHome();
-  console.log('@d ', noData);
 
   return (
     <SafeAreaView style={styles.container}>
