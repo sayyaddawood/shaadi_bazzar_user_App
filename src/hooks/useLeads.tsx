@@ -2,7 +2,7 @@ import {useMutation} from '@tanstack/react-query';
 import {onSubmitLeads} from '../network/serverRequests';
 import Toast from 'react-native-toast-message';
 
-const useSendMessage = () => {
+const useLeads = () => {
   const {mutateAsync, isPending} = useMutation({
     mutationFn: onSubmitLeads,
     onSuccess: response => {
@@ -25,4 +25,4 @@ const useSendMessage = () => {
   };
 };
 
-export default useSendMessage;
+export default useLeads;

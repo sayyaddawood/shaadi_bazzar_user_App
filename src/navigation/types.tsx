@@ -21,6 +21,7 @@ export type RootStackParamList = {
   };
   SendMessage: {
     vendorPhone: string;
+    venueId: string;
   };
   AlbumListing: {
     list: VendorAlbumMedia[];

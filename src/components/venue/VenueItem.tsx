@@ -58,6 +58,7 @@ const VenueItem = ({item}: VenueItemType) => {
           onPress={() => {
             navigation.navigate('SendMessage', {
               vendorPhone: item?.business_phone,
+              venueId: item?.id,
             });
           }}
           leftIcon={() => (
@@ -85,7 +86,7 @@ const VenueItem = ({item}: VenueItemType) => {
           onPress={async () => {
             const body = {
               user_id: global.userInfo.id,
-              vendor_id: 1, // TODO: remove id
+              vendor_id: Number(item.id),
               leads_contact_type: 'phone',
               phone: item.business_phone,
             };

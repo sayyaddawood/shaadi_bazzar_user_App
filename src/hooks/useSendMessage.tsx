@@ -11,7 +11,9 @@ const useSendMessage = () => {
   const {goBackWithAlert} = useNavigationHook();
   const {goToWhatsapp} = useHelper();
   const {onSendLeads, isLoading} = useLeads();
-  const {vendorPhone} = useRouteHook({screenName: 'SendMessage'}).params;
+  const {vendorPhone, venueId} = useRouteHook({
+    screenName: 'SendMessage',
+  }).params;
 
   const form = useFormik<SendMessageFormType>({
     initialValues: {
@@ -31,7 +33,7 @@ const useSendMessage = () => {
       }`;
       const body = {
         user_id: global.userInfo.id,
-        vendor_id: 1,
+        vendor_id: Number(venueId),
         leads_contact_type: 'message',
         phone: vendorPhone,
         // name: values.name,
@@ -39,7 +41,7 @@ const useSendMessage = () => {
         // details: values.details,
         // lead_date: values.date,
       };
-      onSendLeads(body);
+      await onSendLeads(body);
       goToWhatsapp(vendorPhone, message);
     },
   });

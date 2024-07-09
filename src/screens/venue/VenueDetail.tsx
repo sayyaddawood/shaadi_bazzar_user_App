@@ -56,6 +56,7 @@ const VenueDetail = () => {
                           onMessagePress={() =>
                             navigation.navigate('SendMessage', {
                               vendorPhone: data?.vendorDetails.business_phone,
+                              venueId: data?.vendorDetails?.id?.toString(),
                             })
                           }
                         />
