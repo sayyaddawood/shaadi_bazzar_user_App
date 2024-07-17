@@ -92,7 +92,6 @@ export const getCities = async () => {
 
 export const getHomeScreenData = async (cityId: string) => {
   const url = `${getEndpointUrl(EndPointConstants.home)}${cityId}`;
-  console.log('@url ', url);
   const result = await requestApi({
     uri: url,
     method: 'GET',
@@ -121,14 +120,12 @@ export const getVenueAlbum = async (id: string) => {
 
 export const getVendorCategory = async (id?: string) => {
   const idAvailable = id != '-1' ? id : '';
-  const url = `${getEndpointUrl(
-    EndPointConstants.vendorCategory,
-  )}${idAvailable}`;
-  console.log('@url -- ', url);
+  const url = `${getEndpointUrl(EndPointConstants.vendors)}${idAvailable}`;
   const result = await requestApi({
     uri: `${url}`,
     method: 'GET',
   });
+
   return result as ApiResponse<VendorCategory[]>;
 };
 
@@ -150,9 +147,6 @@ export const getSearchVenue = async (id?: string, searchText?: string) => {
   if (id != '-1') {
     url += `&catId=${id}`;
   }
-
-  console.log('@url ', url);
-
   const result = await requestApi({
     uri: url,
     method: 'GET',
@@ -194,8 +188,6 @@ export const onSubmitLeads = async (body: bodyTypeLeads) => {
     body: body,
   });
 
-  console.log('@result ', JSON.stringify(result));
-
   return result as ApiResponseBase;
 };
 
@@ -203,10 +195,24 @@ export const getSubCategories = async (id?: string) => {
   const url = `${getEndpointUrl(EndPointConstants.subCategories)}?loc_id=${
     global.selectedLocId ?? global.userInfo.location_id
   }&cat_id=${id}&page=1&pageSize=50`;
-  console.log('@url ', url);
   const result = await requestApi({
     uri: `${url}`,
     method: 'GET',
   });
   return result as ApiResponse<Results<VendorSubCategoryResult>>;
+};
+
+type tokenBody = {
+  phone: string;
+  newNotificationToken: string;
+  userType: string;
+};
+
+export const onSubmitFCMToken = async (body: tokenBody) => {
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.fcmToken),
+    method: 'PUT',
+    body: body,
+  });
+  return result as ApiResponseBase;
 };

@@ -70,7 +70,7 @@ const CategoryItem = ({item, index, length}: CategoryItemType) => {
 
   return (
     <Pressable style={styles.itemContainer} onPress={onPress}>
-      <ImageView uri={item?.icon} style={styles.image} resizeMode="cover" />
+      <ImageView type='ONLINE' uri={item?.icon} style={styles.image} resizeMode="cover" />
       <TextView type="h8" numberOfLines={2} style={styles.text}>
         {item?.name}
       </TextView>

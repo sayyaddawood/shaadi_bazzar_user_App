@@ -57,7 +57,12 @@ const useUserInfo = () => {
     return data ?? undefined;
   };
 
-  return {saveData, getUserData, onLogout, getAuthToken, setAccessToken};
+  const getFCMToken = async () => {
+    const token = await AsyncStorage.getItem('@fcmToken');
+    return token ?? undefined;
+  };
+
+  return {saveData, getUserData, onLogout, getAuthToken, setAccessToken, getFCMToken};
 };
 
 export default useUserInfo;

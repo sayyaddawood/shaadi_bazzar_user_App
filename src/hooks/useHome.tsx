@@ -1,8 +1,10 @@
 import {useQuery} from '@tanstack/react-query';
 import {getHomeScreenData} from '../network/serverRequests';
 import {useMemo, useState} from 'react';
+import useFCM from './useFCM';
 
 const useHome = () => {
+  useFCM();
   const [cityId, setCityId] = useState<string>('1');
   const {data, isPending} = useQuery({
     queryKey: ['home', cityId],

@@ -8,11 +8,9 @@ import {
   DropDownPicker,
   EditText,
   Icons,
-  ImageView,
   Spacer,
   TextView,
 } from '../../components';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useRegister} from '../../hooks';
 import {IconButton} from 'react-native-paper';
 import {IconsType} from '../../components/core/Icons';

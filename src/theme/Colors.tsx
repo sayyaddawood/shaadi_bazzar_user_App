@@ -1,4 +1,5 @@
 const Colors = {
+  Splash: "#932048",
   PrimaryColor: '#F72A72',
   Black: '#000000',
   White: '#FFFFFF',

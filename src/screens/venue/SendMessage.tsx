@@ -77,7 +77,7 @@ const SendMessage = () => {
             />
             <EditText
               multiline={true}
-              label='Envent Details'
+              label='Event Details'
               placeholder="Details about my event*"
               style={{marginHorizontal: 0, marginTop: 5}}
               inputStyle={{

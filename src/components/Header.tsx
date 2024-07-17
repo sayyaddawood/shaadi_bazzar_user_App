@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TextView} from './core';
 import BackButton from './BackButton';
+import {Colors} from '../theme';
 
 type HeaderProps = {
   onBackPress?: () => void;
@@ -27,7 +28,10 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 10,
+    paddingHorizontal: 10,
+    paddingBottom: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.light,
   },
   text: {
     marginLeft: 10,

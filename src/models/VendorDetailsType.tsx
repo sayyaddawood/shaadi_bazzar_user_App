@@ -77,6 +77,8 @@ interface VendorCategory {
   icon?: string | null;
   children?: VendorCategoryChild[];
   flag?: boolean;
+  images: string;
+  color_code: string;
 }
 
 interface CombinedReviews {
@@ -102,7 +104,6 @@ interface ReviewsResult {
   reviews: Review[];
   combinedReviews: CombinedReviews;
 }
-
 
 interface VendorMediaSearch {
   path: string;

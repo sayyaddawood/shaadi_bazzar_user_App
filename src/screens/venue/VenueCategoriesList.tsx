@@ -29,7 +29,7 @@ const VenueCategoriesList = () => {
           <SearchVenueItem editable={false} onPress={onSearchPress} />
         }
         showsVerticalScrollIndicator={false}
-        style={{marginTop: 15}}
+        style={{marginTop: 5}}
         keyExtractor={(_, index) => index.toString()}
         ItemSeparatorComponent={<Line style={styles.line} />}
       />

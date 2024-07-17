@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: Dimen.height / 3,
     width: Dimen.height / 3,
-    borderRadius: Dimen.height / 4.8,
+    // borderRadius: Dimen.height / 4.8,
     marginTop: Dimen.height / 35,
   },
   content: {

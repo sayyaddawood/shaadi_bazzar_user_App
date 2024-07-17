@@ -10,23 +10,25 @@ import {
 import {
   AppContainer,
   AppStatusBar,
+  Header,
   ImageView,
   TextView,
 } from '../../../components';
 import {Colors, Dimen} from '../../../theme';
 import useVendor from '../../../hooks/useVendor';
-import {useHelper, useNavigationHook} from '../../../hooks';
+import {useNavigationHook} from '../../../hooks';
 import Toast from 'react-native-toast-message';
 import Fonts from '../../../theme/Fonts';
 
 const Vendors = () => {
   const {categories} = useVendor({fetchCategory: true});
-  const {navigation} = useNavigationHook();
+  const {navigation, goBack} = useNavigationHook();
 
   return (
     <SafeAreaView style={styles.container}>
       <AppContainer>
         <AppStatusBar />
+        <Header title={'Vendors'} />
 
         <FlatList
           data={categories}
@@ -74,7 +76,6 @@ const VendorCategory = ({
   item: VendorCategory;
   onPress: () => void;
 }) => {
-  const {generateRandomColor} = useHelper();
   const cats = item?.children ? [...item?.children] : [];
   const subCat = cats?.length > 3 ? cats?.splice(0, 3) : cats || [];
   return (
@@ -82,27 +83,17 @@ const VendorCategory = ({
       style={[
         styles.categoryContainer,
         {
-          backgroundColor: generateRandomColor,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-
-          elevation: 5,
+          backgroundColor: '#' + item?.color_code,
         },
+        item?.images ? styles.shadow : undefined,
       ]}
       onPress={onPress}>
       <View style={styles.imageWrapper}>
         <ImageView
           style={styles.image}
           type="ONLINE"
-          uri={
-            'https://i.pinimg.com/564x/67/a9/03/67a903b932db6a326308e70a66c7e93b.jpg'
-          }
-          resizeMode="cover"
+          uri={item?.images}
+          resizeMode="contain"
         />
       </View>
 
@@ -125,6 +116,18 @@ const VendorCategory = ({
 };
 
 const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+
   container: {backgroundColor: Colors.White, flex: 1},
   scrollView: {paddingBottom: 70},
   contentContainer: {
@@ -137,12 +140,13 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     width: 110,
     height: 110,
-    borderTopRightRadius: 200,
-    borderBottomRightRadius: 90,
-    borderTopLeftRadius: 150,
-    borderBottomLeftRadius: 150,
+    // borderTopRightRadius: 200,
+    // borderBottomRightRadius: 90,
+    // borderTopLeftRadius: 150,
+    // borderBottomLeftRadius: 150,
     transform: [{rotate: '-180deg'}],
     overflow: 'hidden',
+    borderColor: 'transparent',
   },
   image: {
     height: '100%',
@@ -150,25 +154,25 @@ const styles = StyleSheet.create({
     transform: [{rotate: '180deg'}],
   },
   categoryContainer: {
-    width:
-      Platform.OS == 'ios' ? Dimen.width / 2 - 21.5 : Dimen.width / 2 - 22.5,
-    height: Dimen.height / 4.7,
+    width: Platform.OS == 'ios' ? Dimen.width / 2 - 21.5 : Dimen.width / 2 - 23,
+    // height: Platform.OS == 'ios' ? Dimen.height / 4.7 : Dimen.height / 4.3,
     marginRight: 5,
     marginTop: 5,
     borderRadius: 10,
+    paddingBottom: 10,
   },
 
   title: {marginLeft: 10, marginTop: 5, marginBottom: 3},
 
   columnWrapper: {
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 15,
   },
 
   subCategoriesTxt: {
     marginLeft: 10,
-    fontFamily: Fonts.thin,
+    fontFamily: Platform.OS == 'ios' ? Fonts.thin : Fonts.regular,
     color: Colors.Black,
-    fontWeight: '400',
+    fontWeight: Platform.OS == 'ios' ? '400' : undefined,
   },
 });

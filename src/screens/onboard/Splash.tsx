@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {StyleSheet} from 'react-native';
-import {Colors} from '../../theme';
+import {ImageBackground, StyleSheet} from 'react-native';
+import {AssetsIcons, Colors} from '../../theme';
 import {AppContainer, AppStatusBar, TextView} from '../../components';
 import {useNavigationHook, useUserInfo} from '../../hooks';
 
@@ -15,7 +15,6 @@ const Splash = () => {
           navigation.replace('Register');
           return;
         }
-
         navigation.replace('HomeTabs');
       } else {
         setTimeout(() => {
@@ -27,11 +26,11 @@ const Splash = () => {
 
   return (
     <AppContainer style={styles.bg}>
-      <AppStatusBar bgColor={Colors.PrimaryColor} barStyle={'light-content'} />
-
-      <TextView type="h1" style={styles.text}>
-        WedEasy
-      </TextView>
+      <AppStatusBar bgColor={Colors.Splash} barStyle={'light-content'} />
+      <ImageBackground
+        source={AssetsIcons.splash}
+        style={{height: '100%', width: '100%'}}
+      />
     </AppContainer>
   );
 };
@@ -40,7 +39,7 @@ export default Splash;
 
 const styles = StyleSheet.create({
   bg: {
-    backgroundColor: Colors.PrimaryColor,
+    backgroundColor: Colors.Splash,
     justifyContent: 'center',
     alignItems: 'center',
   },

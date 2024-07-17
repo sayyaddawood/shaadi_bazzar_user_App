@@ -90,9 +90,7 @@ const styles = StyleSheet.create({
     marginLeft: -20,
     marginVertical: 15,
   },
-  container: {
-    marginTop: 5,
-  },
+  container: {},
   subContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -109,7 +107,6 @@ const styles = StyleSheet.create({
   rating: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 5,
     marginTop: 8,
   },
   review: {
@@ -175,7 +172,7 @@ const ReviewsItem = ({item, index}: ReviewItem) => {
         Reviewed {moment(item.createdAt).fromNow()}
       </TextView>
 
-      <Spacer height={10} />
+      <Spacer height={5} />
 
       <TextView
         position="left"
@@ -184,6 +181,8 @@ const ReviewsItem = ({item, index}: ReviewItem) => {
         style={{fontFamily: Fonts.light, marginTop: 2}}>
         {item.feedback}
       </TextView>
+
+      <Spacer height={10} />
 
       <Line style={[styles.line, {marginTop: 5}]} />
     </View>

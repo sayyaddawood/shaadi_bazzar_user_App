@@ -16,11 +16,9 @@ import {FlatList} from 'react-native';
 import useVendor from '../../hooks/useVendor';
 
 const VenueDetail = () => {
-  const {navigation} = useNavigationHook();
+  const {navigation, goBack} = useNavigationHook();
   const {id} = useRouteHook({screenName: 'VenueDetail'}).params;
   const {data, imagesList, isLoading} = useVendor({id, fetchDetail: true});
-
-  const onBackPress = () => navigation.goBack();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,10 +32,7 @@ const VenueDetail = () => {
             return (
               <>
                 <AppContainer>
-                  <Header
-                    onBackPress={onBackPress}
-                    title={'Venues in Hyderabad'}
-                  />
+                  <Header onBackPress={goBack} title={'Venues in Hyderabad'} />
 
                   <>
                     {imagesList.length > 0 && (

@@ -1,9 +1,8 @@
 import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
-import {Icons, ImageView, TextView} from '../core';
+import {Pressable, StyleSheet} from 'react-native';
+import {ImageView, TextView} from '../core';
 import {Colors} from '../../theme';
-import {IconsType} from '../core/Icons';
-import {useNavigationHook} from '../../hooks';
+import {useHelper, useNavigationHook} from '../../hooks';
 import {Vendor} from '../../models/RequestTypes';
 import RatingView from './RatingView';
 
@@ -13,6 +12,7 @@ type VenueDashboardItemProps = {
 
 const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
   const {navigation} = useNavigationHook();
+  const {formatCurrency} = useHelper();
 
   const onPress = () =>
     navigation.navigate('VenueDetail', {
@@ -40,10 +40,10 @@ const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
         {item?.address?.full_address}
       </TextView>
       <TextView type="h6" numberOfLines={1} style={styles.txtPrice}>
-        Rs: {item?.f_price ?? 0}
+        Rs: {formatCurrency(Number(item?.f_price)) ?? 0}
       </TextView>
 
-      <RatingView avgRating={item?.avgRating}  style={styles.rating} />
+      <RatingView avgRating={item?.avgRating} style={styles.rating} />
     </Pressable>
   );
 };

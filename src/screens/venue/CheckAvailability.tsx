@@ -1,45 +1,55 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {Calendar} from 'react-native-calendars';
 import {Colors} from '../../theme';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {StyleSheet, Switch} from 'react-native';
-import {AppContainer, Header, TextView} from '../../components';
+import {StyleSheet} from 'react-native';
+import {AppContainer, Header, Spacer, TextView} from '../../components';
 import {useNavigationHook, useRouteHook} from '../../hooks';
 import moment from 'moment';
 import Toast from 'react-native-toast-message';
 import {View} from 'react-native';
 
+const bookingIndicators = [
+  {
+    text: 'Partially Booked',
+    color: Colors.Blue,
+  },
+  {
+    text: 'Completely Booked',
+    color: Colors.PrimaryColor,
+  },
+];
+
 const CheckAvailability = () => {
   const {navigation} = useNavigationHook();
   const {dates} = useRouteHook({screenName: 'CheckAvailability'}).params;
-
   const onBackPress = () => navigation.goBack();
-
-  const [booked, setBooked] = useState({partially: true, completely: false});
 
   const markedDates = useMemo(() => {
     const d: any = {};
-    dates.forEach(date => {
-      if (date.day && booked.partially) {
+    dates?.forEach(date => {
+      if (date.day) {
         dates.forEach(date => {
           const formattedDate = moment(date.date).format('yyyy-MM-DD');
           d[formattedDate] = {
             selected: true,
+            marked: true,
             selectedColor: Colors.PrimaryColor,
           };
         });
-      } else if (date.night && booked.completely) {
+      } else if (date.night) {
         dates.forEach(date => {
           const formattedDate = moment(date.date).format('yyyy-MM-DD');
           d[formattedDate] = {
             selected: true,
+            marked: true,
             selectedColor: Colors.PrimaryColor,
           };
         });
       }
     });
     return d;
-  }, [dates, booked.completely, booked.partially]);
+  }, [dates]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -74,24 +84,23 @@ const CheckAvailability = () => {
           markingType={'custom'}
         />
 
-        <View style={styles.row}>
-          <TextView type="h6">Partially Booked</TextView>
-          <Switch
-            value={booked.partially}
-            onChange={() => setBooked({completely: false, partially: true})}
-            trackColor={{true: Colors.PrimaryColor}}
-            thumbColor={Colors.White}
-          />
-        </View>
-        <View style={styles.row}>
-          <TextView type="h6">Completely Booked</TextView>
-          <Switch
-            value={booked.completely}
-            onChange={() => setBooked({completely: true, partially: false})}
-            trackColor={{true: Colors.PrimaryColor}}
-            thumbColor={Colors.White}
-          />
-        </View>
+        <Spacer height={15} />
+
+        {bookingIndicators?.map(it => {
+          return (
+            <View style={styles.row1}>
+              <View
+                style={[
+                  styles.indicator,
+                  {
+                    backgroundColor: it.color,
+                  },
+                ]}
+              />
+              <TextView type="h6">{it.text}</TextView>
+            </View>
+          );
+        })}
       </AppContainer>
     </SafeAreaView>
   );
@@ -114,5 +123,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     marginTop: 20,
+  },
+
+  row1: {
+    flexDirection: 'row',
+    marginTop: 5,
+    marginLeft: 15,
+    alignItems: 'center',
+  },
+
+  indicator: {
+    width: 50,
+    height: 20,
+    marginRight: 5,
   },
 });

@@ -35,7 +35,6 @@ const VendorsSubCategories = () => {
     fetchSubCategory: true,
   });
 
-  console.log(!isSubCatLoading && subCategories.length == 0)
 
   return (
     <SafeAreaView style={styles.container}>

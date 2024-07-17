@@ -4,8 +4,11 @@ import {StyleSheet, View} from 'react-native';
 import {Colors} from '../../theme';
 import Line from '../Line';
 import Fonts from '../../theme/Fonts';
+import {useHelper} from '../../hooks';
 
 const PriceInfo = ({info}: {info: Package[]}) => {
+  const {formatCurrency} = useHelper();
+
   return (
     <>
       <TextView position="left" type="h5">
@@ -22,7 +25,7 @@ const PriceInfo = ({info}: {info: Package[]}) => {
                 {it.name}
               </TextView>
               <TextView position="left" type="h7" style={styles.location}>
-                RS {it.price}
+                RS {formatCurrency(it.price)}
               </TextView>
             </View>
 
@@ -31,7 +34,7 @@ const PriceInfo = ({info}: {info: Package[]}) => {
                 Booking Price
               </TextView>
               <TextView position="left" type="h8" style={styles.bookingPrice}>
-                RS {it.booking_price}
+                RS {formatCurrency(it.booking_price)}
               </TextView>
             </View>
 

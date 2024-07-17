@@ -9,21 +9,21 @@ const api = 'api/';
 
 export enum EndPointConstants {
   login = 'auth/authentication',
-  reSendCode = "auth/resendCode",
+  reSendCode = 'auth/resendCode',
   OtpVerification = 'auth/verfication',
   profileSetup = 'auth/profileSetup',
   city = 'location',
   home = 'customerapp/homescreen/',
-  vendorCategory = 'customerapp/vendorCategories/', 
+  vendorCategory = 'customerapp/vendorCategories/',
   vendorDetail = 'customerapp/vendorDetails',
-  vendorAlbum = 'customerapp/vendorAlbums/', 
-  vendorReviews = 'customerapp/vendorReviews/', 
-  vendorSearch = 'customerapp/searchVendor', 
-  addReview = "customerapp/addReview",
-  subCategories = "customerapp/vendors",
-  customerLead = "customerLeads",
-
-
+  vendorAlbum = 'customerapp/vendorAlbums/',
+  vendorReviews = 'customerapp/vendorReviews/',
+  vendorSearch = 'customerapp/searchVendor',
+  addReview = 'customerapp/addReview',
+  subCategories = 'customerapp/vendors',
+  customerLead = 'customerLeads',
+  vendors = 'vendorcategories/',
+  fcmToken = 'auth/updateNotification',
 }
 
 export const getEndpointUrl = (endPoint: EndPointConstants): string => {

@@ -1,6 +1,5 @@
 import {useMemo} from 'react';
 import {Linking, Platform, Share} from 'react-native';
-import Toast from 'react-native-toast-message';
 
 const useHelper = () => {
   const goToWhatsapp = (phone: string, text: string) => {
@@ -54,6 +53,16 @@ const useHelper = () => {
     }
   };
 
+  const formatCurrency = useMemo(
+    () => (number: number) => {
+      if (isNaN(number)) {
+        return 'Invalid number';
+      }
+      return number.toLocaleString('en-US');
+    },
+    [],
+  );
+
   const generateRandomColor = useMemo(() => {
     const letters = '89ABCDEF'; // Restrict to lighter shades
     let color = '#';
@@ -68,6 +77,7 @@ const useHelper = () => {
     makeACall,
     rateApp,
     shareApp,
+    formatCurrency,
     generateRandomColor,
   };
 };
