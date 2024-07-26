@@ -1,6 +1,7 @@
 import axios, {AxiosRequestConfig, Method} from 'axios';
 import {BASE_URL} from './const';
 import AsyncStorage from '@react-native-community/async-storage';
+import Toast from 'react-native-toast-message';
 
 export interface BaseModel {
   code?: string;
@@ -108,6 +109,12 @@ export const requestApi = async ({
       .catch(error => {
         console.log('@Error APi ', error);
         reject(`Something went wrong --> ${error}`);
+        Toast.show({
+          type: 'error',
+          text1: 'Something went wrong, please try later',
+          position: 'bottom',
+        });
+
       });
   });
 };
