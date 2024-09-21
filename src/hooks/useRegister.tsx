@@ -26,16 +26,11 @@ const useRegister = () => {
       Keyboard.dismiss();
       const user = await getUserData();
 
-      mutateAsync({
+      await mutateAsync({
         phone: user?.data?.phone || '',
-        businessName: 'string',
         name: values.name,
-        parentId: 0,
-        categoryIds: [0],
         userType: 'customer',
-        businessphone: 'string',
         locationId: Number(values.city),
-        address: 'string',
       });
     },
   });

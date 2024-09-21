@@ -1,9 +1,9 @@
 export let BASE_URL_DEV = 'https://staging-t9umb.ondigitalocean.app/';
 export let BASE_URL_IMAGE =
   'https://hydimages.sgp1.cdn.digitaloceanspaces.com/';
-export let BASE_URL_UAT = '';
+export let BASE_URL_PROD = 'https://sea-lion-app-vd3vz.ondigitalocean.app/';
 
-export let BASE_URL = BASE_URL_DEV;
+export let BASE_URL = BASE_URL_PROD;
 
 const api = 'api/';
 
