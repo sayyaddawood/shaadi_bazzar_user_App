@@ -24,6 +24,7 @@ export enum EndPointConstants {
   customerLead = 'customerLeads',
   vendors = 'vendorcategories/',
   fcmToken = 'auth/updateNotification',
+  addViews = 'views/addViews',
 }
 
 export const getEndpointUrl = (endPoint: EndPointConstants): string => {

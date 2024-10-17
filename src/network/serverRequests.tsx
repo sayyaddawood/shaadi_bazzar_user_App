@@ -216,3 +216,19 @@ export const onSubmitFCMToken = async (body: tokenBody) => {
   });
   return result as ApiResponseBase;
 };
+export const onSubmitAddViews = async (vendorId: string, userId: string) => {
+  const body = {
+    vendorId: Number(vendorId),
+    viewsData: [
+      {
+        user_id: userId,
+      },
+    ],
+  };
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.addViews),
+    method: 'POST',
+    body: body,
+  });
+  return result;
+};

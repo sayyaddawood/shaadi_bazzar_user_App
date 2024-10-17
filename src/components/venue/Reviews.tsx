@@ -24,9 +24,15 @@ const Reviews = ({id, onWriteAReviewPress}: ReviewsType) => {
             Reviews
           </TextView>
 
-          <TextView position="left" type="h8" style={[styles.text]}>
-            Updated on 9 May 2024
-          </TextView>
+          {Array.isArray(reviewsData?.reviews) &&
+            reviewsData?.reviews?.length > 0 && (
+              <TextView position="left" type="h8" style={[styles.text]}>
+                Updated on{' '}
+                {moment(reviewsData?.reviews?.at(-1)?.createdAt).format(
+                  'DD MMM YYYY',
+                )}
+              </TextView>
+            )}
         </View>
         <View style={styles.row}>
           <Icons

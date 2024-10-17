@@ -5,8 +5,9 @@ import {
   getVendorCategory,
   getVenueDetail,
   getVenueReviews,
+  onSubmitAddViews,
 } from '../network/serverRequests';
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 
 type useVendorType = {
@@ -64,6 +65,10 @@ const useVendor = ({
     queryFn: ({queryKey}) => getSubCategories(queryKey[1]),
     enabled: fetchSubCategory,
   });
+  useEffect(() => {
+    if (id != null && fetchDetail)
+      onSubmitAddViews(id, global.userInfo.id?.toString());
+  }, []);
 
   return {
     isLoading: isPending,

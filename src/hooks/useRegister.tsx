@@ -44,8 +44,6 @@ const useRegister = () => {
   const {mutateAsync, isPending} = useMutation({
     mutationFn: profileSetup,
     onSuccess: response => {
-      console.log('@data ', JSON.stringify(response));
-
       setAccessToken(response?.result?.access_token);
       saveData(response?.result);
       navigation.dispatch(
