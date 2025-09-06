@@ -191,10 +191,10 @@ export const onSubmitLeads = async (body: bodyTypeLeads) => {
   return result as ApiResponseBase;
 };
 
-export const getSubCategories = async (id?: string) => {
+export const getSubCategories = async (id: string, pageParam: number) => {
   const url = `${getEndpointUrl(EndPointConstants.subCategories)}?loc_id=${
     global.selectedLocId ?? global.userInfo.location_id
-  }&cat_id=${id}&page=1&pageSize=50`;
+  }&cat_id=${id}&page=${pageParam}&pageSize=10`;
   const result = await requestApi({
     uri: `${url}`,
     method: 'GET',

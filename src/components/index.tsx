@@ -4,6 +4,7 @@ export { default as Header } from './Header'
 export { default as Line } from './Line'
 
 // ... custom Components
+export { default as QuestionAnswer } from './venue/QuestionAnswer'
 export { default as PrimaryInfo } from './venue/PrimaryInfo'
 export { default as PriceInfo } from './venue/PriceInfo'
 export { default as Reviews } from './venue/Reviews'

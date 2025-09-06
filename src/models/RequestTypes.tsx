@@ -77,5 +77,6 @@ export type HomeScreenList = Category[];
 
 export interface VendorSubCategoryResult {
   categoryId: string;
-  vendors: Vendor[]
+  vendors: Vendor[];
+  hasMore: boolean;
 }

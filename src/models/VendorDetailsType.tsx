@@ -25,6 +25,25 @@ interface VendorDetails {
   id: number;
   address: Address;
   vendorMedia: VendorMedia[];
+  questions: Questions[]
+}
+
+export interface AnswerType {
+  id: number;
+  answers: string;
+  status: boolean;
+}
+
+export interface Questions {
+  id: number;
+  question: string;
+  vendor_category_id: number;
+  status: boolean;
+  vendorsAnswers: AnswerType[];
+}
+
+export interface QuestionType {
+  questions: Questions[];
 }
 
 interface Package {

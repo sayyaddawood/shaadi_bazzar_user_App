@@ -1,7 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {
   getSearchVenue,
-  getSubCategories,
   getVendorCategory,
   getVenueDetail,
   getVenueReviews,
@@ -22,7 +21,6 @@ type useVendorType = {
 
 const useVendor = ({
   id,
-  fetchSubCategory = false,
   fetchCategory = false,
   fetchDetail = false,
   fetchReviews = false,
@@ -31,7 +29,7 @@ const useVendor = ({
 }: useVendorType) => {
   const isFocused = useIsFocused();
 
-  const {data: categories, isPending: isCategoryLoading} = useQuery({
+  const {data: categories} = useQuery({
     queryKey: ['vendorCategories', id || '-1'],
     queryFn: ({queryKey}) => getVendorCategory(queryKey[1]),
     enabled: fetchCategory,
@@ -60,11 +58,6 @@ const useVendor = ({
     enabled: fetchSearch && searchText && searchText?.length > 0 ? true : false,
   });
 
-  const {data: subCategories, isPending: isSubCatLoading} = useQuery({
-    queryKey: ['vendorSubCategories', id],
-    queryFn: ({queryKey}) => getSubCategories(queryKey[1]),
-    enabled: fetchSubCategory,
-  });
   useEffect(() => {
     if (id != null && fetchDetail)
       onSubmitAddViews(id, global.userInfo.id?.toString());
@@ -79,8 +72,6 @@ const useVendor = ({
     reviewsLoading,
     searchedList: searchData?.result || [],
     searchLoading,
-    subCategories: subCategories?.result?.vendors || [],
-    isSubCatLoading,
   };
 };
 

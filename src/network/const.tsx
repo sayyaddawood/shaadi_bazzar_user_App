@@ -1,7 +1,7 @@
 export let BASE_URL_DEV = 'https://staging-t9umb.ondigitalocean.app/';
 export let BASE_URL_IMAGE =
-  'https://hydimages.sgp1.cdn.digitaloceanspaces.com/';
-export let BASE_URL_PROD = 'https://sea-lion-app-vd3vz.ondigitalocean.app/';
+  'https://s3.ap-southeast-1.amazonaws.com/bucket.wedeasy.pro/';
+export let BASE_URL_PROD = 'https://wedeasybackendserver.eclatechsolution.com/';
 
 export let BASE_URL = BASE_URL_PROD;
 

@@ -18,8 +18,12 @@ import {
   VenueItem,
 } from '../../../components';
 import {Colors, Dimen} from '../../../theme';
-import useVendor from '../../../hooks/useVendor';
-import {useNavigationHook, useRouteHook} from '../../../hooks';
+import {
+  useNavigationHook,
+  useRouteHook,
+  useVendorSubCategories,
+} from '../../../hooks';
+import {ActivityIndicator} from 'react-native-paper';
 
 const VendorsSubCategories = () => {
   const {goBack} = useNavigationHook();
@@ -30,11 +34,16 @@ const VendorsSubCategories = () => {
     subCategoriesLabel[0]?.id?.toString(),
   );
 
-  const {subCategories, isSubCatLoading} = useVendor({
+  const {
+    subCategories,
+    isSubCatLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useVendorSubCategories({
     id: selectedCategory,
     fetchSubCategory: true,
   });
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,6 +73,19 @@ const VendorsSubCategories = () => {
             style={{marginTop: 15}}
             keyExtractor={(_, index) => index.toString()}
             ItemSeparatorComponent={<Line style={styles.line} />}
+            onEndReachedThreshold={0.5}
+            onEndReached={() => {
+              if (hasNextPage) fetchNextPage();
+            }}
+            ListFooterComponent={
+              isFetchingNextPage ? (
+                <ActivityIndicator
+                  color={Colors.PrimaryColor}
+                  size={'small'}
+                  style={{marginVertical: 10}}
+                />
+              ) : null
+            }
           />
         )}
       </AppContainer>

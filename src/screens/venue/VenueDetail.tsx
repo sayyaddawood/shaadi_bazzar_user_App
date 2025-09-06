@@ -9,6 +9,7 @@ import {
   Reviews,
   Album,
   Loader,
+  QuestionAnswer,
 } from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook, useRouteHook} from '../../hooks';
@@ -69,6 +70,7 @@ const VenueDetail = () => {
                           })
                         }
                       />
+                      <QuestionAnswer questions={data?.questions} />
                     </View>
                   </>
                 </AppContainer>
