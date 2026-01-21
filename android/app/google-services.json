@@ -2,14 +2,14 @@
   "project_info": {
     "project_number": "34582114116",
     "project_id": "wedeasy-3c6d6",
-    "storage_bucket": "wedeasy-3c6d6.appspot.com"
+    "storage_bucket": "wedeasy-3c6d6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:34582114116:android:1d910881fb7f6c81c8b111",
+        "mobilesdk_app_id": "1:34582114116:android:cd89f43a9d1472e9c8b111",
         "android_client_info": {
-          "package_name": "com.shadibazaar"
+          "package_name": "com.wedeasy.app"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:34582114116:android:70a5baae8ac2be54c8b111",
+        "mobilesdk_app_id": "1:34582114116:android:322034c5d26f3579c8b111",
         "android_client_info": {
-          "package_name": "com.vendor_app"
+          "package_name": "com.wedeasybusiness"
         }
       },
       "oauth_client": [],

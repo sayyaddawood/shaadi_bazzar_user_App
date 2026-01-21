@@ -232,3 +232,24 @@ export const onSubmitAddViews = async (vendorId: string, userId: string) => {
   });
   return result;
 };
+
+export const onDeleteAccount = async (phoneNumber: string) => {
+  const body = {
+    phone: phoneNumber,
+    user_type: 'customer',
+  };
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.deleteAccount),
+    method: 'PUT',
+    body: body,
+  });
+  return result;
+};
+
+export const getGuestToken = async () => {
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.guestToken),
+    method: 'POST',
+  });
+  return result as ApiResponse<UserDetailsResult>;
+};

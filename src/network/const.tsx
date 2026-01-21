@@ -1,7 +1,6 @@
-export let BASE_URL_DEV = 'https://staging-t9umb.ondigitalocean.app/';
-export let BASE_URL_IMAGE =
-  'https://s3.ap-southeast-1.amazonaws.com/bucket.wedeasy.pro/';
-export let BASE_URL_PROD = 'https://wedeasybackendserver.eclatechsolution.com/';
+export let BASE_URL_DEV = 'https://newbackend.wedeasybackend.host/';
+export let BASE_URL_IMAGE = 'https://images.wedeasybackend.host/';
+export let BASE_URL_PROD = 'https://newbackend.wedeasybackend.host/';
 
 export let BASE_URL = BASE_URL_PROD;
 
@@ -25,6 +24,8 @@ export enum EndPointConstants {
   vendors = 'vendorcategories/',
   fcmToken = 'auth/updateNotification',
   addViews = 'views/addViews',
+  deleteAccount = 'customerapp/inactivateUser',
+  guestToken = 'auth/guestToken',
 }
 
 export const getEndpointUrl = (endPoint: EndPointConstants): string => {

@@ -39,8 +39,8 @@ const VenueDashboardItem = ({item}: VenueDashboardItemProps) => {
       <TextView type="h7" numberOfLines={1} style={styles.txtLocation}>
         {item?.address?.full_address}
       </TextView>
-      <TextView type="h6" numberOfLines={1} style={styles.txtPrice}>
-        Rs: {formatCurrency(Number(item?.f_price)) ?? 0}
+      <TextView type="h7" numberOfLines={1} style={styles.txtPrice}>
+        Starting at Rs: {formatCurrency(Number(item?.f_price)) ?? 0}
       </TextView>
 
       <RatingView avgRating={item?.avgRating} style={styles.rating} />

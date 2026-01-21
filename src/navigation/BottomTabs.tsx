@@ -26,7 +26,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName='Home'
+      initialRouteName="Home"
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => getTabIcon(route.name, focused),
@@ -51,7 +51,10 @@ const BottomTabs = () => {
       })}>
       <Tab.Screen name="Vendors" component={Vendors} />
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Settings" component={UserSettings} />
+      <Tab.Screen
+        name="Settings"
+        component={UserSettings}
+      />
       {/* <Tab.Screen name="Planner" component={Planner} /> */}
       {/* <Tab.Screen name="Todo List" component={TodoList} /> */}
     </Tab.Navigator>
@@ -190,7 +193,6 @@ var styles = StyleSheet.create({
     marginTop: -45,
 
     borderTopWidth: 1,
-    borderColor: Colors.Halfwit
-
+    borderColor: Colors.Halfwit,
   },
 });

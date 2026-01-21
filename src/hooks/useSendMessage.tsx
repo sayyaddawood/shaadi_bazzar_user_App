@@ -6,6 +6,7 @@ import useNavigationHook from './useNavigationHook';
 import useRouteHook from './useRouteHook';
 import useHelper from './useHelper';
 import {useLeads} from '.';
+import Toast from 'react-native-toast-message';
 
 const useSendMessage = () => {
   const {goBackWithAlert} = useNavigationHook();
@@ -25,6 +26,10 @@ const useSendMessage = () => {
     },
     validationSchema: sendMessageSchema,
     onSubmit: async values => {
+      if (!global.userInfo) {
+        return;
+      }
+
       Keyboard.dismiss();
       const message = `name: ${values.name}\nphone: ${values.phone}\ndate: ${
         values.date

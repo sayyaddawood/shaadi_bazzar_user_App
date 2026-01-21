@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
+import {Keyboard, Platform, SafeAreaView, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import {
   AppContainer,
@@ -61,6 +61,7 @@ const Register = () => {
             style={{marginHorizontal: 0}}
             labelStyle={{marginHorizontal: 35}}
             onChangeText={handleChange('name')}
+            onSubmitEditing={() => Keyboard.dismiss()}
             errorMessage={errors?.name && touched.name ? errors.name : ''}
             errorTextStyle={{
               marginLeft: 40,

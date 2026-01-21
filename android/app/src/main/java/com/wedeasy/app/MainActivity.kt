@@ -1,4 +1,4 @@
-package com.shadibazaar
+package com.wedeasy.app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

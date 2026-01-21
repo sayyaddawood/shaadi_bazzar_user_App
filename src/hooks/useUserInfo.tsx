@@ -8,6 +8,11 @@ import {useQueryClient} from '@tanstack/react-query';
 const useUserInfo = () => {
   const {navigation} = useNavigationHook();
   const queryClient = useQueryClient();
+
+  const onSaveGuestToken = async (token: string) => {
+    await AsyncStorage.setItem('@gToken', token);
+  };
+
   const saveData = async (data: UserDetailsResult) => {
     await AsyncStorage.setItem('@userInfo', JSON.stringify(data));
     if (data?.userDetail) {
@@ -24,6 +29,20 @@ const useUserInfo = () => {
     return user;
   };
 
+  const onConfirmLogout = async () => {
+    await AsyncStorage.removeItem('@userInfo');
+    await AsyncStorage.removeItem('@token');
+    global.userInfo = undefined;
+    queryClient.clear();
+    queryClient.invalidateQueries();
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{name: 'Onboarding'}],
+      }),
+    );
+  };
+
   const onLogout = async () => {
     Alert.alert('Alert', 'Are you sure you want to sign out?', [
       {
@@ -32,18 +51,7 @@ const useUserInfo = () => {
       },
       {
         text: 'Yes',
-        onPress: async () => {
-          await AsyncStorage.removeItem('@userInfo');
-          await AsyncStorage.removeItem('@token');
-          queryClient.clear();
-          queryClient.invalidateQueries();
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{name: 'Onboarding'}],
-            }),
-          );
-        },
+        onPress: async () => onConfirmLogout(),
       },
     ]);
   };
@@ -62,7 +70,16 @@ const useUserInfo = () => {
     return token ?? undefined;
   };
 
-  return {saveData, getUserData, onLogout, getAuthToken, setAccessToken, getFCMToken};
+  return {
+    saveData,
+    getUserData,
+    onLogout,
+    getAuthToken,
+    setAccessToken,
+    getFCMToken,
+    onConfirmLogout,
+    onSaveGuestToken
+  };
 };
 
 export default useUserInfo;

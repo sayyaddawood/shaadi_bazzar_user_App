@@ -8,6 +8,7 @@ import {IconButton} from 'react-native-paper';
 import {useHelper, useLeads, useNavigationHook} from '../../hooks';
 import {Vendor} from '../../models/RequestTypes';
 import RatingView from './RatingView';
+import Toast from 'react-native-toast-message';
 
 type VenueItemType = {
   item: Vendor;
@@ -41,8 +42,8 @@ const VenueItem = ({item}: VenueItemType) => {
       <TextView type="h6" color={Colors.Black} style={styles.textTitle}>
         {item.business_name}
       </TextView>
-      <TextView type="h6" style={styles.priceText}>
-        Rs {item.f_price ?? '0'}{' '}
+      <TextView type="h7" style={styles.priceText}>
+        Starting at Rs {item.f_price ?? '0'}{' '}
         <TextView position="left" type="h8" style={styles.des}>
           per day
         </TextView>
@@ -56,6 +57,17 @@ const VenueItem = ({item}: VenueItemType) => {
           textColor={Colors.PrimaryColor}
           style={styles.btn}
           onPress={() => {
+            if (!global.userInfo) {
+              Toast.show({
+                type: 'info',
+                text1: 'Sign in required',
+                position: 'bottom',
+                text2: 'Tap to continue',
+                onPress: () => navigation.navigate('Onboarding'),
+              });
+              return;
+            }
+
             navigation.navigate('SendMessage', {
               vendorPhone: item?.business_phone,
               venueId: item?.id,
@@ -84,13 +96,15 @@ const VenueItem = ({item}: VenueItemType) => {
           size={25}
           style={styles.btnCall}
           onPress={async () => {
-            const body = {
-              user_id: global.userInfo.id,
-              vendor_id: Number(item.id),
-              leads_contact_type: 'phone',
-              phone: item.business_phone,
-            };
-            await onSendLeads(body);
+            if (global.userInfo) {
+              const body = {
+                user_id: global.userInfo.id,
+                vendor_id: Number(item.id),
+                leads_contact_type: 'phone',
+                phone: item.business_phone,
+              };
+              await onSendLeads(body);
+            }
             makeACall(`${item?.phone}`);
           }}
         />

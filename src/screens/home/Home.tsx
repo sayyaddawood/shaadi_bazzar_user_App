@@ -13,7 +13,14 @@ import {useHome} from '../../hooks';
 import {Colors, Dimen} from '../../theme';
 
 const Home = () => {
-  const {isLoading, data, noData, onSelectedCity} = useHome();
+  const {
+    isLoading,
+    data,
+    noData,
+    isRefetching = false,
+    onSelectedCity,
+    refetch,
+  } = useHome();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,6 +36,8 @@ const Home = () => {
             contentContainerStyle={styles.scrollView}
             showsVerticalScrollIndicator={false}
             style={{zIndex: 1}}
+            onRefresh={() => refetch()}
+            refreshing={isRefetching}
             renderItem={({}) => {
               return (
                 <>
@@ -59,7 +68,7 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: Colors.White, flex: 1},
-  scrollView: {paddingBottom: 70},
+  container: {backgroundColor: Colors.White, flex: 1, },
+  scrollView: {paddingBottom: 110,},
   noData: {marginTop: Dimen.height / 7},
 });

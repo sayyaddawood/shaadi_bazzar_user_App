@@ -1,58 +1,92 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Platform, SafeAreaView, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors} from '../../theme';
-import {BackButton, ImageView, Spacer, TextView} from '../../components';
+import {
+  AppContainer,
+  BackButton,
+  ConfirmDeleteAccount,
+  ImageView,
+  Spacer,
+  TextView,
+} from '../../components';
 import {useHelper, useNavigationHook, useUserInfo} from '../../hooks';
 import {TouchableRipple} from 'react-native-paper';
 import Fonts from '../../theme/Fonts';
+import Popup from '../../components/core/Popup';
+import {ConfirmDeleteAccountRef} from '../../components/dialoge/ConfirmDeleteAccount';
 
 const UserSettings = () => {
   const {navigation} = useNavigationHook();
   const {onLogout} = useUserInfo();
   const {goToWhatsapp, rateApp, shareApp} = useHelper();
+  const ref = useRef<ConfirmDeleteAccountRef>(null);
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <BackButton onBackPress={() => navigation.goBack()} />
-        <ImageView
-          uri={
-            'https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_1280.png'
-          }
-          style={styles.image}
-        />
-        <View style={styles.usernameContainer}>
-          <TextView>{global.userInfo.name}</TextView>
-          <TextView type="h8" style={styles.txtBasicUser}>
-            Basic User
-          </TextView>
+    <AppContainer>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
+          <BackButton onBackPress={() => navigation.goBack()} />
+          <ImageView
+            uri={
+              'https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_1280.png'
+            }
+            style={styles.image}
+          />
+          <View style={styles.usernameContainer}>
+            <TextView>
+              {global?.userInfo?.name ? global?.userInfo?.name : 'Guest'}
+            </TextView>
+            <TextView type="h8" style={styles.txtBasicUser}>
+              Basic User
+            </TextView>
+          </View>
         </View>
-      </View>
 
-      <Spacer height={20} />
+        <Spacer height={20} />
 
-      <ListItem
-        icon={AssetsIcons.support}
-        label={'Contact Support'}
-        onPress={() =>
-          goToWhatsapp('+92 320 3033680', 'Hello! I need assistance.')
-        }
-      />
-      <ListItem
+        <ListItem
+          icon={AssetsIcons.support}
+          label={'Contact Support'}
+          onPress={() =>
+            goToWhatsapp('+92 320 3033680', 'Hello! I need assistance.')
+          }
+        />
+        <ListItem
+          icon={AssetsIcons.privacyPolicy}
+          label={'Privacy Policy'}
+          onPress={() => navigation.navigate('PrivacyPolicy')}
+        />
+        {global?.userInfo && (
+          <ListItem
+            icon={AssetsIcons.delete}
+            label={'Deactivate Account'}
+            onPress={() => ref?.current?.onShowConfirmDeletePopup()}
+          />
+        )}
+        {/* <ListItem
         icon={AssetsIcons.rating}
         label={'Rate this app on play store'}
         onPress={rateApp}
-      />
-      <ListItem
+      /> */}
+        {/* <ListItem
         icon={AssetsIcons.share}
         label={'Share with your friends'}
         onPress={shareApp}
-      />
-      <ListItem
-        icon={AssetsIcons.logout}
-        label={'Sign out'}
-        onPress={onLogout}
-      />
-    </SafeAreaView>
+      /> */}
+        <ListItem
+          icon={AssetsIcons.logout}
+          label={global.userInfo ? 'Sign out' : 'Login/Register'}
+          onPress={() => {
+            if (global.userInfo) {
+              onLogout();
+            } else {
+              navigation.navigate('Login');
+            }
+          }}
+        />
+
+        <ConfirmDeleteAccount ref={ref} />
+      </SafeAreaView>
+    </AppContainer>
   );
 };
 

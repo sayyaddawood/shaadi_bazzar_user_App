@@ -59,7 +59,7 @@ const useVendor = ({
   });
 
   useEffect(() => {
-    if (id != null && fetchDetail)
+    if (id != null && fetchDetail && global.userInfo)
       onSubmitAddViews(id, global.userInfo.id?.toString());
   }, []);
 

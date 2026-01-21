@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {
   AppContainer,
   AppStatusBar,
   Button,
   ImageView,
+  Loader,
   TextView,
 } from '../../components';
 import {AssetsIcons, Colors, Dimen} from '../../theme';
 import LinearGradient from 'react-native-linear-gradient';
 import Fonts from '../../theme/Fonts';
-import {useNavigationHook} from '../../hooks';
+import {useNavigationHook, useUserInfo} from '../../hooks';
+import {getGuestToken} from '../../network/serverRequests';
 
 const Data = [
   {
@@ -31,11 +33,24 @@ const Data = [
 
 const Onboarding = () => {
   const {navigation} = useNavigationHook();
+  const {onSaveGuestToken} = useUserInfo();
+  const [guestLoading, setGuestLoading] = useState(false);
 
   const onSignInPress = () => navigation.replace('Login');
 
+  const onPressGuestLogin = async () => {
+    setGuestLoading(true);
+    const result = await getGuestToken();
+    setGuestLoading(false);
+    if (result?.token) {
+      global.selectedLocId = '1';
+      onSaveGuestToken(result?.token);
+      navigation.replace('HomeTabs');
+    }
+  };
+
   return (
-    <AppContainer>
+    <View style={{flex: 1}}>
       <AppStatusBar hidden />
       <FlatList
         data={Data}
@@ -61,7 +76,7 @@ const Onboarding = () => {
                 style={styles.gradient}
               />
 
-              <View style={[styles.descriptionView, {bottom: 130}]}>
+              <View style={[styles.descriptionView, {bottom: 150}]}>
                 <TextView type="h5" position="center" style={styles.title}>
                   {item.title}
                 </TextView>
@@ -78,8 +93,22 @@ const Onboarding = () => {
           style={{marginTop: 20}}
           text={'Sign In/Register'}
         />
+        {guestLoading ? (
+          <View style={styles.txtContinue}>
+            <Loader color={Colors.White} />
+          </View>
+        ) : (
+          <TextView
+            type="h6"
+            position="center"
+            color={Colors.White}
+            style={styles.txtContinue}
+            onPress={onPressGuestLogin}>
+            Continue as Guest
+          </TextView>
+        )}
       </View>
-    </AppContainer>
+    </View>
   );
 };
 
@@ -112,5 +141,9 @@ const styles = StyleSheet.create({
     bottom: 60,
     left: 0,
     right: 0,
+  },
+
+  txtContinue: {
+    marginTop: 15,
   },
 });

@@ -6,7 +6,7 @@ import useFCM from './useFCM';
 const useHome = () => {
   useFCM();
   const [cityId, setCityId] = useState<string>('1');
-  const {data, isPending} = useQuery({
+  const {data, isPending, isRefetching, refetch} = useQuery({
     queryKey: ['home', cityId],
     queryFn: ({queryKey}) => getHomeScreenData(queryKey[1]),
   });
@@ -27,10 +27,12 @@ const useHome = () => {
 
   return {
     isLoading: isPending,
+    isRefetching,
     data: data?.result || [],
     cityId,
     noData,
     onSelectedCity,
+    refetch,
   };
 };
 

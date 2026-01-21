@@ -33,6 +33,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>whatsapp</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Black.ttf</string>

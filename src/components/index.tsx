@@ -21,3 +21,7 @@ export { default as BackButton } from './BackButton'
 
 export { default as NoView } from './NoView'
 
+
+// ... Dialogue
+export { default as ConfirmDeleteAccount } from './dialoge/ConfirmDeleteAccount'
+

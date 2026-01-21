@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import {AssetsIcons, Colors} from '../../theme';
 import {AppContainer, AppStatusBar, TextView} from '../../components';
 import {useNavigationHook, useUserInfo} from '../../hooks';
@@ -25,13 +25,13 @@ const Splash = () => {
   }, []);
 
   return (
-    <AppContainer style={styles.bg}>
+    <View style={styles.bg}>
       <AppStatusBar bgColor={Colors.Splash} barStyle={'light-content'} />
       <ImageBackground
         source={AssetsIcons.splash}
         style={{height: '100%', width: '100%'}}
       />
-    </AppContainer>
+    </View>
   );
 };
 

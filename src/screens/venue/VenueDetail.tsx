@@ -15,6 +15,7 @@ import {Colors} from '../../theme';
 import {useNavigationHook, useRouteHook} from '../../hooks';
 import {FlatList} from 'react-native';
 import useVendor from '../../hooks/useVendor';
+import Toast from 'react-native-toast-message';
 
 const VenueDetail = () => {
   const {navigation, goBack} = useNavigationHook();
@@ -49,12 +50,24 @@ const VenueDetail = () => {
                               dates: data.lockedDates,
                             })
                           }
-                          onMessagePress={() =>
+                          onMessagePress={() => {
+                            if (!global.userInfo) {
+                              Toast.show({
+                                type: 'info',
+                                text1: 'Sign in required',
+                                position: 'bottom',
+                                text2: 'Tap to continue',
+                                onPress: () =>
+                                  navigation.navigate('Onboarding'),
+                              });
+                              return;
+                            }
+
                             navigation.navigate('SendMessage', {
                               vendorPhone: data?.vendorDetails.business_phone,
                               venueId: data?.vendorDetails?.id?.toString(),
-                            })
-                          }
+                            });
+                          }}
                         />
                       )}
                       {data?.packages && <PriceInfo info={data?.packages} />}

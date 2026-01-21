@@ -18,6 +18,8 @@ const AssetsIcons = {
   user: require('../assets/images/user.png'),
   category: require('../assets/images/category.png'),
   explore: require('../assets/images/explore.png'),
+  delete: require('../assets/images/delete.png'),
+  privacyPolicy: require('../assets/images/privacy-policy.png'),
 
 };
 

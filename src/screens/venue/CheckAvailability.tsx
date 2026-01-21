@@ -52,7 +52,6 @@ const CheckAvailability = () => {
   }, [dates]);
 
   return (
-    <SafeAreaView style={styles.container}>
       <AppContainer>
         <Header onBackPress={onBackPress} title={'Check Availability'} />
 
@@ -102,7 +101,6 @@ const CheckAvailability = () => {
           );
         })}
       </AppContainer>
-    </SafeAreaView>
   );
 };
 

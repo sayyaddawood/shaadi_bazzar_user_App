@@ -56,7 +56,11 @@ apiClient.interceptors.request.use(
     const token = await AsyncStorage.getItem('@token'); // Get token from local storage or any other storage
     if (token) {
       config.headers.Authorization = `${token}`;
+    } else {
+      const gToken = await AsyncStorage.getItem('@gToken'); // Get token from local storage or any other storage
+      config.headers.Authorization = `${gToken}`;
     }
+
     return config;
   },
   error => {
@@ -114,7 +118,6 @@ export const requestApi = async ({
           text1: 'Something went wrong, please try later',
           position: 'bottom',
         });
-
       });
   });
 };

@@ -9,7 +9,15 @@ const useHelper = () => {
       phone = `+${phone}`; // Remove '+' sign
     }
     const url = 'whatsapp://send?text=' + text + '&phone=' + phone;
-    Linking.openURL(url).catch(e => {});
+    Linking.canOpenURL(url)
+      .then(supported => {
+        if (!supported) {
+          alert('WhatsApp is not installed on your device');
+        } else {
+          return Linking.openURL(url).catch((e) => console.log(e));
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   const makeACall = (phoneNumber: string) => {
@@ -22,7 +30,7 @@ const useHelper = () => {
   };
 
   const rateApp = () => {
-    const androidPackageName = 'com.shadibazaar'; // Replace with your app's package name
+    const androidPackageName = 'com.wedeasy.app'; // Replace with your app's package name
     const appleAppID = '1234567890'; // Replace with your app's Apple App Store ID
 
     if (Platform.OS === 'ios') {

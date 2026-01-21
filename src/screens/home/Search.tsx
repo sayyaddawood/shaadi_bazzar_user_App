@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import {
+  AppContainer,
   Header,
   ImageView,
   Line,
@@ -30,21 +31,23 @@ const Search = () => {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Header onBackPress={onBackPress} title={'Search'} />
+    <AppContainer>
+      <SafeAreaView style={styles.container}>
+        <Header onBackPress={onBackPress} title={'Search'} />
 
-      <SearchVenueItem {...{search, setSearch}} />
+        <SearchVenueItem {...{search, setSearch}} />
 
-      <FlatList
-        data={searchedList}
-        renderItem={({item}) => {
-          return <SearchItem {...{item}} />;
-        }}
-        showsVerticalScrollIndicator={false}
-        style={{marginHorizontal: 20}}
-        keyExtractor={(_, index) => index.toString()}
-      />
-    </SafeAreaView>
+        <FlatList
+          data={searchedList}
+          renderItem={({item}) => {
+            return <SearchItem {...{item}} />;
+          }}
+          showsVerticalScrollIndicator={false}
+          style={{marginHorizontal: 20}}
+          keyExtractor={(_, index) => index.toString()}
+        />
+      </SafeAreaView>
+    </AppContainer>
   );
 };
 

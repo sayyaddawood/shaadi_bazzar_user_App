@@ -37,6 +37,17 @@ const useWriteReview = () => {
       return;
     }
 
+    if (!global.userInfo) {
+      Toast.show({
+        type: 'info',
+        text1: 'Sign in required',
+        position: 'bottom',
+        text2: "Tap to continue",
+        onPress: () => navigation.navigate('Onboarding'),
+      });
+      return;
+    }
+
     const body = {
       ...state,
       userId: global.userInfo.id,

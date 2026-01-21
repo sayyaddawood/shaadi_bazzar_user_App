@@ -17,6 +17,8 @@ const useVendorSubCategories = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
+    refetch
   } = useInfiniteQuery({
     queryKey: ['vendorSubCategories', id],
     queryFn: ({queryKey, pageParam = 1}) =>
@@ -35,9 +37,11 @@ const useVendorSubCategories = ({
     subCategories:
       subCategories?.pages?.flatMap(page => page.result?.vendors) || [],
     isSubCatLoading,
-    fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
+    refetch,
+    fetchNextPage
   };
 };
 

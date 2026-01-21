@@ -37,9 +37,11 @@ const VendorsSubCategories = () => {
   const {
     subCategories,
     isSubCatLoading,
-    fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isRefetching,
+    refetch,
+    fetchNextPage,    
   } = useVendorSubCategories({
     id: selectedCategory,
     fetchSubCategory: true,
@@ -65,6 +67,8 @@ const VendorsSubCategories = () => {
           <NoView />
         ) : (
           <FlatList
+            onRefresh={() => refetch()}
+            refreshing={isRefetching}
             data={subCategories}
             renderItem={({item}) => {
               return <VenueItem {...{item}} />;
