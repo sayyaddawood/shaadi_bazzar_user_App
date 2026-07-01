@@ -50,11 +50,13 @@ type EditTextType = {
   rightText?: string;
   type?: string;
   pointerEvent?: string;
+  focusable?: boolean;
 };
 
 const EditText = ({
   style,
   placeholder,
+  focusable = true,
   multiline,
   keyboardType = 'default',
   label,
@@ -97,7 +99,7 @@ const EditText = ({
       <Pressable
         style={[
           styles.container,
-          isFocused && {borderColor: Colors.PrimaryColor},
+          focusable && isFocused && {borderColor: Colors.PrimaryColor},
           inputStyle,
         ]}
         disabled={pointerEvent == 'none' ? false : true}
@@ -128,7 +130,7 @@ const EditText = ({
           placeholderTextColor={placeholderColor}
           autoCapitalize={autoCapitalize}
           maxLength={max}
-          style={[styles.input, {fontFamily: Fonts.regular}, input,]}
+          style={[styles.input, {fontFamily: Fonts.regular}, input]}
           secureTextEntry={isPassword}
           keyboardType={keyboardType}
           returnKeyType={returnKey}

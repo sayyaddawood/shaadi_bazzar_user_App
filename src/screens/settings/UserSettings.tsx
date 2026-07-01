@@ -5,6 +5,7 @@ import {
   AppContainer,
   BackButton,
   ConfirmDeleteAccount,
+  Icons,
   ImageView,
   Spacer,
   TextView,
@@ -14,6 +15,7 @@ import {TouchableRipple} from 'react-native-paper';
 import Fonts from '../../theme/Fonts';
 import Popup from '../../components/core/Popup';
 import {ConfirmDeleteAccountRef} from '../../components/dialoge/ConfirmDeleteAccount';
+import {IconsType} from '../../components/core/Icons';
 
 const UserSettings = () => {
   const {navigation} = useNavigationHook();
@@ -25,43 +27,98 @@ const UserSettings = () => {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <BackButton onBackPress={() => navigation.goBack()} />
-          <ImageView
+        </View>
+
+        <View style={{alignSelf: 'center'}}>
+          {/* <ImageView
             uri={
               'https://cdn.pixabay.com/photo/2018/08/28/13/29/avatar-3637561_1280.png'
             }
             style={styles.image}
-          />
+          /> */}
+          <View
+            style={[
+              styles.image,
+              {alignItems: 'center', justifyContent: 'center'},
+            ]}>
+            <Icons
+              type={IconsType.AntDesign}
+              name="user"
+              size={50}
+              color={Colors.Gray}
+            />
+          </View>
+          <Spacer height={8} />
+
           <View style={styles.usernameContainer}>
-            <TextView>
+            <TextView type="h5" position="center">
               {global?.userInfo?.name ? global?.userInfo?.name : 'Guest'}
             </TextView>
-            <TextView type="h8" style={styles.txtBasicUser}>
-              Basic User
-            </TextView>
+            <Spacer height={5} />
+
+            {global?.userInfo?.phone && (
+              <>
+                <TextView type="h7" noBold={true} position="center">
+                  {global?.userInfo?.phone}
+                </TextView>
+                <Spacer height={7} />
+              </>
+            )}
+
+            <View
+              style={{
+                backgroundColor: Colors.PrimaryColor,
+                borderRadius: 20,
+                paddingVertical: 5,
+                paddingHorizontal: 20,
+              }}>
+              <TextView type="h7" noBold={true} color={Colors.White}>
+                Basic User
+              </TextView>
+            </View>
           </View>
         </View>
 
         <Spacer height={20} />
 
-        <ListItem
-          icon={AssetsIcons.support}
-          label={'Contact Support'}
-          onPress={() =>
-            goToWhatsapp('+92 320 3033680', 'Hello! I need assistance.')
-          }
-        />
-        <ListItem
-          icon={AssetsIcons.privacyPolicy}
-          label={'Privacy Policy'}
-          onPress={() => navigation.navigate('PrivacyPolicy')}
-        />
-        {global?.userInfo && (
+        <View style={{marginHorizontal: 10}}>
+          <TextView type="h5" style={{marginLeft: 10}}>
+            Settings
+          </TextView>
+
           <ListItem
-            icon={AssetsIcons.delete}
-            label={'Deactivate Account'}
-            onPress={() => ref?.current?.onShowConfirmDeletePopup()}
+            icon={AssetsIcons.support}
+            label={'Contact Support'}
+            onPress={() =>
+              goToWhatsapp('+923203033680', 'Hello! I need assistance.')
+            }
           />
-        )}
+          <ListItem
+            icon={AssetsIcons.privacyPolicy}
+            label={'Privacy Policy'}
+            onPress={() => navigation.navigate('PrivacyPolicy')}
+          />
+          {global?.userInfo && (
+            <ListItem
+              icon={AssetsIcons.delete}
+              label={'Deactivate Account'}
+              onPress={() => ref?.current?.onShowConfirmDeletePopup()}
+            />
+          )}
+
+          <ListItem
+            icon={AssetsIcons.logout}
+            label={global.userInfo ? 'Sign out' : 'Login/Register'}
+            onPress={() => {
+              if (global.userInfo) {
+                onLogout();
+              } else {
+                navigation.navigate('Login');
+              }
+            }}
+          />
+        </View>
+
         {/* <ListItem
         icon={AssetsIcons.rating}
         label={'Rate this app on play store'}
@@ -72,17 +129,6 @@ const UserSettings = () => {
         label={'Share with your friends'}
         onPress={shareApp}
       /> */}
-        <ListItem
-          icon={AssetsIcons.logout}
-          label={global.userInfo ? 'Sign out' : 'Login/Register'}
-          onPress={() => {
-            if (global.userInfo) {
-              onLogout();
-            } else {
-              navigation.navigate('Login');
-            }
-          }}
-        />
 
         <ConfirmDeleteAccount ref={ref} />
       </SafeAreaView>
@@ -108,10 +154,27 @@ const ListItem = ({icon, label, onPress}: ListItemType) => {
       ]}
       onPress={onPress}>
       <>
-        <ImageView uri={icon} style={styles.icon} />
-        <TextView type="h6" style={styles.txtLabel}>
+        <View
+          style={{
+            backgroundColor: Colors.PrimaryColorLight,
+            width: 30,
+            height: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 30 / 2,
+          }}>
+          <ImageView uri={icon} style={[styles.icon]} />
+        </View>
+        <TextView type="h6" style={[styles.txtLabel, {flex: 1}]}>
           {label}
         </TextView>
+
+        <Icons
+          size={25}
+          type={IconsType.MaterialIcons}
+          name="keyboard-arrow-right"
+          color={Colors.PrimaryColor}
+        />
       </>
     </TouchableRipple>
   );
@@ -121,18 +184,18 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: Colors.White},
 
   image: {
-    height: 45,
-    width: 45,
+    height: 80,
+    width: 80,
+    alignSelf: 'center',
     resizeMode: 'contain',
-    borderRadius: 45 / 2,
-    borderWidth: 0.2,
-    borderColor: Colors.Gray,
-    marginLeft: 5,
+    borderRadius: 80 / 2,
+    borderWidth: 0.3,
+    borderColor: Colors.PrimaryColor,
   },
 
   icon: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     resizeMode: 'contain',
   },
 
@@ -143,19 +206,34 @@ const styles = StyleSheet.create({
   },
 
   itemContainer: {
-    paddingVertical: 15,
+    paddingVertical: 8,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 12,
     borderBottomWidth: 0.5,
     borderBottomColor: Colors.light,
+
+    backgroundColor: Colors.White,
+    marginHorizontal: 10,
+
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    marginTop: 8,
   },
 
-  txtBasicUser: {color: Colors.LightestGray, marginTop: 2},
+  txtBasicUser: {color: Colors.LightestGray},
   txtLabel: {
     marginLeft: 10,
     fontFamily: Platform.OS == 'ios' ? Fonts.thin : Fonts.light,
     fontWeight: Platform.OS == 'ios' ? '400' : undefined,
   },
-  usernameContainer: {marginLeft: 10},
+  usernameContainer: {},
 });

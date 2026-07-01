@@ -19,8 +19,10 @@ const DatePicker = ({
 
   return (
     <DateTimePickerModal
+      minimumDate={new Date()}
       isVisible={visible}
       mode="date"
+      
       onConfirm={handleConfirm}
       onCancel={() => setVisibility(false)}
     />

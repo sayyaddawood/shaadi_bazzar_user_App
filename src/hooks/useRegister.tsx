@@ -13,7 +13,7 @@ import useCities from './useCities';
 const useRegister = () => {
   const {navigation} = useNavigationHook();
   const ref = useRef<TextInput>();
-  const {cities} = useCities();
+  const {cities} = useCities({});
   const {saveData, setAccessToken, getUserData, onLogout} = useUserInfo();
 
   const form = useFormik<RegisterFormType>({

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleProp, StyleSheet, ViewStyle} from 'react-native';
+import {Pressable, StyleProp, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {Colors} from '../../theme';
 import TextView from './TextView';
 import Loader from './Loader';
@@ -15,6 +15,7 @@ type Button = {
   loaderColor?: string;
   rightIcon?: () => React.ReactNode;
   leftIcon?: () => React.ReactNode;
+  textStyle?: StyleProp<TextStyle> ,
 };
 
 const Button = ({
@@ -27,7 +28,8 @@ const Button = ({
   style,
   onPress,
   disabled = false,
-  loaderColor
+  loaderColor,
+  textStyle,
 }: Button) => {
   return (
     <Pressable
@@ -48,7 +50,7 @@ const Button = ({
           <TextView
             type="h6"
             color={textColor ?? Colors.White}
-            style={styles.text}>
+            style={[styles.text, textStyle]}>
             {text}
           </TextView>
           {rightIcon && rightIcon()}

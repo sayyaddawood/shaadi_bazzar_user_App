@@ -30,3 +30,7 @@ export {default as AlbumGallery} from './venue/album/AlbumGallery';
 // ... settings
 export {default as UserSettings} from './settings/UserSettings';
 export {default as PrivacyPolicy} from './settings/PrivacyPolicy';
+
+// ... Planner 
+export {default as Cities} from './home/Planner/Cities';
+export {default as Budget} from './home/Planner/Budget';

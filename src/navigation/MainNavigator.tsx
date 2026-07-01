@@ -20,9 +20,10 @@ import {
   Search,
   VendorsSubCategories,
   PrivacyPolicy,
+  Cities,
+  Budget
 } from '../screens';
 import {navigationRef} from './navigationService';
-import {AppContainer} from '../components';
 
 const Stack = createNativeStackNavigator();
 
@@ -121,6 +122,16 @@ function MainNavigator() {
         <Stack.Screen
           name="PrivacyPolicy"
           component={PrivacyPolicy}
+          options={options}
+        />
+        <Stack.Screen
+          name="Cities"
+          component={Cities}
+          options={options}
+        />
+        <Stack.Screen
+          name="Budget"
+          component={Budget}
           options={options}
         />
       </Stack.Navigator>

@@ -37,7 +37,7 @@ const HomeHeader = ({onSelectedCity}: HomeHeaderProps) => {
           });
         }}
       />
-      {/* <IconButton
+      <IconButton
         icon={() => (
           <Icons
             type={IconsType.AntDesign}
@@ -49,7 +49,7 @@ const HomeHeader = ({onSelectedCity}: HomeHeaderProps) => {
         size={15}
         style={{backgroundColor: Colors.Halfwit}}
         onPress={() => navigation.navigate('UserSettings')}
-      /> */}
+      />
     </View>
   );
 };

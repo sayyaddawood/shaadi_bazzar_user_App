@@ -25,7 +25,7 @@ const useOtpVerification = () => {
       saveData(response.result);
       setAccessToken(response?.result?.access_token);
       const isUserAlreadyVerified = response?.result?.data?.is_account_verified;
-      if (isUserAlreadyVerified && false) {
+      if (isUserAlreadyVerified) {
         navigation.dispatch(
           CommonActions.reset({
             index: 0,

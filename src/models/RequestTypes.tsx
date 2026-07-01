@@ -63,8 +63,11 @@ export interface Vendor {
   id: string;
   business_phone: string,
   address: Address;
+  full_address: string;
   vendorMedia: VendorMedia[];
   phone: string
+  cover_photo: string
+  price_type?: string
 }
 
 interface Category {
@@ -79,4 +82,16 @@ export interface VendorSubCategoryResult {
   categoryId: string;
   vendors: Vendor[];
   hasMore: boolean;
+}
+
+
+export interface BudgetAmount {
+  minBudget: number;
+  maxBudget: number;
+  currency: string;
+}
+
+export interface ConfigResult {
+  budgetAmount: BudgetAmount;
+  status: boolean;
 }

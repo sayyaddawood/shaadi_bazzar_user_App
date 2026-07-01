@@ -6,6 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Foundation from 'react-native-vector-icons/Foundation';
@@ -23,6 +24,7 @@ export enum IconsType {
   EvilIcons,
   Feather,
   FontAwesome5,
+  FontAwesome6,
   FontAwesome,
   Fontisto,
   Foundation,
@@ -96,6 +98,16 @@ const Icons = ({type, name, size, color, style}: IconsProps) => {
     case IconsType.FontAwesome5:
       return (
         <FontAwesome5
+          name={name}
+          size={size}
+          color={color ? color : Colors.Icon}
+          style={style}
+        />
+      );
+   
+    case IconsType.FontAwesome6:
+      return (
+        <FontAwesome6
           name={name}
           size={size}
           color={color ? color : Colors.Icon}

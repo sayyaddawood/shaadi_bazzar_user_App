@@ -20,6 +20,10 @@ const AssetsIcons = {
   explore: require('../assets/images/explore.png'),
   delete: require('../assets/images/delete.png'),
   privacyPolicy: require('../assets/images/privacy-policy.png'),
+  button: require('../assets/images/button.png'),
+  budgetFriendly: require('../assets/images/budget.png'),
+  standard: require('../assets/images/standard.png'),
+  premium: require('../assets/images/preimum.png'),
 
 };
 

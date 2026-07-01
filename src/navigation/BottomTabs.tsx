@@ -16,12 +16,15 @@ import {
   Inspirations,
   TodoList,
   UserSettings,
+  Budget,
 } from '../screens';
 import {Colors, Dimen, AssetsIcons} from '../theme';
 import {TextView} from '../components';
 import Fonts from '../theme/Fonts';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const BottomTabs = () => {
   return (
@@ -51,11 +54,11 @@ const BottomTabs = () => {
       })}>
       <Tab.Screen name="Vendors" component={Vendors} />
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Settings"
         component={UserSettings}
-      />
-      {/* <Tab.Screen name="Planner" component={Planner} /> */}
+      /> */}
+      <Tab.Screen name="Planner" component={PlannerStack} />
       {/* <Tab.Screen name="Todo List" component={TodoList} /> */}
     </Tab.Navigator>
   );
@@ -88,6 +91,18 @@ const getTabIcon = (name: string, focused: boolean) => {
 };
 
 export default BottomTabs;
+
+const PlannerStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Tab.Screen name="Planner" component={Planner} />
+      <Tab.Screen name="Budget" component={Budget} />
+    </Stack.Navigator>
+  );
+};
 
 type TabIconProps = {
   id?: string;
@@ -142,10 +157,10 @@ var styles = StyleSheet.create({
     marginTop: -50,
     shadowOffset: {
       width: 0,
-      height: -2,
+      height: -1,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 2.84,
+    shadowOpacity: 0.15,
+    shadowRadius: 1.84,
     elevation: 5,
   },
 

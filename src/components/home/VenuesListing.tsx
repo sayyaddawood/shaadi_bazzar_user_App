@@ -10,9 +10,14 @@ import {Vendor} from '../../models/RequestTypes';
 type VenuesListingProps = {
   title: string;
   data: Vendor[];
+  budgetSelect?: boolean;
 };
 
-const VenuesListing = ({title, data}: VenuesListingProps) => {
+const VenuesListing = ({
+  title,
+  data,
+  budgetSelect = false,
+}: VenuesListingProps) => {
   const {navigation} = useNavigationHook();
 
   const trimCategories = data?.filter((_, index) => index < 5);
@@ -28,7 +33,7 @@ const VenuesListing = ({title, data}: VenuesListingProps) => {
         data={trimCategories}
         style={{marginTop: 15}}
         renderItem={({item}) => {
-          return <VenueDashboardItem {...{item}} />;
+          return <VenueDashboardItem {...{item, budgetSelect, category: title}} />;
         }}
         horizontal
         showsHorizontalScrollIndicator={false}

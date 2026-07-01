@@ -9,6 +9,7 @@ type TextView = {
   color?: string;
   numberOfLines?: number;
   onPress?: () => void;
+  noBold?: boolean;
   position?: 'center' | 'right' | 'left';
   type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8';
   [key: string]: any;
@@ -22,6 +23,7 @@ const TextView = ({
   style,
   onPress,
   numberOfLines,
+  noBold,
   ...props
 }: TextView) => {
   const fontStyle = styles[type];
@@ -34,6 +36,7 @@ const TextView = ({
         styles.text,
         fontStyle,
         {color: color ?? Colors.Black, textAlign: position ?? 'center'},
+        noBold && {fontWeight: undefined},
         style,
       ]}>
       {children}

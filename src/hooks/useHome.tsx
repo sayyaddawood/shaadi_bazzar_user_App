@@ -1,14 +1,33 @@
 import {useQuery} from '@tanstack/react-query';
-import {getHomeScreenData} from '../network/serverRequests';
+import {getConfigData, getHomeScreenData} from '../network/serverRequests';
 import {useMemo, useState} from 'react';
 import useFCM from './useFCM';
+import useBudgetPlannerStore from '../store/useBudgetPlanner';
 
 const useHome = () => {
   useFCM();
   const [cityId, setCityId] = useState<string>('1');
+  const onSetMaxBudgetAmount = useBudgetPlannerStore(
+    state => state.onSetMaxBudgetAmount,
+  );
+
   const {data, isPending, isRefetching, refetch} = useQuery({
     queryKey: ['home', cityId],
     queryFn: ({queryKey}) => getHomeScreenData(queryKey[1]),
+  });
+
+  // Get Config - at Home Screen
+  const {} = useQuery({
+    queryKey: ['config'],
+    queryFn: () =>
+      getConfigData().then(response => {
+        const {maxBudget, minBudget} = response?.result?.budgetAmount;
+        if (typeof maxBudget === 'number') {
+          onSetMaxBudgetAmount(maxBudget, minBudget);
+        }
+
+        return response.result;
+      }),
   });
 
   const onSelectedCity = (city: string) => setCityId(city);

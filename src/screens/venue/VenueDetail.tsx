@@ -10,6 +10,7 @@ import {
   Album,
   Loader,
   QuestionAnswer,
+  SocialLinks,
 } from '../../components';
 import {Colors} from '../../theme';
 import {useNavigationHook, useRouteHook} from '../../hooks';
@@ -21,6 +22,7 @@ const VenueDetail = () => {
   const {navigation, goBack} = useNavigationHook();
   const {id} = useRouteHook({screenName: 'VenueDetail'}).params;
   const {data, imagesList, isLoading} = useVendor({id, fetchDetail: true});
+  console.log('🚀 ~ VenueDetail ~ data:', JSON.stringify(data));
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,8 +72,11 @@ const VenueDetail = () => {
                           }}
                         />
                       )}
+                      <SocialLinks {...{...data?.vendorDetails}} />
+
                       {data?.packages && <PriceInfo info={data?.packages} />}
                       <Album {...{id}} />
+
 
                       <Reviews
                         id={id}

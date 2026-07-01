@@ -12,6 +12,7 @@ export enum EndPointConstants {
   OtpVerification = 'auth/verfication',
   profileSetup = 'auth/profileSetup',
   city = 'location',
+  area = 'location/areas',
   home = 'customerapp/homescreen/',
   vendorCategory = 'customerapp/vendorCategories/',
   vendorDetail = 'customerapp/vendorDetails',
@@ -26,6 +27,8 @@ export enum EndPointConstants {
   addViews = 'views/addViews',
   deleteAccount = 'customerapp/inactivateUser',
   guestToken = 'auth/guestToken',
+  availableVendors = 'customerapp/availableVendors',
+  config = 'auth/config',
 }
 
 export const getEndpointUrl = (endPoint: EndPointConstants): string => {

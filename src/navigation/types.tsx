@@ -49,6 +49,17 @@ export type RootStackParamList = {
     title: string;
   };
   PrivacyPolicy: undefined;
+  Cities: {
+    flag: string;
+    cityId?: string;
+    onSelect: ({label, value}: {label: string; value: string}) => void;
+  };
+  Budget: {
+    date: string,
+    guest: string,
+    city: string,
+    data: any[]
+  }
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

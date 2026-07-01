@@ -36,19 +36,21 @@ const PrimaryInfo = ({
             style={{marginRight: 0, backgroundColor: Colors.PrimaryColor}}
             onPress={onCalenderPress}
           />
-          <IconButton
-            icon={() => (
-              <Icons
-                type={IconsType.Fontisto}
-                name={'whatsapp'}
-                size={18}
-                color={Colors.White}
-              />
-            )}
-            size={15}
-            style={{backgroundColor: 'green', padding: 3}}
-            onPress={onMessagePress}
-          />
+          {info?.business_phone && (
+            <IconButton
+              icon={() => (
+                <Icons
+                  type={IconsType.Fontisto}
+                  name={'whatsapp'}
+                  size={18}
+                  color={Colors.White}
+                />
+              )}
+              size={15}
+              style={{marginRight: 0, backgroundColor: 'green', padding: 3}}
+              onPress={onMessagePress}
+            />
+          )}
         </View>
       </View>
 

@@ -2,6 +2,7 @@ import {
   ApiResponse,
   ApiResponseBase,
   CityList,
+  ConfigResult,
   HomeScreenList,
   LoginResponseData,
   ResendCodeResult,
@@ -90,6 +91,16 @@ export const getCities = async () => {
   return result as ApiResponse<Results<CityList>>;
 };
 
+export const getAreas = async (locationId: string) => {
+  const url = `${getEndpointUrl(EndPointConstants.area)}/${locationId}`;
+  const result = await requestApi({
+    uri: `${url}`,
+    method: 'GET',
+  });
+
+  return result as ApiResponse<Results<CityList>>;
+};
+
 export const getHomeScreenData = async (cityId: string) => {
   const url = `${getEndpointUrl(EndPointConstants.home)}${cityId}`;
   const result = await requestApi({
@@ -98,6 +109,16 @@ export const getHomeScreenData = async (cityId: string) => {
   });
 
   return result as ApiResponse<Results<HomeScreenList>>;
+};
+
+export const getConfigData = async () => {
+  const url = `${getEndpointUrl(EndPointConstants.config)}`;
+  const result = await requestApi({
+    uri: url,
+    method: 'GET',
+  });
+
+  return result as ApiResponse<ConfigResult>;
 };
 
 export const getVenueDetail = async (id?: string) => {
@@ -164,6 +185,24 @@ type bodyTypes = {
 export const onSubmitReview = async (body: bodyTypes) => {
   const result = await requestApi({
     uri: getEndpointUrl(EndPointConstants.addReview),
+    method: 'POST',
+    body: body,
+  });
+
+  return result as ApiResponseBase;
+};
+
+type bodyTypesPlanner = {
+  wedding_date: string;
+  number_of_guests: number;
+  location: number;
+  areas: number[];
+  categories: any[];
+};
+
+export const onPlannerFindVendors = async (body: bodyTypesPlanner) => {
+  const result = await requestApi({
+    uri: getEndpointUrl(EndPointConstants.availableVendors),
     method: 'POST',
     body: body,
   });

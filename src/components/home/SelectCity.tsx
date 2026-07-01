@@ -11,7 +11,7 @@ type SelectCityProps = {
 };
 
 const SelectCity = ({onSelectedCity}: SelectCityProps) => {
-  const {cities} = useCities();
+  const {cities} = useCities({});
   const [showCity, setShowCity] = useState(false);
   const [selectedCity, setSelectedCity] = useState<string | null>(
     global.userInfo?.city,
