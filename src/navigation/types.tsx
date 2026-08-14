@@ -1,9 +1,65 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import SCREENS from './screenNames';
+import {Vendor} from '../models/RequestTypes';
 
 export type RootStackParamList = {
   Splash: undefined;
   Login: undefined;
+  OtpVerification: {
+    phone: string;
+  };
+  Register: undefined;
+  Onboarding: undefined;
+  Home: undefined;
+  HomeTabs: undefined;
+  Vendors: undefined;
+  VenueDetail: {
+    id: string;
+  };
+  VenueCategoriesList: {
+    list: Vendor[];
+    title: string;
+  };
+  SendMessage: {
+    vendorPhone: string;
+    venueId: string;
+  };
+  AlbumListing: {
+    list: VendorAlbumMedia[];
+  };
+  WriteReview: {
+    title: string;
+    vendorId: number;
+  };
+  CheckAvailability: {
+    dates: LockedDate[];
+  };
+  ViewAllAlbums: {
+    id: string;
+  };
+  AlbumGallery: {
+    activeIndexImage: number;
+    itemsImages: VendorAlbumMedia[];
+  };
+  UserSettings: undefined;
+  Search: {
+    id: string;
+  };
+  VendorsSubCategories: {
+    children: VendorCategoryChild[];
+    title: string;
+  };
+  PrivacyPolicy: undefined;
+  Cities: {
+    flag: string;
+    cityId?: string;
+    onSelect: ({label, value}: {label: string; value: string}) => void;
+  };
+  Budget: {
+    date: string,
+    guest: string,
+    city: string,
+    data: any[]
+  }
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

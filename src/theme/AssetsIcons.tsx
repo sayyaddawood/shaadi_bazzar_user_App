@@ -1,6 +1,30 @@
+const AssetsIcons = {
+  splash: require('../assets/images/splash.png'),
+  pic1: require('../assets/images/pic-1.jpg'),
+  pic2: require('../assets/images/pic-2.jpg'),
+  pic3: require('../assets/images/pic-3.jpg'),
+  home: require('../assets/images/home.png'),
+  invites: require('../assets/images/invites.png'),
+  vendors: require('../assets/images/vendors.png'),
+  ideas: require('../assets/images/ideas.png'),
+  packages: require('../assets/images/packages.png'),
+  login: require('../assets/images/login.png'),
+  support: require('../assets/images/support.png'),
+  share: require('../assets/images/share.png'),
+  rating: require('../assets/images/rating.png'),
+  information: require('../assets/images/information.png'),
+  logout: require('../assets/images/logout.png'),
+  placeholder: require('../assets/images/placeholder.png'),
+  user: require('../assets/images/user.png'),
+  category: require('../assets/images/category.png'),
+  explore: require('../assets/images/explore.png'),
+  delete: require('../assets/images/delete.png'),
+  privacyPolicy: require('../assets/images/privacy-policy.png'),
+  button: require('../assets/images/button.png'),
+  budgetFriendly: require('../assets/images/budget.png'),
+  standard: require('../assets/images/standard.png'),
+  premium: require('../assets/images/preimum.png'),
 
-let AssetsIcons = {
-    // icon : require('../../assets')
 };
 
 export default AssetsIcons;

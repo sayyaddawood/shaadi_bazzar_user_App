@@ -1,25 +1,49 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Colors} from '../../theme';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../../navigation/types';
-import {AppContainer} from '../../components';
+import {ImageBackground, StyleSheet, View} from 'react-native';
+import {AssetsIcons, Colors} from '../../theme';
+import {AppContainer, AppStatusBar, TextView} from '../../components';
+import {useNavigationHook, useUserInfo} from '../../hooks';
 
 const Splash = () => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {navigation} = useNavigationHook();
+  const {getUserData} = useUserInfo();
   useEffect(() => {
-    (() => {
-      setTimeout(() => {
-        navigation.navigate('Login');
-      }, 2000);
+    (async () => {
+      const isUserFound = await getUserData();
+      if (isUserFound) {
+        if (isUserFound && !isUserFound.data?.is_account_verified) {
+          navigation.replace('Register');
+          return;
+        }
+        navigation.replace('HomeTabs');
+      } else {
+        setTimeout(() => {
+          navigation.replace('Onboarding');
+        }, 2000);
+      }
     })();
   }, []);
 
   return (
-    <AppContainer>
-      <Text style={{color: Colors.Black}}>Splash ...</Text>
-    </AppContainer>
+    <View style={styles.bg}>
+      <AppStatusBar bgColor={Colors.Splash} barStyle={'light-content'} />
+      <ImageBackground
+        source={AssetsIcons.splash}
+        style={{height: '100%', width: '100%'}}
+      />
+    </View>
   );
 };
 
 export default Splash;
+
+const styles = StyleSheet.create({
+  bg: {
+    backgroundColor: Colors.Splash,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: Colors.White,
+  },
+});
