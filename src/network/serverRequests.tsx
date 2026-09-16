@@ -83,8 +83,9 @@ export const profileSetup = async (body: profileSetupType) => {
 };
 
 export const getCities = async () => {
+  const url = getEndpointUrl(EndPointConstants.city);
   const result = await requestApi({
-    uri: getEndpointUrl(EndPointConstants.city),
+    uri: url,
     method: 'GET',
   });
 

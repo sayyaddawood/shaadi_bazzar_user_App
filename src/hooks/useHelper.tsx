@@ -9,15 +9,7 @@ const useHelper = () => {
       phone = `+${phone}`; // Remove '+' sign
     }
     const url = 'whatsapp://send?text=' + text + '&phone=' + phone;
-    Linking.canOpenURL(url)
-      .then(supported => {
-        if (!supported) {
-          alert('WhatsApp is not installed on your device');
-        } else {
-          return Linking.openURL(url).catch((e) => console.log(e));
-        }
-      })
-      .catch(err => console.log(err));
+    Linking.openURL(url).catch((e) => console.log(e))
   };
 
   const makeACall = (phoneNumber: string) => {

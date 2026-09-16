@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import {
   AppContainer,
   AppStatusBar,
@@ -11,9 +11,9 @@ import {
   PriceView,
   TextView,
 } from '../../../components';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Colors} from '../../../theme';
-import {IconsType} from '../../../components/core/Icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Colors } from '../../../theme';
+import { IconsType } from '../../../components/core/Icons';
 import Toast from 'react-native-toast-message';
 import moment from 'moment';
 import usePlannerState from '../../../hooks/usePlannerState';
@@ -41,7 +41,7 @@ const Planner = () => {
       flag: 'city',
       onSelect: item => {
         setCityItem(item);
-        setAreaItem([{label: 'Select area', value: ''}]);
+        setAreaItem([{ label: 'Select area', value: '' }]);
       },
     });
   };
@@ -98,7 +98,7 @@ const Planner = () => {
       number_of_guests: Number(guest),
       categories: Object.values(
         useBudgetPlannerStore?.getState()?.selectedCategories,
-      ).map(item => ({id: item?.cId, tier: item?.tier})),
+      ).map(item => ({ id: item?.cId, tier: item?.tier })),
     });
   };
 
@@ -111,14 +111,15 @@ const Planner = () => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           bounces={false}
-          contentContainerStyle={styles.content}>
+          contentContainerStyle={styles.content}
+        >
           <View style={styles.body}>
-            <>
-              <PriceView {...{budget, setBudget}} />
+            <PriceView {...{ budget, setBudget }} />
 
+            <>
               <EditText
                 onChangeText={value => setGuest(value)}
-                style={{marginHorizontal: 0}}
+                style={{ marginHorizontal: 0 }}
                 keyboardType="number-pad"
                 focusable={false}
                 value={guest}
@@ -152,7 +153,7 @@ const Planner = () => {
                 />
               </View>
 
-              <TextView type="h5" style={{marginTop: 20}}>
+              <TextView type="h5" style={{ marginTop: 20 }}>
                 Services you looking for
               </TextView>
             </>
@@ -179,8 +180,8 @@ const Planner = () => {
 export default Planner;
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: Colors.White, flex: 1},
-  content: {paddingBottom: 80},
+  container: { backgroundColor: Colors.White, flex: 1 },
+  content: { paddingBottom: 80 },
   body: {
     paddingHorizontal: 20,
   },
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
   list: {
     marginTop: 15,
   },
-  wedding: {flex: undefined, marginTop: 15},
+  wedding: { flex: undefined, marginTop: 15 },
   input: {
     marginHorizontal: 0,
     borderColor: Colors.GrayShade,

@@ -6,7 +6,7 @@ const useCities = ({locationId = -1}: {locationId?: number}) => {
   const {data: cities} = useQuery({
     queryKey: ['cities'],
     queryFn: getCities,
-    enabled: locationId ? false : true,
+    enabled: locationId === -1 ? true : false,
   });
 
   const {data: areas} = useQuery({

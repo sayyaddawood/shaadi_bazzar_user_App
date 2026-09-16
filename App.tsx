@@ -1,12 +1,11 @@
 import 'react-native-gesture-handler';
 
 import React from 'react';
-import {Platform, SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
-import {MainNavigator} from './src/navigation';
-import {AppContainer} from './src/components';
-import {Colors} from './src/theme';
-import {ReactQueryClientProvider} from './src/network';
-import {UserDetails} from './src/models/UserDataType';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { MainNavigator } from './src/navigation';
+import { Colors } from './src/theme';
+import { ReactQueryClientProvider } from './src/network';
+import { UserDetails } from './src/models/UserDataType';
 import Toast from 'react-native-toast-message';
 import useFCMNotification from './src/hooks/useFCMNotification';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -22,7 +21,6 @@ declare global {
 
 const App = () => {
   useFCMNotification();
-
   return (
     <ReactQueryClientProvider>
       <SafeAreaProvider>
@@ -45,7 +43,7 @@ export default App;
 
 const styles = StyleSheet.create({
   bg: {
-    backgroundColor: Colors.PrimaryColor,
-    flex:1
+    // backgroundColor: Colors.PrimaryColor,
+    flex: 1,
   },
 });

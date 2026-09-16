@@ -12,8 +12,8 @@ import useCities from './useCities';
 
 const useRegister = () => {
   const {navigation} = useNavigationHook();
-  const ref = useRef<TextInput>();
-  const {cities} = useCities({});
+  const ref = useRef<TextInput>(null);
+  const {cities} = useCities({ locationId: undefined });
   const {saveData, setAccessToken, getUserData, onLogout} = useUserInfo();
 
   const form = useFormik<RegisterFormType>({
