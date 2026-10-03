@@ -5,7 +5,7 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-platform :ios, "13.4"
+platform :ios, "16.0"
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
@@ -28,11 +28,6 @@ target 'ShadiBazaar' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'ShadiBazaarTests' do
-    inherit! :complete
-    # Pods for testing
-
-  end
 
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
@@ -42,5 +37,13 @@ target 'ShadiBazaar' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
+    installer.pods_project.targets.each do |target|
+    if target.name == 'fmt'
+      target.build_configurations.each do |config|
+        config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+      end
+    end
   end
+end
 end

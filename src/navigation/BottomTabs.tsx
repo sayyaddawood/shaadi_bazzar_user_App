@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   View,
   Image,
@@ -9,19 +9,11 @@ import {
   Platform,
 } from 'react-native';
 
-import {
-  Home,
-  Planner,
-  Vendors,
-  Inspirations,
-  TodoList,
-  UserSettings,
-  Budget,
-} from '../screens';
-import {Colors, Dimen, AssetsIcons} from '../theme';
-import {TextView} from '../components';
+import { Home, Planner, Vendors, Budget } from '../screens';
+import { Colors, Dimen, AssetsIcons } from '../theme';
+import { TextView } from '../components';
 import Fonts from '../theme/Fonts';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -30,9 +22,10 @@ const BottomTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarIcon: ({focused, color, size}) => getTabIcon(route.name, focused),
+        tabBarIcon: ({ focused, color, size }) =>
+          getTabIcon(route.name, focused),
         tabBarActiveTintColor: Colors.PrimaryColor,
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
@@ -46,12 +39,14 @@ const BottomTabs = () => {
                   : Dimen.width * 0.21,
               },
               android: {
-                height: Dimen.width * 0.15,
+                height: 70,
+                paddingBottom: 0,
               },
             }),
           },
         ],
-      })}>
+      })}
+    >
       <Tab.Screen name="Vendors" component={Vendors} />
       <Tab.Screen name="Home" component={Home} />
       {/* <Tab.Screen
@@ -71,9 +66,9 @@ const getTabIcon = (name: string, focused: boolean) => {
         <TabIcon
           id={'Explore'}
           icon={AssetsIcons.explore}
-          imageStyle={{width: 40, height: 40, marginTop: 10}}
+          imageStyle={{ width: 45, height: 45, marginTop: 10 }}
           isFocused={focused}
-          textStyle={{marginTop: 5}}
+          textStyle={{ marginTop: 5, fontSize: 13 }}
         />
       </View>
     ),
@@ -97,7 +92,8 @@ const PlannerStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}>
+      }}
+    >
       <Tab.Screen name="Planner" component={Planner} />
       <Tab.Screen name="Budget" component={Budget} />
     </Stack.Navigator>
@@ -125,7 +121,7 @@ const TabIcon = ({
         source={icon}
         style={[
           styles.tabIcon,
-          {tintColor: isFocused ? Colors.PrimaryColor : '#dfe6e9'},
+          { tintColor: isFocused ? Colors.PrimaryColor : '#dfe6e9' },
           imageStyle,
         ]}
       />
@@ -134,9 +130,10 @@ const TabIcon = ({
         <TextView
           style={[
             styles.tabIconText,
-            {color: isFocused ? Colors.PrimaryColor : '#95a5a6'},
+            { color: isFocused ? Colors.PrimaryColor : '#95a5a6' },
             textStyle,
-          ]}>
+          ]}
+        >
           {id}
         </TextView>
       )}
@@ -154,7 +151,7 @@ var styles = StyleSheet.create({
     position: 'absolute',
 
     shadowColor: '#000',
-    marginTop: -50,
+    // marginTop: -50,
     shadowOffset: {
       width: 0,
       height: -1,
@@ -205,7 +202,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 90 / 2,
     borderTopRightRadius: 90 / 2,
-    marginTop: -45,
+    marginTop: -65,
 
     borderTopWidth: 1,
     borderColor: Colors.Halfwit,

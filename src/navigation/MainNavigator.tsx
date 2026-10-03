@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {
   Login,
@@ -21,14 +21,16 @@ import {
   VendorsSubCategories,
   PrivacyPolicy,
   Cities,
-  Budget
+  Budget,
 } from '../screens';
-import {navigationRef} from './navigationService';
+import { navigationRef } from './navigationService';
 
 const Stack = createNativeStackNavigator();
 
-import {DefaultTheme} from '@react-navigation/native';
+import { DefaultTheme } from '@react-navigation/native';
 import BottomTabs from './BottomTabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Platform, View } from 'react-native';
 
 const navTheme = {
   ...DefaultTheme,
@@ -40,102 +42,107 @@ const navTheme = {
 
 function MainNavigator() {
   let initialRouteName = 'Splash';
+  const insets = useSafeAreaInsets();
 
   return (
-    <NavigationContainer ref={navigationRef} theme={navTheme}>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={initialRouteName}>
-        <Stack.Screen
-          name="VenueDetail"
-          component={VenueDetail}
-          options={options}
-        />
-        <Stack.Screen
-          name="HomeTabs"
-          component={BottomTabs}
-          options={options}
-        />
-        <Stack.Screen name="Splash" component={Splash} options={options} />
-        <Stack.Screen name="Login" component={Login} options={options} />
-        <Stack.Screen
-          name="VenueCategoriesList"
-          component={VenueCategoriesList}
-          options={options}
-        />
-        <Stack.Screen name="Register" component={Register} options={options} />
-        <Stack.Screen
-          name="Onboarding"
-          component={Onboarding}
-          options={options}
-        />
-        <Stack.Screen
-          name="OtpVerification"
-          component={OtpVerification}
-          options={options}
-        />
-        <Stack.Screen
-          name="SendMessage"
-          component={SendMessage}
-          options={options}
-        />
-        <Stack.Screen
-          name="AlbumListing"
-          component={AlbumListing}
-          options={options}
-        />
-        <Stack.Screen
-          name="WriteReview"
-          component={WriteReview}
-          options={options}
-        />
-        <Stack.Screen
-          name="CheckAvailability"
-          component={CheckAvailability}
-          options={options}
-        />
-        <Stack.Screen
-          name="ViewAllAlbums"
-          component={ViewAllAlbums}
-          options={options}
-        />
-        <Stack.Screen
-          name="AlbumGallery"
-          component={AlbumGallery}
-          options={options}
-        />
+    <View
+      style={{
+        flex: 1,
+        paddingBottom: Platform.OS === 'ios' ? 0 : insets.bottom,
+      }}
+    >
+      <NavigationContainer ref={navigationRef} theme={navTheme}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName={initialRouteName}
+        >
+          <Stack.Screen
+            name="VenueDetail"
+            component={VenueDetail}
+            options={options}
+          />
+          <Stack.Screen
+            name="HomeTabs"
+            component={BottomTabs}
+            options={options}
+          />
+          <Stack.Screen name="Splash" component={Splash} options={options} />
+          <Stack.Screen name="Login" component={Login} options={options} />
+          <Stack.Screen
+            name="VenueCategoriesList"
+            component={VenueCategoriesList}
+            options={options}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={options}
+          />
+          <Stack.Screen
+            name="Onboarding"
+            component={Onboarding}
+            options={options}
+          />
+          <Stack.Screen
+            name="OtpVerification"
+            component={OtpVerification}
+            options={options}
+          />
+          <Stack.Screen
+            name="SendMessage"
+            component={SendMessage}
+            options={options}
+          />
+          <Stack.Screen
+            name="AlbumListing"
+            component={AlbumListing}
+            options={options}
+          />
+          <Stack.Screen
+            name="WriteReview"
+            component={WriteReview}
+            options={options}
+          />
+          <Stack.Screen
+            name="CheckAvailability"
+            component={CheckAvailability}
+            options={options}
+          />
+          <Stack.Screen
+            name="ViewAllAlbums"
+            component={ViewAllAlbums}
+            options={options}
+          />
+          <Stack.Screen
+            name="AlbumGallery"
+            component={AlbumGallery}
+            options={options}
+          />
 
-        <Stack.Screen
-          name="UserSettings"
-          component={UserSettings}
-          options={options}
-        />
+          <Stack.Screen
+            name="UserSettings"
+            component={UserSettings}
+            options={options}
+          />
 
-        <Stack.Screen name="Search" component={Search} options={options} />
-        <Stack.Screen
-          name="VendorsSubCategories"
-          component={VendorsSubCategories}
-          options={options}
-        />
-        <Stack.Screen
-          name="PrivacyPolicy"
-          component={PrivacyPolicy}
-          options={options}
-        />
-        <Stack.Screen
-          name="Cities"
-          component={Cities}
-          options={options}
-        />
-        <Stack.Screen
-          name="Budget"
-          component={Budget}
-          options={options}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Search" component={Search} options={options} />
+          <Stack.Screen
+            name="VendorsSubCategories"
+            component={VendorsSubCategories}
+            options={options}
+          />
+          <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+            options={options}
+          />
+          <Stack.Screen name="Cities" component={Cities} options={options} />
+          <Stack.Screen name="Budget" component={Budget} options={options} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }
 
