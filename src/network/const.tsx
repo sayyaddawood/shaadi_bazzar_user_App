@@ -1,6 +1,6 @@
-export let BASE_URL_DEV = 'https://newbackend.wedeasybackend.host/';
-export let BASE_URL_IMAGE = 'https://images.wedeasybackend.host/';
-export let BASE_URL_PROD = 'https://newbackend.wedeasybackend.host/';
+export let BASE_URL_DEV = 'https://wedeasyapp.com/';
+export let BASE_URL_IMAGE = 'https://images.wedeasyapp.com/';
+export let BASE_URL_PROD = 'https://wedeasyapp.com/';
 
 export let BASE_URL = BASE_URL_PROD;
 
