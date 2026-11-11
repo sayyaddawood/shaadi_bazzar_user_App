@@ -23,10 +23,10 @@ const useHelper = () => {
 
   const rateApp = () => {
     const androidPackageName = 'com.wedeasy.app'; // Replace with your app's package name
-    const appleAppID = '1234567890'; // Replace with your app's Apple App Store ID
+    const appleAppID = '6526460900'; // WedEasy App on the App Store
 
     if (Platform.OS === 'ios') {
-      Linking.openURL(`itms-apps://itunes.apple.com/app/id${appleAppID}?mt=8`);
+      Linking.openURL(`itms-apps://apps.apple.com/app/id${appleAppID}?action=write-review`);
     } else if (Platform.OS === 'android') {
       Linking.openURL(`market://details?id=${androidPackageName}`);
     }
@@ -36,7 +36,9 @@ const useHelper = () => {
     try {
       const result = await Share.share({
         message:
-          'Check out this awesome app! https://play.google.com/store/apps/details?id=com.yourapp',
+          Platform.OS === 'ios'
+            ? 'Check out WedEasy! https://apps.apple.com/app/id6526460900'
+            : 'Check out WedEasy! https://play.google.com/store/apps/details?id=com.wedeasy.app',
       });
 
       if (result.action === Share.sharedAction) {
